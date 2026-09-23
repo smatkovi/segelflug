@@ -1,28 +1,32 @@
-Segelflug 1.6 — jede Formel wird hergeleitet, deutsch und englisch
+Segelflug 1.7 — jedes Formelzeichen definiert, jede Formel hergeleitet
 
-**Neu:** Sieben Herleitungen, jeweils am Ende der Lektion und in beiden
-Sprachen:
+Die Herleitungen von 1.6 setzten Formeln voraus, die selbst nicht
+begründet waren. Das ist jetzt geschlossen, in beiden Sprachen.
 
-* Die **125 m je Grad Spreizung** — trockenadiabatischer Gradient
-  (1 °C/100 m) gegen Taupunktgradient (0,2 °C/100 m); die Spreizung
-  schließt sich mit 0,8 °C/100 m, also 125 m je Grad. Mit der Angabe,
-  wann die Formel nicht mehr gilt.
-* **Strecke = Höhe × Gleitzahl** aus dem Kräftegleichgewicht im Gleitflug,
-  samt der Frage, warum bestes Gleiten die Tangente vom Ursprung ist.
-* **n = 1/cos φ** aus dem Kräftedreieck im Kurvenflug und
-  **v_s(n) = v_s·√n** aus L ∝ v². Und warum die Last schneller wächst als
-  die Geschwindigkeit — weshalb man sie nach Gefühl immer unterschätzt.
-* Der **Schwerpunkt** als Momentengleichgewicht um die Bezugsebene.
-* Die **Dichtehöhe** aus der Auftriebsgleichung und der Gasgleichung.
-* **1 hPa ≈ 8 m** aus der hydrostatischen Grundgleichung — und was „from
-  high to low, look out below" damit zu tun hat.
-* Der **Vorhaltewinkel** aus sin α ≈ α und 1 rad = 57,3°, samt der
-  Angabe, bis zu welchem Winkel die 1-in-60-Regel trägt.
+**Neu in jeder Herleitung:** ein Abschnitt **Formelzeichen** mit
+Bedeutung und Einheit, und die Formeln zweiter Stufe ausgerechnet:
+
+* Der **Staudruck** q = ½ρv² aus dem Massenstrom ρ·A·v und der
+  Bewegungsenergie — und daraus die **Auftriebsgleichung**
+  L = ½ρv²S·c_A, auf der n = 1/cos φ und v_s·√n aufbauen.
+* Der **trockenadiabatische Gradient** 1 °C/100 m als g/c_p =
+  9,81/1005 — die 125 m je Grad Spreizung stehen damit in zwei
+  Naturkonstanten, nicht in einer Erfahrung. Dazu, warum der Taupunkt
+  nur um 0,2 °C/100 m fällt (Clausius-Clapeyron).
+* Die **hydrostatische Grundgleichung** dp = −ρg·dh aus dem Gewicht
+  einer Luftschicht, aus der die 8 m je hPa folgen.
+* Die **Gasgleichung** ρ = p/(R·T) hinter der Dichtehöhe.
+* Das **Moment** M = F·x hinter der Schwerpunktrechnung, samt der
+  Begründung, warum die Fallbeschleunigung herausfällt.
+* **1 rad = 57,3°** aus dem Kreisumfang und **sin α ≈ α** aus der
+  Taylorreihe, mit dem Fehler bei 10°, 20° und 30°.
+* Beim Gleitflug: dass das **Gewicht herausfällt** — ein beladener
+  Segler gleitet gleich weit, nur schneller.
+
+**Und ein Fehler aus 1.6 behoben:** Der Textdarsteller kannte keine
+Überschriften.
 
 **Pakete**
 
-* `segelflug_1.6_armel.deb` — Nokia N9 / N950, `dpkg -i`
-* `harbour-segelflug-1.1.0-1.aarch64.rpm` und `…armv7hl.rpm` —
-  Sailfish OS, `pkcon install-local <datei>.rpm`
-
-Auch die Oberfläche spricht jetzt Englisch, nicht nur der Kurs.
+* `segelflug_1.7_armel.deb` — Nokia N9 / N950, `dpkg -i`
+* `harbour-segelflug-1.2.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish
