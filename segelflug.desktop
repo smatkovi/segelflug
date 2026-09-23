@@ -1,0 +1,11 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=1.0
+Type=Application
+Name=Segelflug
+Comment=Segelflug- und PPL-Theorie
+Icon=/usr/share/icons/hicolor/80x80/apps/segelflug.png
+Exec=/opt/segelflug/bin/segelflug
+Terminal=false
+Categories=Education;
+X-Osso-Type=application/x-executable

@@ -1,0 +1,15 @@
+Package: segelflug
+Version: @VERSION@
+Section: user/education
+Priority: optional
+Architecture: armel
+Depends: libqt4-declarative, libqt4-script, libqt4-gui, qt-components
+Maintainer: Sebastian Matkovich <sebastian.matkovich@gmail.com>
+Description: Segelflug- und PPL-Theorie, deutsch oder englisch
+ Theorie fuer Segelflug- und PPL-Schein mit Einstufungstest und
+ Wiederholung nach Abstand. Schwerpunkt: an den Wolken ablesen, was der
+ Himmel fuer Thermik, Streckenflug und Sicherheit hergibt. Die Sprache
+ laesst sich jederzeit umschalten.
+Maemo-Display-Name: Segelflug
+XB-Maemo-Icon-26:
+@ICON@
