@@ -1,19 +1,28 @@
-Segelflug 1.5 — Segelflug- und PPL-Theorie, deutsch oder englisch
+Segelflug 1.6 — jede Formel wird hergeleitet, deutsch und englisch
 
-Zehn Kapitel, 23 Lektionen: Aerodynamik, Flugleistung und Flugplanung,
-Luftrecht nach EASA, Navigation, menschliches Leistungsvermögen, Technik,
-Verfahren und Notfälle, Sprechfunk — und als Schwerpunkt sieben Lektionen
-Wolken lesen. Die Sprache lässt sich jederzeit umschalten.
+**Neu:** Sieben Herleitungen, jeweils am Ende der Lektion und in beiden
+Sprachen:
 
-**Neu in 1.5:** Nach einer falschen Antwort kommt zuerst die Erklärung und
-ein zweiter Versuch; die Lösung gibt es auf Knopfdruck und nach dem zweiten
-Fehlversuch von selbst. Bei Auswahlaufgaben wird nur noch die eigene falsche
-Wahl markiert — die richtige bleibt bis dahin verdeckt, damit der zweite
-Versuch einer bleibt.
+* Die **125 m je Grad Spreizung** — trockenadiabatischer Gradient
+  (1 °C/100 m) gegen Taupunktgradient (0,2 °C/100 m); die Spreizung
+  schließt sich mit 0,8 °C/100 m, also 125 m je Grad. Mit der Angabe,
+  wann die Formel nicht mehr gilt.
+* **Strecke = Höhe × Gleitzahl** aus dem Kräftegleichgewicht im Gleitflug,
+  samt der Frage, warum bestes Gleiten die Tangente vom Ursprung ist.
+* **n = 1/cos φ** aus dem Kräftedreieck im Kurvenflug und
+  **v_s(n) = v_s·√n** aus L ∝ v². Und warum die Last schneller wächst als
+  die Geschwindigkeit — weshalb man sie nach Gefühl immer unterschätzt.
+* Der **Schwerpunkt** als Momentengleichgewicht um die Bezugsebene.
+* Die **Dichtehöhe** aus der Auftriebsgleichung und der Gasgleichung.
+* **1 hPa ≈ 8 m** aus der hydrostatischen Grundgleichung — und was „from
+  high to low, look out below" damit zu tun hat.
+* Der **Vorhaltewinkel** aus sin α ≈ α und 1 rad = 57,3°, samt der
+  Angabe, bis zu welchem Winkel die 1-in-60-Regel trägt.
 
 **Pakete**
 
-* `segelflug_1.5_armel.deb` — Nokia N9 / N950 (MeeGo 1.2 Harmattan),
-  `dpkg -i segelflug_1.5_armel.deb`
-* `harbour-segelflug-1.0.0-1.aarch64.rpm` und `…armv7hl.rpm` — Sailfish OS,
-  `pkcon install-local <datei>.rpm`
+* `segelflug_1.6_armel.deb` — Nokia N9 / N950, `dpkg -i`
+* `harbour-segelflug-1.1.0-1.aarch64.rpm` und `…armv7hl.rpm` —
+  Sailfish OS, `pkcon install-local <datei>.rpm`
+
+Auch die Oberfläche spricht jetzt Englisch, nicht nur der Kurs.
