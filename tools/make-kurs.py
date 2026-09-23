@@ -76,6 +76,38 @@ def aufgabe(task, saat):
     return out
 
 
+def pruefen(chapters, sprachen):
+    """Faellt, bevor ein halbfertiger Kurs ausgeliefert wird.
+
+    Zwei Dinge sind im Feld schon schiefgegangen und beide fallen im
+    Alltag nicht auf: eine Lektion, die nur auf Deutsch uebersetzt ist
+    (die App zeigt dann stillschweigend die andere Sprache), und eine
+    Formel ohne Herleitung. Also hier, beim Erzeugen, und nicht spaeter.
+    """
+    fehler = []
+
+    def zwei(wert, wo):
+        if isinstance(wert, dict):
+            for code in sprachen:
+                if not wert.get(code, "").strip():
+                    fehler.append("%s: %s fehlt" % (wo, code))
+        elif isinstance(wert, str) and wert.strip():
+            fehler.append("%s: nur einsprachig" % wo)
+
+    for c in chapters:
+        zwei(c.get("titel"), "Kapitel %s Titel" % c["id"])
+        zwei(c.get("text"), "Kapitel %s Text" % c["id"])
+        for l in c["lektionen"]:
+            zwei(l.get("titel"), "%s Titel" % l["id"])
+            zwei(l.get("text"), "%s Text" % l["id"])
+            for i, a in enumerate(l.get("aufgaben", [])):
+                zwei(a.get("q"), "%s Aufgabe %d Frage" % (l["id"], i))
+                zwei(a.get("warum"), "%s Aufgabe %d Begruendung" % (l["id"], i))
+                for j, o in enumerate(a.get("optionen", []) or []):
+                    zwei(o, "%s Aufgabe %d Antwort %d" % (l["id"], i, j))
+    return fehler
+
+
 def main():
     chapters = []
     for chapter in kurs.KAPITEL:
@@ -117,6 +149,15 @@ def main():
             "optionen": e_optionen, "antwort": e_antwort,
             "warum": entry["warum"],
         })
+
+    fehler = pruefen(chapters, ["de", "en"])
+    if fehler:
+        for f in fehler[:25]:
+            print("  FEHLER " + f, file=sys.stderr)
+        print("%d Maengel -- kein kurs.json geschrieben" % len(fehler),
+              file=sys.stderr)
+        return 1
+    print("Zweisprachigkeit: vollstaendig")
 
     out = {
         "titel": {"de": "Segelflug", "en": "Soaring"},

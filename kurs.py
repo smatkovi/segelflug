@@ -29,6 +29,13 @@ def zahl(q, answer, einheit, why, toleranz=0.1, bild=""):
 
 
 def lektion(ident, titel, begriffe, text, bild, aufgaben):
+    # Die Herleitung haengt hinten an, in beiden Sprachen. Sie steht nicht
+    # im Lektionstext selbst, damit sie an einer Stelle zu ueberblicken
+    # ist und keine Formel ohne Begruendung durchrutscht.
+    h = HERLEITUNGEN.get(ident)
+    if h:
+        text = {"de": text["de"] + "\n\n" + h["de"],
+                "en": text["en"] + "\n\n" + h["en"]}
     return {"id": ident, "titel": titel, "begriffe": begriffe, "text": text,
             "bild": bild, "aufgaben": aufgaben}
 
@@ -36,6 +43,324 @@ def lektion(ident, titel, begriffe, text, bild, aufgaben):
 def kapitel(ident, titel, stufe, blurb, lektionen):
     return {"id": ident, "titel": titel, "stufe": stufe, "text": blurb,
             "lektionen": lektionen}
+
+
+# ===========================================================================
+# Herleitungen
+# ===========================================================================
+#
+# Jede Formel, die im Kurs benutzt wird, steht hier mit ihrer Begruendung.
+# Angehaengt wird sie von lektion() selbst -- so kann keine vergessen
+# werden, und pruefen() weiter unten faellt darueber, wenn doch.
+#
+# Warum ueberhaupt: eine Faustformel, die man nur auswendig kann, ist im
+# Cockpit wertlos, sobald die Lage nicht zum Lehrbuch passt. Wer weiss,
+# WORAUS die 125 kommen, sieht auch, wann sie nicht mehr gelten.
+
+HERLEITUNGEN = {
+
+"w-basis": t(
+    "**Woher die 125 kommen.**\n\n"
+    "Zwei Temperaturen laufen beim Aufsteigen aufeinander zu.\n\n"
+    "Die **Lufttemperatur** des Pakets faellt trockenadiabatisch: Das Paket "
+    "dehnt sich gegen den sinkenden Aussendruck aus, leistet dabei Arbeit "
+    "und bekommt von aussen keine Waerme. Das kostet rund **1 °C je "
+    "100 m**.\n\n"
+    "Der **Taupunkt** des Pakets faellt auch, aber viel langsamer. Das "
+    "Wasser bleibt ja darin; nur der Druck sinkt, und mit ihm ganz leicht "
+    "die Temperatur, bei der dieses Wasser saettigen wuerde. Das sind etwa "
+    "**0,2 °C je 100 m**.\n\n"
+    "Die Spreizung schliesst sich also mit der Differenz:\n\n"
+    "    1,0 − 0,2 = 0,8 °C je 100 m\n\n"
+    "Kondensiert wird, wenn die Spreizung aufgebraucht ist. Also:\n\n"
+    "    Hoehe = Spreizung ÷ 0,8 °C/100 m = Spreizung × 125 m/°C\n\n"
+    "**Wann die Formel bricht.** Sie unterstellt, dass das Paket vom Boden "
+    "bis zur Basis trocken aufsteigt und unterwegs keine Luft mit anderer "
+    "Feuchte einmischt. Nach Regen, ueber Wasser oder in einer "
+    "Luftmassengrenze stimmt beides nicht, und die Basis liegt tiefer als "
+    "gerechnet.",
+
+    "**Where the 125 comes from.**\n\n"
+    "Two temperatures close on each other as the air rises.\n\n"
+    "The parcel's **air temperature** falls at the dry adiabatic rate: the "
+    "parcel expands against the falling outside pressure, does work doing "
+    "so, and receives no heat from outside. That costs about **1 °C per "
+    "100 m**.\n\n"
+    "The parcel's **dew point** falls too, but far more slowly. The water "
+    "stays in the parcel; only the pressure drops, and with it, slightly, "
+    "the temperature at which that water would saturate. About **0.2 °C "
+    "per 100 m**.\n\n"
+    "So the spread closes at the difference:\n\n"
+    "    1.0 − 0.2 = 0.8 °C per 100 m\n\n"
+    "Condensation happens when the spread is used up. Hence:\n\n"
+    "    height = spread ÷ 0.8 °C/100 m = spread × 125 m/°C\n\n"
+    "**Where it breaks.** It assumes the parcel rises dry from the ground "
+    "to the base and mixes in no air of different humidity on the way. "
+    "After rain, over water, or at an air mass boundary neither holds, and "
+    "the base sits lower than the sum says."),
+
+"a-polare": t(
+    "**Warum Strecke = Hoehe × Gleitzahl.**\n\n"
+    "Im stationaeren Gleitflug haelt sich alles die Waage: Das Gewicht "
+    "wird von Auftrieb und Widerstand zusammen getragen. Zerlegt man es "
+    "entlang und quer zur Flugbahn, steht da\n\n"
+    "    tan(Gleitwinkel) = Widerstand / Auftrieb = D / L\n\n"
+    "Der Tangens eines Winkels ist Gegenkathete durch Ankathete, hier also "
+    "**Hoehenverlust durch Strecke**. Damit ist\n\n"
+    "    Strecke / Hoehe = L / D = Gleitzahl E\n\n"
+    "Die Gleitzahl ist also nichts anderes als das Verhaeltnis von "
+    "Auftrieb zu Widerstand. E = 38 heisst: 38 Meter Strecke je Meter "
+    "Hoehe. Aus 900 m werden 34,2 km.\n\n"
+    "**Und warum die Tangente vom Ursprung?** Die Polare traegt Sinken "
+    "ueber Fahrt auf. Fuer jeden Punkt darauf ist\n\n"
+    "    Gleitzahl = Fahrt / Sinken\n\n"
+    "also die Steigung des Strahls vom Ursprung zu diesem Punkt. Am "
+    "weitesten kommt man, wo dieser Strahl am flachsten ist — und flacher "
+    "als die Beruehrende geht nicht, ohne die Polare zu verlassen. Deshalb "
+    "die Tangente.\n\n"
+    "Bei Gegenwind verschiebt man den Ursprung um die Windgeschwindigkeit "
+    "nach links: derselbe Griff, neuer Beruehrpunkt, hoehere Fahrt.",
+
+    "**Why distance = height × glide ratio.**\n\n"
+    "In a steady glide everything balances: weight is carried by lift and "
+    "drag together. Resolved along and across the flight path,\n\n"
+    "    tan(glide angle) = drag / lift = D / L\n\n"
+    "The tangent of an angle is opposite over adjacent, here **height lost "
+    "over distance flown**. So\n\n"
+    "    distance / height = L / D = glide ratio E\n\n"
+    "The glide ratio is nothing but the lift-to-drag ratio. E = 38 means "
+    "38 metres of distance per metre of height. 900 m becomes 34.2 km.\n\n"
+    "**And why the tangent from the origin?** The polar plots sink against "
+    "airspeed. For any point on it,\n\n"
+    "    glide ratio = speed / sink\n\n"
+    "which is the slope of the ray from the origin to that point. You get "
+    "furthest where that ray is flattest — and no ray is flatter than the "
+    "tangent without leaving the curve. Hence the tangent.\n\n"
+    "In a headwind you shift the origin left by the wind speed: same "
+    "construction, new touching point, higher speed."),
+
+"a-ueberziehen": t(
+    "**Woher n = 1/cos φ kommt.**\n\n"
+    "Im sauberen Kurvenflug hat der Auftrieb zwei Aufgaben zugleich. "
+    "Kippt man ihn um die Schraeglage φ, zerfaellt er in zwei Anteile:\n\n"
+    "* senkrecht: **L · cos φ** — der traegt das Gewicht,\n"
+    "* waagrecht: **L · sin φ** — der zieht in die Kurve.\n\n"
+    "Damit die Hoehe gehalten wird, muss der senkrechte Anteil genau das "
+    "Gewicht tragen:\n\n"
+    "    L · cos φ = G      →      L = G / cos φ\n\n"
+    "Das Lastvielfache ist definiert als n = L/G, also\n\n"
+    "    n = 1 / cos φ\n\n"
+    "45°: cos 45° = 0,707, also n = 1,41. 60°: cos 60° = 0,5, also n = 2. "
+    "Bei 90° waere cos φ = 0 und n unendlich — ein senkrechter "
+    "Messerflug traegt kein Gewicht, und genau deshalb geht er nicht "
+    "stationaer.\n\n"
+    "**Und die Wurzel bei der Ueberziehgeschwindigkeit.**\n\n"
+    "Der Auftrieb waechst mit dem Quadrat der Fahrt:\n\n"
+    "    L = ½ · ρ · v² · S · c_A\n\n"
+    "Ueberzogen wird immer beim **selben** groessten c_A — das ist eine "
+    "Eigenschaft des Fluegels, nicht der Lage. Beim Ueberziehen ist also "
+    "alles fest ausser v und L, und damit ist L ∝ v². Im Geradeausflug "
+    "muss L = G sein, in der Kurve L = n · G. Verhaeltnis bilden:\n\n"
+    "    v_kurve² / v_gerade² = n      →      v_kurve = v_gerade · √n\n\n"
+    "Daher die Zahlen: √1,15 = 1,07 (+7 %), √1,41 = 1,19 (+19 %), "
+    "√2,00 = 1,41 (+41 %).\n\n"
+    "**Das Gefaehrliche daran** ist der Unterschied der beiden Reihen. Die "
+    "Last waechst schneller als die Geschwindigkeit: bei 60° traegt man "
+    "das doppelte Gewicht, muss aber nur 41 % schneller fliegen. Wer nach "
+    "Gefuehl fliegt, unterschaetzt darum immer die Last.",
+
+    "**Where n = 1/cos φ comes from.**\n\n"
+    "In a clean turn the lift does two jobs at once. Tilted by the bank "
+    "angle φ it splits into two parts:\n\n"
+    "* vertical: **L · cos φ** — this carries the weight,\n"
+    "* horizontal: **L · sin φ** — this pulls you round.\n\n"
+    "To hold height the vertical part must carry exactly the weight:\n\n"
+    "    L · cos φ = W      →      L = W / cos φ\n\n"
+    "The load factor is defined as n = L/W, so\n\n"
+    "    n = 1 / cos φ\n\n"
+    "45°: cos 45° = 0.707, so n = 1.41. 60°: cos 60° = 0.5, so n = 2. At "
+    "90° cos φ would be 0 and n infinite — knife edge carries no weight, "
+    "which is exactly why it cannot be held.\n\n"
+    "**And the square root in the stall speed.**\n\n"
+    "Lift grows with the square of the speed:\n\n"
+    "    L = ½ · ρ · v² · S · C_L\n\n"
+    "A wing always stalls at the **same** maximum C_L — that is a property "
+    "of the wing, not of the attitude. At the stall everything is fixed "
+    "but v and L, so L ∝ v². Level flight needs L = W, the turn needs "
+    "L = n · W. Take the ratio:\n\n"
+    "    v_turn² / v_level² = n      →      v_turn = v_level · √n\n\n"
+    "Hence the numbers: √1.15 = 1.07 (+7 %), √1.41 = 1.19 (+19 %), "
+    "√2.00 = 1.41 (+41 %).\n\n"
+    "**What makes it dangerous** is the gap between the two series. Load "
+    "grows faster than speed: at 60° you carry twice the weight but need "
+    "only 41 % more speed. Flying by feel therefore always underestimates "
+    "the load."),
+
+"l-schwerpunkt": t(
+    "**Warum man Momente addiert und nicht Massen.**\n\n"
+    "Ein Moment ist Kraft mal Hebelarm. Ob ein Flugzeug kopflastig ist, "
+    "haengt nicht davon ab, wie schwer etwas ist, sondern **wo** es "
+    "sitzt: 10 kg weit vorn kippen mehr als 50 kg nahe am Schwerpunkt.\n\n"
+    "Der Schwerpunkt ist der eine Punkt, an dem die Gesamtmasse dasselbe "
+    "Moment erzeugt wie alle Einzelmassen zusammen. Das ist die ganze "
+    "Definition, und als Gleichung um die Bezugsebene:\n\n"
+    "    m_gesamt · x_s = Σ (m_i · x_i)\n\n"
+    "Nach x_s aufgeloest:\n\n"
+    "    x_s = Σ (m_i · x_i) / Σ m_i = Gesamtmoment / Gesamtmasse\n\n"
+    "Im Beispiel: (75 000 + 70 × 100) / (250 + 70) = 82 000 / 320 = "
+    "256,25 mm.\n\n"
+    "**Worauf zu achten ist:** Alle Hebelarme muessen von **derselben** "
+    "Bezugsebene aus gemessen sein, und zwar mit Vorzeichen. Etwas hinter "
+    "der Bezugsebene hat einen negativen Hebelarm; wer das Vorzeichen "
+    "vergisst, rechnet sich den Schwerpunkt in den gruenen Bereich, in dem "
+    "er nicht liegt.",
+
+    "**Why you add moments, not masses.**\n\n"
+    "A moment is force times lever arm. Whether an aircraft is nose heavy "
+    "does not depend on how heavy something is but on **where** it sits: "
+    "10 kg well forward tips more than 50 kg near the centre of "
+    "gravity.\n\n"
+    "The centre of gravity is the one point at which the total mass "
+    "produces the same moment as all the individual masses together. That "
+    "is the whole definition, and as an equation about the datum:\n\n"
+    "    m_total · x_cg = Σ (m_i · x_i)\n\n"
+    "Solved for x_cg:\n\n"
+    "    x_cg = Σ (m_i · x_i) / Σ m_i = total moment / total mass\n\n"
+    "In the example: (75 000 + 70 × 100) / (250 + 70) = 82 000 / 320 = "
+    "256.25 mm.\n\n"
+    "**What to watch:** every arm must be measured from the **same** "
+    "datum, and with its sign. Anything behind the datum has a negative "
+    "arm; forget the sign and you compute yourself into a green band you "
+    "are not in."),
+
+"l-startstrecke": t(
+    "**Warum duenne Luft die Startstrecke verlaengert.**\n\n"
+    "Abheben heisst: der Auftrieb traegt das Gewicht.\n\n"
+    "    L = ½ · ρ · v² · S · c_A = G\n\n"
+    "Gewicht, Flaeche und der groesste brauchbare c_A aendern sich nicht, "
+    "wenn es heiss wird. ρ schon. Nach v aufgeloest:\n\n"
+    "    v = √( 2G / (ρ · S · c_A) )      also      v ∝ 1/√ρ\n\n"
+    "Bei 10 % weniger Dichte braucht man also 1/√0,9 = 1,054, gut 5 % mehr "
+    "**Fahrt ueber Grund** zum Abheben. Und weil die Rollstrecke etwa mit "
+    "dem Quadrat der Abhebegeschwindigkeit waechst und der Motor in "
+    "duenner Luft zugleich weniger leistet, ist der Zuschlag auf die "
+    "Strecke deutlich groesser als die 5 % auf die Fahrt.\n\n"
+    "**Woher die Dichte kommt.** Aus der Gasgleichung:\n\n"
+    "    ρ = p / (R · T)\n\n"
+    "Hoher Platz heisst kleines p, heisser Tag grosses T — beides "
+    "verkleinert ρ. Feuchte Luft ist uebrigens **leichter** als trockene, "
+    "weil ein Wassermolekuel weniger wiegt als das Stickstoff- oder "
+    "Sauerstoffmolekuel, das es verdraengt. Die Dichtehoehe fasst all das "
+    "in eine Zahl: die Hoehe, in der die Normatmosphaere genau diese "
+    "Dichte haette.",
+
+    "**Why thin air lengthens the take-off run.**\n\n"
+    "Lifting off means lift carries the weight.\n\n"
+    "    L = ½ · ρ · v² · S · C_L = W\n\n"
+    "Weight, wing area and the largest usable C_L do not change when it "
+    "gets hot. ρ does. Solved for v:\n\n"
+    "    v = √( 2W / (ρ · S · C_L) )      so      v ∝ 1/√ρ\n\n"
+    "With 10 % less density you need 1/√0.9 = 1.054, a good 5 % more "
+    "**groundspeed** to unstick. And because the ground roll grows roughly "
+    "with the square of the lift-off speed while the engine also delivers "
+    "less in thin air, the penalty on distance is far larger than the 5 % "
+    "on speed.\n\n"
+    "**Where the density comes from.** From the gas law:\n\n"
+    "    ρ = p / (R · T)\n\n"
+    "A high field means small p, a hot day means large T — both shrink ρ. "
+    "Humid air, incidentally, is **lighter** than dry air, because a water "
+    "molecule weighs less than the nitrogen or oxygen molecule it "
+    "displaces. Density altitude packs all of this into one number: the "
+    "altitude at which the standard atmosphere would have exactly this "
+    "density."),
+
+"r-hoehenmesser": t(
+    "**Warum ein Hektopascal rund acht Meter ist.**\n\n"
+    "Ein Hoehenmesser ist eine Dose, die den Luftdruck misst, und eine "
+    "Skala, die Druck in Hoehe uebersetzt. Die Uebersetzung kommt aus dem "
+    "Gewicht der Luftsaeule ueber einem. Eine Schicht der Dicke dh drueckt "
+    "mit ihrem eigenen Gewicht:\n\n"
+    "    dp = − ρ · g · dh\n\n"
+    "Nach dh aufgeloest und in Meereshoehe eingesetzt (ρ ≈ 1,225 kg/m³, "
+    "g = 9,81 m/s², 1 hPa = 100 Pa):\n\n"
+    "    dh = 100 / (1,225 × 9,81) ≈ 8,3 m je hPa\n\n"
+    "**Deshalb** verschiebt jedes falsch gestellte Hektopascal die Anzeige "
+    "um gut acht Meter. Ein um 18 hPa zu hoch eingestellter Hoehenmesser "
+    "(1013 statt 995) zeigt rund 150 m zu viel an.\n\n"
+    "Weiter oben wird die Zahl groesser, weil ρ abnimmt: in 5000 m sind es "
+    "schon rund 15 m je hPa. Fuer die Platzrunde reicht die 8.\n\n"
+    "**\u201eFrom high to low, look out below\u201c** ist genau das: Fliegt man in "
+    "tieferen Druck, ohne nachzustellen, misst die Dose zu wenig Druck und "
+    "haelt das faelschlich fuer Hoehe. Man ist tiefer, als angezeigt wird "
+    "— und zwar um acht Meter je Hektopascal.",
+
+    "**Why one hectopascal is about eight metres.**\n\n"
+    "An altimeter is a capsule that measures air pressure and a scale that "
+    "translates pressure into height. The translation comes from the "
+    "weight of the column of air above you. A layer of thickness dh "
+    "presses with its own weight:\n\n"
+    "    dp = − ρ · g · dh\n\n"
+    "Solved for dh and evaluated at sea level (ρ ≈ 1.225 kg/m³, "
+    "g = 9.81 m/s², 1 hPa = 100 Pa):\n\n"
+    "    dh = 100 / (1.225 × 9.81) ≈ 8.3 m per hPa\n\n"
+    "**That is why** every hectopascal set wrongly shifts the reading by a "
+    "good eight metres. An altimeter set 18 hPa too high (1013 instead of "
+    "995) over-reads by about 150 m.\n\n"
+    "Higher up the figure grows, because ρ falls: at 5000 m it is already "
+    "about 15 m per hPa. For the circuit, 8 will do.\n\n"
+    "**\u201cFrom high to low, look out below\u201d** is exactly this: fly into "
+    "lower pressure without resetting and the capsule measures less "
+    "pressure and mistakes that for height. You are lower than indicated — "
+    "by eight metres per hectopascal."),
+
+"n-kurse": t(
+    "**Woher die 60 im Vorhaltewinkel kommt.**\n\n"
+    "Der Wind schiebt quer. Aus Eigengeschwindigkeit und Querwind wird ein "
+    "rechtwinkliges Dreieck, und exakt gilt\n\n"
+    "    sin(Vorhaltewinkel) = Querwind / Eigengeschwindigkeit\n\n"
+    "Damit koennte man im Cockpit wenig anfangen. Die Rettung ist eine "
+    "Naeherung: Fuer kleine Winkel ist der Sinus fast gleich dem Winkel "
+    "**im Bogenmass**. Und ein Bogenmass sind\n\n"
+    "    1 rad = 180°/π = 57,3°\n\n"
+    "Also ist\n\n"
+    "    Vorhaltewinkel [°] ≈ (Querwind / Fahrt) × 57,3\n\n"
+    "Aufgerundet auf **60**, weil sich damit im Kopf rechnen laesst und "
+    "der Fehler zur sicheren Seite geht. Daher der Name **1-in-60-Regel**: "
+    "1 Einheit Versatz auf 60 Einheiten Strecke ist ein Grad.\n\n"
+    "**Wie weit sie traegt.** Bei 10° betraegt der Fehler der Naeherung "
+    "unter einem halben Grad, bei 20° rund 2°, bei 30° schon 5°. Bis etwa "
+    "20 Grad ist sie also gut, darueber rechnet man besser richtig.\n\n"
+    "**Und die Missweisung.** Sie ist kein Rechentrick, sondern eine "
+    "Ortsangabe: der Winkel zwischen geografischem und magnetischem "
+    "Nordpol an dieser Stelle der Erde. Die Karte zeigt rechtweisend, der "
+    "Kompass missweisend, also\n\n"
+    "    missweisend = rechtweisend + Missweisung (West positiv)\n\n"
+    "Merksatz: *Missweisung West, Kompass zeigt mehr.*",
+
+    "**Where the 60 in the drift angle comes from.**\n\n"
+    "The wind pushes you sideways. Airspeed and crosswind make a "
+    "right-angled triangle, and exactly\n\n"
+    "    sin(drift angle) = crosswind / airspeed\n\n"
+    "which is of little use in a cockpit. The rescue is an approximation: "
+    "for small angles the sine is almost the angle itself **in radians**. "
+    "And one radian is\n\n"
+    "    1 rad = 180°/π = 57.3°\n\n"
+    "So\n\n"
+    "    drift angle [°] ≈ (crosswind / airspeed) × 57.3\n\n"
+    "rounded up to **60**, because that can be done in the head and the "
+    "error falls on the safe side. Hence the name **1-in-60 rule**: one "
+    "unit of offset in sixty units of distance is one degree.\n\n"
+    "**How far it carries.** At 10° the error of the approximation is "
+    "under half a degree, at 20° about 2°, at 30° already 5°. Up to some "
+    "20 degrees it is good; beyond that, do it properly.\n\n"
+    "**And variation.** It is not an arithmetic trick but a statement "
+    "about place: the angle between the geographic and the magnetic north "
+    "pole at this spot on the earth. The chart is true, the compass is "
+    "magnetic, so\n\n"
+    "    magnetic = true + variation (west positive)\n\n"
+    "Mnemonic: *variation west, magnetic best.*"),
+
+}
 
 
 # ===========================================================================
