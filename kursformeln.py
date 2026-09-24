@@ -19,9 +19,67 @@ def t(de, en):
     return {"de": de, "en": en}
 
 
-def formel(zeile, tex, untertitel, erklaerung):
+# Was die Zeichen bedeuten, je Formel -- gefunden ueber den deutschen
+# Untertitel. Die Regel ist dieselbe wie bei den Herleitungen: Jedes
+# Formelzeichen wird definiert, mit Bedeutung und Einheit, bevor es
+# auftaucht. Der Kasten steht fuer sich; wer ihn beim Durchblaettern
+# zuerst sieht, hat den Text darueber noch nicht gelesen.
+ZEICHEN = {
+ "Die Basis aus Temperatur und Taupunkt": t(
+   "`T` Lufttemperatur am Boden, °C. `T_d` Taupunkt, °C. Die **Spreizung** "
+   "ist `T − T_d`, in Grad. `h` Basis über Grund, m.",
+   "`T` air temperature at the ground, °C. `T_d` dew point, °C. The "
+   "**spread** is `T − T_d`, in degrees. `h` cloud base above ground, m."),
+ "Gleitzahl: dieselbe Zahl aus Kräften und aus Geschwindigkeiten": t(
+   "`E` Gleitzahl, dimensionslos. `L` Auftrieb, N. `D` Widerstand, N. "
+   "`v` Fahrt durch die Luft, m/s. `w` Sinkgeschwindigkeit, m/s. "
+   "`γ` Gleitwinkel, Grad. `G` Gewicht, N.",
+   "`E` glide ratio, dimensionless. `L` lift, N. `D` drag, N. `v` airspeed, "
+   "m/s. `w` sink rate, m/s. `γ` glide angle, degrees. `G` weight, N."),
+ "Der Staudruck steckt in jeder Luftkraft": t(
+   "`q` Staudruck, Pa. `ρ` Luftdichte, kg/m³ (1,225 in Meereshöhe). "
+   "`v` Anströmgeschwindigkeit, m/s. `A` angeströmte Fläche, m².",
+   "`q` dynamic pressure, Pa. `ρ` air density, kg/m³ (1.225 at sea level). "
+   "`v` airspeed, m/s. `A` frontal area, m²."),
+ "Lastvielfaches in der Kurve": t(
+   "`n` Lastvielfaches, dimensionslos. `φ` Querlage, Grad. `L` Auftrieb, N. "
+   "`G` Gewicht, N.",
+   "`n` load factor, dimensionless. `φ` bank angle, degrees. `L` lift, N. "
+   "`G` weight, N."),
+ "Überziehgeschwindigkeit in der Kurve": t(
+   "`v_S` Überziehgeschwindigkeit im Geradeausflug, `v_(S,φ)` dieselbe bei "
+   "der Querlage `φ`, beide km/h. `n` Lastvielfaches, dimensionslos.",
+   "`v_S` stalling speed in straight flight, `v_(S,φ)` the same at bank "
+   "angle `φ`, both km/h. `n` load factor, dimensionless."),
+ "Der Schwerpunkt ist ein gewogener Mittelwert": t(
+   "`x_S` Lage des Schwerpunkts ab Bezugspunkt, m. `m_i` Einzelmassen, kg. "
+   "`x_i` ihre Hebelarme ab demselben Bezugspunkt, m.",
+   "`x_S` position of the centre of gravity from the datum, m. `m_i` the "
+   "individual masses, kg. `x_i` their lever arms from the same datum, m."),
+ "Abhebegeschwindigkeit, und warum sie mit der Höhe steigt": t(
+   "`v` wahre Geschwindigkeit, m/s. `G` Gewicht, N. `ρ` Luftdichte, kg/m³. "
+   "`S` Flügelfläche, m². `c_A` Auftriebsbeiwert beim Abheben, "
+   "dimensionslos.",
+   "`v` true airspeed, m/s. `G` weight, N. `ρ` air density, kg/m³. `S` wing "
+   "area, m². `c_A` lift coefficient at lift-off, dimensionless."),
+ "Vorhaltewinkel gegen den Querwind": t(
+   "`α` Vorhaltewinkel, Grad. `v_q` Querwindanteil, km/h. "
+   "`v` Eigengeschwindigkeit, km/h.",
+   "`α` drift correction angle, degrees. `v_q` crosswind component, km/h. "
+   "`v` airspeed, km/h."),
+ "Warum ein Hektopascal acht Meter sind": t(
+   "`Δh` Höhenunterschied, m. `Δp` Druckunterschied, Pa; 1 hPa = 100 Pa. "
+   "`ρ` Luftdichte, kg/m³. `g` Fallbeschleunigung, 9,81 m/s².",
+   "`Δh` difference in height, m. `Δp` difference in pressure, Pa; "
+   "1 hPa = 100 Pa. `ρ` air density, kg/m³. `g` gravitational acceleration, "
+   "9.81 m/s²."),
+}
+
+
+def formel(zeile, tex, untertitel, erklaerung, zeichen=""):
     return {"code": zeile, "tex": tex, "untertitel": untertitel,
-            "erklaerung": erklaerung}
+            "erklaerung": erklaerung,
+            "zeichen": zeichen or ZEICHEN.get(untertitel["de"], "")}
 
 
 KURSFORMELN = {
