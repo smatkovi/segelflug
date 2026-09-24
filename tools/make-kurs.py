@@ -16,6 +16,7 @@ ROOT = os.path.dirname(HERE)
 sys.path.insert(0, ROOT)
 
 import formeln as formelsatz
+import kartenherleitungen
 import kurs
 
 
@@ -65,6 +66,17 @@ def aufgabe(task, saat):
     """Rename the authoring keys to the ones the engine reads."""
     out = {"kind": task["kind"], "q": task["q"], "warum": task["warum"],
            "bild": task.get("bild", "")}
+    # Die Herleitung liegt daneben (kartenherleitungen.py) und wird ueber
+    # den deutschen Fragetext zugeordnet, damit die Aufgaben selbst
+    # unberuehrt bleiben. Sie steht in der Loesung; die Skizze dazu auch,
+    # und ausdruecklich nicht in "bild" -- das steht ueber der Frage und
+    # wuerde die Antwort verraten.
+    frage = task["q"]
+    schluessel = frage["de"] if isinstance(frage, dict) else frage
+    herleitung = kartenherleitungen.HERLEITUNGEN.get(schluessel)
+    if herleitung:
+        out["herleitung"] = herleitung
+        out["skizze"] = kartenherleitungen.SKIZZEN.get(schluessel, "")
     if task["kind"] == "mc":
         optionen, antwort = mischen(task["optionen"], task["antwort"], saat)
         out["options"] = optionen
@@ -109,7 +121,29 @@ def pruefen(chapters, sprachen):
     return fehler
 
 
+def herleitungen_pruefen():
+    """Jeder Schluessel muss auf eine wirkliche Frage zeigen.
+
+    Ein Tippfehler waere sonst unsichtbar: die Herleitung faende ihre Karte
+    nicht, und die Karte bliebe ohne Herleitung -- genau der Zustand, den
+    es hier abzustellen gilt.
+    """
+    alle = set()
+    for kapitel in kurs.KAPITEL:
+        for lektion in kapitel["lektionen"]:
+            for t in lektion["aufgaben"]:
+                frage = t["q"]
+                alle.add(frage["de"] if isinstance(frage, dict) else frage)
+    verwaist = sorted(set(kartenherleitungen.HERLEITUNGEN) - alle) \
+             + sorted(set(kartenherleitungen.SKIZZEN) - alle)
+    for q in verwaist:
+        print("Herleitung zeigt ins Leere: " + q, file=sys.stderr)
+    return not verwaist
+
+
 def main():
+    if not herleitungen_pruefen():
+        return 1
     chapters = []
     for chapter in kurs.KAPITEL:
         lessons = []
