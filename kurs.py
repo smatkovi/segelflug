@@ -12,6 +12,7 @@ when to go home -- follows from that reading.
 from __future__ import unicode_literals
 
 from herleitungen import HERLEITUNGEN
+from kursformeln import KURSFORMELN
 
 
 def t(de, en):
@@ -30,7 +31,24 @@ def zahl(q, answer, einheit, why, toleranz=0.1, bild=""):
             "warum": why, "toleranz": toleranz, "bild": bild}
 
 
-def lektion(ident, titel, begriffe, text, bild, aufgaben):
+def formel(zeile, tex, untertitel, erklaerung):
+    """Eine Formel zweimal: wie sie im Text steht und wie sie gesetzt aussieht.
+
+    `zeile` ist genau die Zeile, die im Lehrtext oder in der Herleitung
+    vorkommt -- eine dritte Schreibweise waere eine Huerde mehr, keine
+    weniger. `tex` ist dieselbe Sache in TeX-Schreibweise; gesetzt wird sie
+    beim Bauen (tools/formeln.py), das Geraet zeigt nur ein Bild.
+
+    `untertitel` sagt in einer halben Zeile, was dasteht, `erklaerung`
+    beantwortet die Frage, die beim Hinsehen entsteht: woher der Faktor
+    kommt und wo er aufhoert zu gelten. Beide sind Sprachpaare, die Formel
+    selbst nicht -- die ist in jeder Sprache dieselbe.
+    """
+    return {"code": zeile, "tex": tex, "untertitel": untertitel,
+            "erklaerung": erklaerung}
+
+
+def lektion(ident, titel, begriffe, text, bild, aufgaben, formeln=None):
     # Die Herleitung haengt hinten an, in beiden Sprachen. Sie steht nicht
     # im Lektionstext selbst, damit sie an einer Stelle zu ueberblicken
     # ist und keine Formel ohne Begruendung durchrutscht.
@@ -39,7 +57,8 @@ def lektion(ident, titel, begriffe, text, bild, aufgaben):
         text = {"de": text["de"] + "\n\n" + h["de"],
                 "en": text["en"] + "\n\n" + h["en"]}
     return {"id": ident, "titel": titel, "begriffe": begriffe, "text": text,
-            "bild": bild, "aufgaben": aufgaben}
+            "bild": bild, "aufgaben": aufgaben,
+            "formeln": formeln or KURSFORMELN.get(ident, [])}
 
 
 def kapitel(ident, titel, stufe, blurb, lektionen):
