@@ -76,10 +76,25 @@ ZEICHEN = {
 }
 
 
-def formel(zeile, tex, untertitel, erklaerung, zeichen=""):
+# Zu welcher Formel welche Skizze gehoert. Gezeichnet werden sie von
+# tools/skizzen.py; die Beschriftung steckt im Bild, also liegt daneben
+# jeweils eine englische Fassung <name>.en.png.
+SKIZZEN = {
+ "Die Basis aus Temperatur und Taupunkt": "skizze-wolkenbasis",
+ "Gleitzahl: dieselbe Zahl aus Kräften und aus Geschwindigkeiten":
+   "skizze-gleitflug",
+ "Lastvielfaches in der Kurve": "skizze-kurvenlast",
+ "Der Schwerpunkt ist ein gewogener Mittelwert": "skizze-schwerpunkt",
+ "Vorhaltewinkel gegen den Querwind": "skizze-vorhalt",
+ "Warum ein Hektopascal acht Meter sind": "skizze-luftsaeule",
+}
+
+
+def formel(zeile, tex, untertitel, erklaerung, zeichen="", skizze=""):
     return {"code": zeile, "tex": tex, "untertitel": untertitel,
             "erklaerung": erklaerung,
-            "zeichen": zeichen or ZEICHEN.get(untertitel["de"], "")}
+            "zeichen": zeichen or ZEICHEN.get(untertitel["de"], ""),
+            "skizze": skizze or SKIZZEN.get(untertitel["de"], "")}
 
 
 KURSFORMELN = {
