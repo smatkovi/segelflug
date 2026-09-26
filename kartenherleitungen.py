@@ -24,7 +24,7 @@ from kurs import t
 
 BASIS = t(
  "## Woher die 125 Meter je Grad kommen\n\n"
- "`ϑ` Temperatur am Boden, °C. `ϑ_d` Taupunkt am Boden, °C. "
+ "`θ` Temperatur am Boden, °C. `θ_d` Taupunkt am Boden, °C. "
  "`h` Höhe der Wolkenbasis über Grund, m. `Γ_d` "
  "Trockenadiabate, K/100 m. `Γ_t` Taupunktgradient, K/100 m.\n\n"
  "Ein Luftpaket, das aufsteigt, kühlt sich ab, weil es sich gegen den "
@@ -35,9 +35,9 @@ BASIS = t(
  "Paket behält seinen Wasserdampf, nur die Dichte nimmt ab. Gemessen sind "
  "das rund **0,2 K je 100 m**.\n\n"
  "Die Wolke entsteht, wo sich beide treffen, also wo die anfängliche "
- "Spreizung `ϑ − ϑ_d` aufgebraucht ist. Je 100 m schliesst "
+ "Spreizung `θ − θ_d` aufgebraucht ist. Je 100 m schliesst "
  "sich die Lücke um `1 − 0,2 = 0,8 K`:\n\n"
- "`h = (ϑ − ϑ_d) / 0,8 · 100 m = (ϑ − ϑ_d) · 125 m`\n\n"
+ "`h = (θ − θ_d) / 0,8 · 100 m = (θ − θ_d) · 125 m`\n\n"
  "Die 125 sind also nichts Gemessenes, sondern `100 / 0,8`. Mit 24 °C "
  "und 9 °C: `15 · 125 = 1875 m`.\n\n"
  "Die Annahme dahinter ist, dass die aufsteigende Luft dieselbe ist, die "
@@ -46,7 +46,7 @@ BASIS = t(
  "gerechnet.",
 
  "## Where the 125 metres per degree come from\n\n"
- "`ϑ` temperature at the ground, °C. `ϑ_d` dew point at the "
+ "`θ` temperature at the ground, °C. `θ_d` dew point at the "
  "ground, °C. `h` height of the cloud base above ground, m. "
  "`Γ_d` dry adiabatic lapse rate, K/100 m. `Γ_t` dew point "
  "lapse rate, K/100 m.\n\n"
@@ -58,9 +58,9 @@ BASIS = t(
  "the parcel keeps its water vapour, only the density drops. Measurements "
  "give about **0.2 K per 100 m**.\n\n"
  "The cloud forms where the two meet, that is where the initial spread "
- "`ϑ − ϑ_d` has been used up. Every 100 m the gap closes by "
+ "`θ − θ_d` has been used up. Every 100 m the gap closes by "
  "`1 − 0.2 = 0.8 K`:\n\n"
- "`h = (ϑ − ϑ_d) / 0.8 · 100 m = (ϑ − ϑ_d) · 125 m`\n\n"
+ "`h = (θ − θ_d) / 0.8 · 100 m = (θ − θ_d) · 125 m`\n\n"
  "So the 125 are not measured, they are `100 / 0.8`. With 24 °C and "
  "9 °C: `15 · 125 = 1875 m`.\n\n"
  "The assumption behind it is that the rising air is the same air that was "
