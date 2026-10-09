@@ -1,4 +1,4 @@
-Segelflug 2.6 — unter jeder Zeichnung steht jetzt der wirkliche Himmel
+Segelflug 2.7 — unter jeder Zeichnung steht jetzt der wirkliche Himmel
 
 Die Zeichnungen bleiben, wo sie sind, und bleiben das Hauptbild: Sie zeigen
 das Merkmal und sonst nichts. Genau das ist aber auch ihre Grenze. Am
@@ -41,10 +41,20 @@ mit Qualität 82: 1,1 MB für siebenundzwanzig Fotos. Ohne die Höhengrenze
 stünde ein Hochformat 850 Punkte hoch auf einem 854 Punkte hohen
 Bildschirm, und die Zeichnung darüber liefe aus dem Bild.
 
+## Auch bei den Aufgaben
+
+Nicht nur in den Lektionen: Jede Aufgabe und jede Karteikarte, die eine
+Zeichnung führt, zeigt die Fotos **zweimal** — über der Frage neben der
+Zeichnung, wo sie beim Nachdenken helfen, und noch einmal in der Lösung,
+wo nach der Antwort Zeit ist, wirklich hinzusehen. Verraten wird damit
+nichts, was die Zeichnung über der Frage nicht schon zeigt. Vierzehn der
+neunundvierzig Aufgaben haben eine Zeichnung, macht zweiundvierzig
+Fotoplätze.
+
 ## Pakete
 
-* **N9 / N950:** `segelflug_2.6_armel.deb`
-* **Sailfish OS:** `harbour-segelflug-1.12.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
+* **N9 / N950:** `segelflug_2.7_armel.deb`
+* **Sailfish OS:** `harbour-segelflug-1.13.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
 
 Die Oberfläche dafür liegt in C-Lehrer und harbour-lehrer (`Foto.qml`,
 `Fotos.qml`); das Harmattan-Binär musste neu gebaut werden, weil die

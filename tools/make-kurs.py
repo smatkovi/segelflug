@@ -66,7 +66,13 @@ def mischen(optionen, antwort, saat):
 def aufgabe(task, saat):
     """Rename the authoring keys to the ones the engine reads."""
     out = {"kind": task["kind"], "q": task["q"], "warum": task["warum"],
-           "bild": task.get("bild", "")}
+           "bild": task.get("bild", ""),
+           # Dieselbe Wolke wie ueber der Frage, nur echt. Sie steht auf der
+           # Aufgabenseite zweimal: ueber der Frage neben der Zeichnung und
+           # noch einmal in der Loesung, wo man nach der Antwort Zeit hat,
+           # hinzusehen. Verraten wird damit nichts, was die Zeichnung
+           # darueber nicht schon zeigt.
+           "fotos": fotos_fuer([task.get("bild", "")])}
     # Die Herleitung liegt daneben (kartenherleitungen.py) und wird ueber
     # den deutschen Fragetext zugeordnet, damit die Aufgaben selbst
     # unberuehrt bleiben. Sie steht in der Loesung; die Skizze dazu auch,
@@ -90,6 +96,30 @@ def aufgabe(task, saat):
     return out
 
 
+def fotos_fuer(arten):
+    """Die Fotos zu einer Liste von Zeichnungsnamen, in dieser Reihenfolge.
+
+    Masse und Herkunft stehen in bilder/fotos.json, das tools/fotos.py
+    geschrieben hat. Fehlt die Datei, gibt es eben keine Fotos -- der Kurs
+    soll sich auch ohne Netz bauen lassen.
+    """
+    pfad = os.path.join(ROOT, "bilder", "fotos.json")
+    if not os.path.exists(pfad):
+        return []
+    with open(pfad, encoding="utf-8") as fh:
+        geholt = json.load(fh)
+    aus = []
+    for art in arten:
+        for eintrag in geholt.get(art, []):
+            aus.append({
+                "datei": eintrag["datei"],
+                "breite": eintrag["breite"], "hoehe": eintrag["hoehe"],
+                "hinweis": eintrag["hinweis"],
+                "autor": eintrag["autor"], "lizenz": eintrag["lizenz"],
+            })
+    return aus
+
+
 def fotos_zu(lektion):
     """Die Fotos, die unter die Zeichnung dieser Lektion gehoeren.
 
@@ -106,23 +136,9 @@ def fotos_zu(lektion):
     tools/fotos.py geschrieben hat. Fehlt die Datei, gibt es eben keine
     Fotos -- der Kurs soll sich auch ohne Netz bauen lassen.
     """
-    pfad = os.path.join(ROOT, "bilder", "fotos.json")
-    if not os.path.exists(pfad):
-        return []
-    with open(pfad, encoding="utf-8") as fh:
-        geholt = json.load(fh)
     arten = [lektion.get("bild", "")]
     arten += wolkenfotos.ZUSATZ.get(lektion["id"], [])
-    aus = []
-    for art in arten:
-        for eintrag in geholt.get(art, []):
-            aus.append({
-                "datei": eintrag["datei"],
-                "breite": eintrag["breite"], "hoehe": eintrag["hoehe"],
-                "hinweis": eintrag["hinweis"],
-                "autor": eintrag["autor"], "lizenz": eintrag["lizenz"],
-            })
-    return aus
+    return fotos_fuer(arten)
 
 
 def fotos_pruefen():
