@@ -15,10 +15,19 @@ Begriffe liegen zweisprachig vor.
 
 ## Die Wolkenbilder
 
-Alle neun Wolkenbilder sind gezeichnet, nicht fotografiert
-(`tools/clouds.py`, Pillow). Die Wolkenbasis wird dabei **ausgeschnitten**
-statt hell unterlegt — eine unterlegte Basis sieht auf dem OLED des N9 wie
-Dunst aus, ein sauberer Schnitt wie eine Basis.
+Alle neun Wolkenbilder sind gezeichnet (`tools/clouds.py`, Pillow). Die
+Wolkenbasis wird dabei **ausgeschnitten** statt hell unterlegt — eine
+unterlegte Basis sieht auf dem OLED des N9 wie Dunst aus, ein sauberer
+Schnitt wie eine Basis.
+
+Unter jeder Zeichnung stehen **zwei bis drei echte Fotos derselben Wolke**,
+jedes mit einem Satz, der sagt, wohin zu schauen ist. Die Zeichnung zeigt
+das Merkmal allein, das Foto zeigt es inmitten von allem anderen; das
+Erkennen am Himmel übt nur das zweite. Die Fotos kommen von Wikimedia
+Commons, sind frei lizenziert und stehen mit Urheber und Lizenz in
+[CREDITS](CREDITS) und in der App unter dem Bild. Welche es sind und was
+der Hinweis dazu sagt, steht in `wolkenfotos.py`; `tools/fotos.py` holt
+sie, verkleinert sie auf 640 Punkte und schreibt `bilder/fotos.json`.
 
 ## Wie das gebaut ist
 
@@ -34,6 +43,8 @@ Dieses Repo ist der Kurs:
 kurs.py            Kapitel, Lektionen, Aufgaben, beides zweisprachig
 tools/make-kurs.py schreibt data/kurs.json
 tools/clouds.py    zeichnet bilder/*.png
+wolkenfotos.py     welche echten Fotos unter welche Zeichnung gehoeren
+tools/fotos.py     holt sie von Commons nach bilder/foto-*.jpg
 tools/build-deb.sh packt das Harmattan-.deb
 ```
 
@@ -44,6 +55,7 @@ deterministisch und zählt danach nach, damit kein Muster entsteht.
 
 ```sh
 python3 tools/clouds.py          # Wolkenbilder zeichnen
+python3 tools/fotos.py           # Fotos von Commons holen (braucht Netz)
 python3 tools/make-kurs.py       # data/kurs.json erzeugen
 tools/build-deb.sh 1.5           # braucht ~/ps/c-lehrer/build/c-lehrer
 ```

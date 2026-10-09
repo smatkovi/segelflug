@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 """Draws the cloud types a glider pilot has to recognise.
 
-Drawings rather than photographs, on purpose. A photograph shows one
-particular sky on one particular day, with the diagnostic feature -- the
-sharp flat base, the fibrous top, the tilt -- buried among everything else
-that happened to be in frame. A drawing can show the feature and nothing
-else, which is what recognition has to be learned from. The photographs
-come later, in the sky.
+Drawings first, photographs under them. A photograph shows one particular
+sky on one particular day, with the diagnostic feature -- the sharp flat
+base, the fibrous top, the tilt -- buried among everything else that
+happened to be in frame. A drawing can show the feature and nothing else,
+and that is what recognition starts from. Finding the same feature again
+in a crowded frame is the second half, and that is what the real photos
+under each drawing are for (wolkenfotos.py, tools/fotos.py).
 
 Everything is drawn at 3x and scaled down, so the soft edges stay soft.
 

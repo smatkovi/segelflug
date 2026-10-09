@@ -18,6 +18,7 @@ sys.path.insert(0, ROOT)
 import formeln as formelsatz
 import kartenherleitungen
 import kurs
+import wolkenfotos
 
 
 def mischen(optionen, antwort, saat):
@@ -89,6 +90,58 @@ def aufgabe(task, saat):
     return out
 
 
+def fotos_zu(lektion):
+    """Die Fotos, die unter die Zeichnung dieser Lektion gehoeren.
+
+    Sie haengen am Namen der Zeichnung, nicht an der Lektion: Dieselbe
+    Wolke in zwei Lektionen bekommt zweimal dieselben Fotos, und das ist
+    richtig so -- wer in "Die flache Basis" einsteigt, hat die Bilder aus
+    "Woher die Wolken ihre Namen haben" vielleicht nie gesehen.
+
+    Zwei Wolken werden besprochen, ohne das Bild der Lektion zu sein (der
+    Cumulonimbus in der Ueberentwicklung, die Linse bei den Wellen); die
+    haengen ueber wolkenfotos.ZUSATZ an der Lektionskennung.
+
+    Die Masse und die Herkunft stehen in bilder/fotos.json, das
+    tools/fotos.py geschrieben hat. Fehlt die Datei, gibt es eben keine
+    Fotos -- der Kurs soll sich auch ohne Netz bauen lassen.
+    """
+    pfad = os.path.join(ROOT, "bilder", "fotos.json")
+    if not os.path.exists(pfad):
+        return []
+    with open(pfad, encoding="utf-8") as fh:
+        geholt = json.load(fh)
+    arten = [lektion.get("bild", "")]
+    arten += wolkenfotos.ZUSATZ.get(lektion["id"], [])
+    aus = []
+    for art in arten:
+        for eintrag in geholt.get(art, []):
+            aus.append({
+                "datei": eintrag["datei"],
+                "breite": eintrag["breite"], "hoehe": eintrag["hoehe"],
+                "hinweis": eintrag["hinweis"],
+                "autor": eintrag["autor"], "lizenz": eintrag["lizenz"],
+            })
+    return aus
+
+
+def fotos_pruefen():
+    """Jede Zeichnung, die als Lektionsbild vorkommt, soll Fotos haben.
+
+    Sonst faellt es erst am Geraet auf, und dort nur dem, der zufaellig
+    diese eine Lektion aufschlaegt.
+    """
+    gezeichnet = set()
+    for kap in kurs.KAPITEL:
+        for lek in kap["lektionen"]:
+            if lek.get("bild"):
+                gezeichnet.add(lek["bild"])
+    ohne = sorted(gezeichnet - set(wolkenfotos.WOLKENFOTOS))
+    for name in ohne:
+        print("Zeichnung ohne Fotos: " + name, file=sys.stderr)
+    return not ohne
+
+
 def pruefen(chapters, sprachen):
     """Faellt, bevor ein halbfertiger Kurs ausgeliefert wird.
 
@@ -144,6 +197,8 @@ def herleitungen_pruefen():
 def main():
     if not herleitungen_pruefen():
         return 1
+    if not fotos_pruefen():
+        return 1
     chapters = []
     for chapter in kurs.KAPITEL:
         lessons = []
@@ -154,6 +209,7 @@ def main():
                 "begriffe": lesson["begriffe"],
                 "text": lesson["text"],
                 "bild": lesson.get("bild", ""),
+                "fotos": fotos_zu(lesson),
                 "formeln": [dict(f) for f in lesson.get("formeln", [])],
                 # No runnable example here -- the app hides the whole block
                 # when it is empty, which is what a theory course wants.
@@ -235,11 +291,12 @@ def main():
     path = os.path.join(ROOT, "data", "kurs.json")
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=1, sort_keys=True)
+    bildzahl = sum(len(l["fotos"]) for c in chapters for l in c["lektionen"])
     print("data/kurs.json: %d Kapitel, %d Lektionen, %d Aufgaben, "
-          "%d Einstufungsfragen, %d B"
+          "%d Einstufungsfragen, %d Fotos, %d B"
           % (len(chapters), sum(len(c["lektionen"]) for c in chapters),
              sum(len(l["aufgaben"]) for c in chapters for l in c["lektionen"]),
-             len(items), os.path.getsize(path)))
+             len(items), bildzahl, os.path.getsize(path)))
     return 0
 
 

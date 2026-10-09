@@ -25,7 +25,10 @@ mkdir -p "$STAGE/opt/segelflug/bin" "$STAGE/opt/segelflug/qml" \
 cp "$BIN" "$STAGE/opt/segelflug/bin/segelflug"
 cp "$HOME/ps/c-lehrer/qml/"*.qml "$HOME/ps/c-lehrer/qml/"*.js "$STAGE/opt/segelflug/qml/"
 cp data/kurs.json "$STAGE/opt/segelflug/data/"
+# Zeichnungen und Formeln als PNG, die Wolkenfotos als JPEG.
 cp bilder/*.png "$STAGE/opt/segelflug/bilder/"
+cp bilder/*.jpg "$STAGE/opt/segelflug/bilder/"
+cp CREDITS "$STAGE/opt/segelflug/"
 cp segelflug.desktop "$STAGE/usr/share/applications/"
 cp icons/icon-80.png "$STAGE/usr/share/icons/hicolor/80x80/apps/segelflug.png"
 chmod 755 "$STAGE/opt/segelflug/bin/segelflug"
