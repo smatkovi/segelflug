@@ -103,6 +103,14 @@ KLASSEN = [
             "File:2013-05-25 13-20-11-nuages.jpg",
             "File:2014-02-17 12-45-02 paysage-champey.jpg",
             "File:20190406 141726 le barrage de damouni tiaret.jpg",
+            "File:4416x3312-clouds-nature-sky-IMG 7627.jpg",
+            "File:5 stainless steel grain bins.jpg",
+            "File:500px photo (105261883).jpeg",
+            "File:500px photo (152124903).jpeg",
+            "File:500px photo (47206606).jpeg",
+            "File:500px photo (47206620).jpeg",
+            "File:A high country landscape.jpg",
+            "File:AcrosstheHills.jpg",
         ]),
 
     klasse(
@@ -125,6 +133,14 @@ KLASSEN = [
             "File:500px photo (79660815).jpeg",
             "File:Alcácer do Sal, 2010.10.13 (6094109993).jpg",
             "File:Above the Valais of Mabayi there are clouds.jpg",
+            "File:Bar Harbor distant view.jpg",
+            "File:Beau nuage le 18 mai 2008 près de Châteauneuf-du-Pape.JPG",
+            "File:Belleza puntana.JPG",
+            "File:Bilbao - Parque Doña Casilda - Farola 01.jpg",
+            "File:Carretera en el Altiplano - Bolivia.jpg",
+            "File:Cayo Blanco (1983) 01.jpg",
+            "File:Chapel of Our Lady of Sorrows on Svatý kopeček in Mikulov 2020.jpg",
+            "File:Chicago skyline 2013.JPG",
         ]),
 
     klasse(
@@ -149,6 +165,10 @@ KLASSEN = [
             "File:2019-05-25 09-51-19 cumulus.jpg",
             "File:2022-08-05 18 40 16 View of towering cumulus from Mercer County Route 526 (Robbinsville-Edinburg Road) in Robbinsville Township, Mercer County, New Jersey.jpg",
             "File:2022-08-05 19 37 17 View of towering cumulus near sunset from Mercer County Route 526 (Robbinsville-Edinburg Road) in Robbinsville Township, Mercer County, New Jersey.jpg",
+            "File:9000x2700 (34511242821).jpg",
+            "File:A Dutch polder.jpg",
+            "File:Amazonas peruano 1980 08.jpg",
+            "File:Big cu congestus 1.JPG",
         ]),
 
     klasse(
@@ -172,6 +192,15 @@ KLASSEN = [
             "File:2016-07-19 14 30 41 Thundestorm with a large cumulonimbus anvil and mammatus hanging from it over the Blue Ridge Mountains of Shenandoah National Park, viewed from U.S. Route 211 (Lee Highway) just east of Collins Avenue in Luray, Virginia.jpg",
             "File:2016-07-19 15 42 26 View of a thunderstorm cumulonimbus east of the Blue Ridge Mountains in Shenandoah National Park from U.S. Route 340 south of Newport in western Page County, Virginia.jpg",
             "File:2023-07-04 17 55 29 View of a distant line of thunderstorms from Ann M. Banchoff Park in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+            "File:A cumulonimbus - Flickr - odako1 (2).jpg",
+            "File:Alasiga rünksajupilv (Cumulonimbus incus) .jpg",
+            "File:Anvil cloud 1.jpg",
+            "File:Anvil cloud, St. Simons, GA, US.jpg",
+            "File:Chasing the rain, Masai Mara.jpg",
+            "File:Chmura burzowa na północny-wschód od Krakowa, widok spod Wawelu, 20201005 1657 1653.jpg",
+            "File:Cloud formations over Mumbai.jpg",
+            "File:2023-09-08 13 53 22 View of a cumulonimbus anvil from Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+            "File:2025-06-19 17 21 52 An approaching severe thunderstorm (about 40 minutes out) viewed from the Ewing Branch of the Mercer County Library System in Ewing Township, Mercer County, New Jersey.jpg",
         ]),
 
     klasse(
@@ -192,6 +221,7 @@ KLASSEN = [
             "File:Apodaca Cloud Streets.jpg",
             "File:Cloud-street (11802049514).jpg",
             "File:Cloud Streets Mty.jpg",
+            "File:Roll clouds, grand junction, co 20250710.jpg",
         ]),
 
     klasse(
@@ -215,6 +245,12 @@ KLASSEN = [
             "File:2018 Central Chernozem Zapovednik 11 34 26 010000.jpeg",
             "File:2018 Front chłodny w Kotlinie Kłodzkiej 1.jpg",
             "File:2020-06-20 14-02-15 nuages.jpg",
+            "File:Bayern Erlangen Naturschutzgebiet Exerzierplatz Frühling 1.jpg",
+            "File:Blue Sky in Montreal, Quebec.jpg",
+            "File:BlueSkyWhiteClouds.jpg",
+            "File:Brosen clouds lake2.jpg",
+            "File:Burnished (8583935661).jpg",
+            "File:Chapel of Saint Sebastian in Mikulov - west side 2020 crop.jpg",
         ]),
 
     klasse(
@@ -260,6 +296,19 @@ KLASSEN = [
             "File:Altocumulus lenticolaris.jpg",
             "File:Altocumulus lenticularis - Andøy, Norway 2023-07-12.jpg",
             "File:Altocumulus lenticularis Arctowski Station HD.JPG",
+            "File:Flickr - Nicholas T - Saucer.jpg",
+            "File:Flickr - Nicholas T - Shape-Shifters.jpg",
+            "File:Garaio - Embalse de Ullíbarri-Gamboa - Camino 02.jpg",
+            "File:Isolated Altocumulus lenticularis.jpg",
+            "File:Lago de Coatepeque, Occidente El Salvador.jpg",
+            "File:Lake Argentino northern arm Lago Argentino Brazo Norte Patagonia Argentina Luca Galuzzi 2005.JPG",
+            "File:Lenticular clouds and cumulus over flat New Braunfels.jpg",
+            "File:Lenticular clouds and Mount Hotaka from Mount Otensho 1994-06-25.jpg",
+            "File:Lenticular Clouds around Fitz Roy (3259963875).jpg",
+            "File:Lenticular clouds Scotland (5844541910).jpg",
+            "File:Lenticular-La Serrota.jpeg",
+            "File:Lenticular4.jpeg",
+            "File:LenticularCloud-Madeira 20150221©KarlheinzEssl.JPG",
         ]),
 
     klasse(
@@ -276,13 +325,16 @@ KLASSEN = [
           "thermals, long before anything of it reaches the ground."),
         ["ac-castellanus", "stratocumulus", "cirrus"],
         [
-            "File:2014 Gagra, Plaża (17).jpg",
             "File:2025-07-30 08 46 36 Altocumulus clouds viewed from Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
             "File:Clouds over Nuthurst, West Sussex, England.jpg",
             "File:2025-07-29 08 15 46 \"Mackerel sky\" Altocumulus clouds viewed from Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
             "File:2025-11-09 Igreja de São Sebastião, Cesaredas, Reguengo Grande.jpg",
             "File:2026-05-26 19 02 02 Altocumulus clouds viewed from Mountain View Road in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
             "File:2026-05-26 19 06 43 Altocumulus clouds viewed from Mountain View Road in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+            "File:Altocumulus (11773580033).jpg",
+            "File:Altocumulus 1 August 2021 Galley Common.jpg",
+            "File:Altocumulus and cumulus over Gåseberg.jpg",
+            "File:Altocumulus cloud Galley Common.jpg",
         ]),
 
     klasse(
@@ -307,6 +359,17 @@ KLASSEN = [
             "File:2026-09-10 16 20 38 Cirrus uncinus clouds viewed from Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
             "File:2026-09-10 16 45 51 Cirrus uncinus clouds viewed from Aquetong Lane in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
             "File:2026-10-10 12 07 54 Cirrus uncinus clouds viewed from Klockner Road in Hamilton Township, Mercer County, New Jersey.jpg",
+            "File:Clouds - Mendocino, California - DSC01699.JPG",
+            "File:Clouds - Mendocino, California - DSC01703.JPG",
+            "File:Dancing blue clouds and skies.jpg",
+            "File:El cielo muy azul y....JPG",
+            "File:Mares' tails, St Andrews Park - geograph.org.uk - 6266391.jpg",
+            "File:Mattupetty Dam reservoir, Munnar,Kerala, India.jpg",
+            "File:Mila Young 2017-05-21 (Unsplash).jpg",
+            "File:Nuages 3.jpg",
+            "File:Nuages 6.jpg",
+            "File:Nuvole 2.jpg",
+            "File:Nuvole.jpg",
         ]),
 
     klasse(
@@ -329,6 +392,9 @@ KLASSEN = [
             "File:2015 04 09 23 23 20 2 Jpg (112274519).jpeg",
             "File:2019-11-07 14 17 51 Cirrostratus clouds obscuring the sun along Old Ox Road in the Dulles section of Sterling, Loudoun County, Virginia.jpg",
             "File:2020-02-20 09 12 22 Sun dimly visible through cirrostratus along Old Ox Road in the Dulles section of Sterling, Loudoun County, Virginia.jpg",
+            "File:2021-07-13 12 20 22 Cirrostratus clouds viewed from Thompson Road in the Franklin Farm section of Oak Hill, Fairfax County, Virginia.jpg",
+            "File:2021-07-13 12 52 40 A halo around the sun within cirrus and cirrostratus clouds viewed from Franklin Farm Park in the Franklin Farm section of Oak Hill, Fairfax County, Virginia.jpg",
+            "File:2021-07-13 12 52 48 Cirrostratus clouds viewed from Franklin Farm Park in the Franklin Farm section of Oak Hill, Fairfax County, Virginia.jpg",
         ]),
 
     klasse(
@@ -351,5 +417,11 @@ KLASSEN = [
             "File:2019-11-30 12 58 13 Stratus clouds over a field along Old Ox Road in the Dulles section of Sterling, Loudoun County, Virginia.jpg",
             "File:2019-10-13 13 58 40 Stratus over a field along Old Ox Road in the Dulles section of Sterling, Loudoun County, Virginia.jpg",
             "File:2019-10-13 13 58 47 Stratus over a field along Old Ox Road in the Dulles section of Sterling, Loudoun County, Virginia.jpg",
+            "File:2024-12-20 09 31 08 Stratus clouds viewed from Interstate 295 in Ewing Township, Mercer County, New Jersey.jpg",
+            "File:2024-12-20 09 39 41 Stratus clouds viewed from Suburban Square Shopping Center in Ewing Township, Mercer County, New Jersey.jpg",
+            "File:2025-06-27 19 01 12 Stratus clouds viewed from Ann M. Banchoff Park in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+            "File:2025-11-21 10 40 58 Stratus clouds viewed from Mountain View Road in the Mountainview section of Ewing Township, Mercer County, New Jersey.jpg",
+            "File:Hochnebel Wismat 005.jpg",
+            "File:Hochnebel Wismat 006.jpg",
         ]),
 ]

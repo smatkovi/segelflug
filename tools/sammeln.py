@@ -17,6 +17,7 @@ Alles landet unter kandidaten/ und gehoert nicht ins Repository.
 from __future__ import unicode_literals
 
 import argparse
+import hashlib
 import io
 import json
 import os
@@ -38,7 +39,13 @@ VERBOTEN = re.compile(r"gfdl|non-?free|fair use|nc\b|nd\b", re.I)
 # der Blick aus dem Cockpit und vom Platz, also von unten und von der Seite.
 VONOBEN = re.compile(r"satellit|from space|iss\b|modis|aqua|terra modis|"
                      r"aerial|from the air|from above|von oben|airplane window|"
-                     r"flight|window seat|a380|boeing|airbus", re.I)
+                     r"flight|window seat|a380|boeing|airbus|"
+                     # Raumfahrtarchive: ganze Kategorien stecken voll
+                     # davon, und ihre Titel sind blosse Filmnummern
+                     # ("AS09-19-3023"). Von dort sieht man Wolken von
+                     # oben -- fuer eine Uebung am Platz unbrauchbar.
+                     r"apollo|gemini|skylab|^file:as\d\d-|^file:s\d\d-|"
+                     r"sts-\d|nasa", re.I)
 VORSCHAU = 300
 
 
@@ -212,6 +219,18 @@ def brauchbar(d):
     return None
 
 
+def vorschauname(titel):
+    """Die Vorschau heisst nach dem Titel, nicht nach der Nummer.
+
+    Die Nummer ist die Stelle in der Liste, und die verschiebt sich,
+    sobald ein Bild dazukommt oder der Filter sich aendert. Wer dann die
+    alte Vorschau liegen laesst, sieht Bild A und waehlt Titel B aus --
+    genau das drohte am 17.10.2026, als der Filter die Apollo-Aufnahmen
+    aussortierte.
+    """
+    return hashlib.md5(titel.encode("utf-8")).hexdigest()[:12] + ".jpg"
+
+
 def laden(klasse, kategorie, grenze, suche=None, titel=None):
     os.makedirs(os.path.join(KAND, klasse), exist_ok=True)
     if titel:
@@ -244,7 +263,7 @@ def laden(klasse, kategorie, grenze, suche=None, titel=None):
 
     from PIL import Image
     for nummer, d in enumerate(gut):
-        ziel = os.path.join(KAND, klasse, "%03d.jpg" % nummer)
+        ziel = os.path.join(KAND, klasse, vorschauname(d["titel"]))
         if not os.path.exists(ziel):
             bild = Image.open(io.BytesIO(hole(d["vorschau"]))).convert("RGB")
             bild.save(ziel, "JPEG", quality=78)

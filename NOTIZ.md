@@ -1,4 +1,4 @@
-Segelflug 2.8 — ein Modus, der nur fragt: Was ist das für eine Wolke?
+Segelflug 2.9 — ein Modus, der nur fragt: Was ist das für eine Wolke?
 
 Bis 2.7 standen die Fotos unter den Zeichnungen, unter der Überschrift der
 Wolke, die sie zeigen. Das erklärt gut und übt nichts: Wer unter
@@ -28,33 +28,53 @@ gewesen wäre.
 
 ## Die Bilder
 
-**81 Fotoplätze in zwölf Klassen**, 59 Dateien neu dazu (die
-siebenundzwanzig aus den Lektionen werden mitbenutzt, nicht ein zweites
-Mal geholt):
+**153 Fotos in zwölf Klassen** (2.8 hatte 81), 131 Dateien eigens dafür;
+die siebenundzwanzig aus den Lektionen werden mitbenutzt, nicht ein
+zweites Mal geholt:
 
 | Klasse | Fotos | heißt |
 |---|---|---|
-| Cumulus humilis | 10 | schwache Thermik |
-| Cumulus mediocris | 6 | der Tag trägt |
-| Cumulus congestus | 8 | Überentwicklung |
-| Cumulonimbus | 7 | Gewitter |
-| Wolkenstraße | 4 | Strecke geradeaus |
-| Stratocumulus | 7 | schirmt ab |
-| Altocumulus castellanus | 4 | Überentwicklung |
-| Lenticularis | 9 | Welle |
-| Altocumulus | 6 | schirmt ab |
-| Cirrus | 8 | Warmfront |
-| Cirrostratus | 6 | Warmfront |
-| Stratus | 6 | kein Flugwetter |
+| Cumulus humilis | 18 | schwache Thermik |
+| Cumulus mediocris | 14 | der Tag trägt |
+| Cumulus congestus | 12 | Überentwicklung |
+| Cumulonimbus | 16 | Gewitter |
+| Wolkenstraße | 5 | Strecke geradeaus |
+| Stratocumulus | 13 | schirmt ab |
+| Altocumulus castellanus | 3 | Überentwicklung |
+| Lenticularis | 22 | Welle |
+| Altocumulus | 10 | schirmt ab |
+| Cirrus | 19 | Warmfront |
+| Cirrostratus | 9 | Warmfront |
+| Stratus | 12 | kein Flugwetter |
 
-Gesucht hat `tools/sammeln.py` (Commons-Kategorien, Unterkategorien,
-Volltextsuche), ausgewählt habe ich mit den Augen: Aus den Kandidaten
-wurden Kontaktbögen gezeichnet, und jedes Bild, bei dem man selbst zögert,
-ist für eine Erkennungsübung ein schlechtes Bild. Von rund fünfhundert
-Kandidaten sind einundachtzig geblieben. Draußen geblieben sind
-Satelliten- und Flugzeugbilder (so sieht niemand Wolken vom Platz aus),
+Zwei Klassen bleiben dünn, und das ist keine Nachlässigkeit: Von einer
+**Wolkenstraße** gibt es auf Commons fast nur Satellitenbilder — vom Boden
+aus fotografiert sie kaum jemand, weil man sie dort erst erkennt, wenn man
+weiß, wonach man sucht. Und **Altocumulus castellanus** ist selbst am
+Himmel selten und wird meist falsch beschriftet; von fünfzig Kandidaten
+blieben drei. Lieber drei richtige als zehn, bei denen die Übung das
+Falsche beibringt.
+
+**Eine Runde sind zwanzig Bilder**, reihum über die Klassen gemischt.
+Hundertdreiundfünfzig Bilder mal zwei Fragen wären vierhundert Antworten
+am Stück; wer mehr will, tippt noch einmal, und im Menü (Sailfish) bzw.
+unter der Taste (N9) steht der ganze Stapel.
+
+Gesucht hat `tools/sammeln.py` — Commons-Kategorien, deren
+Unterkategorien, Volltextsuche und, wo nötig, eine Liste von Titeln.
+Ausgewählt habe ich mit den Augen: Aus den Kandidaten werden Kontaktbögen
+gezeichnet, und jedes Bild, bei dem man selbst zögert, ist für eine
+Erkennungsübung ein schlechtes Bild. Aus rund tausend Kandidaten sind
+hundertdreiundfünfzig geblieben. Draußen geblieben sind Satelliten- und
+Flugzeugbilder (so sieht niemand Wolken vom Platz aus) — darunter ein
+ganzer Schwung Apollo-Aufnahmen, die in der Congestus-Kategorie liegen —,
 Sonnenuntergänge (die Farbe verrät mehr als die Form), Nachtbilder und
 alles mit Masten und Leitungen quer durchs Bild.
+
+Zwei Dinge, die beim Hinsehen auffielen und ohne das Hinsehen falsch
+gelernt worden wären: ein Floccus-Feld unter „castellanus“, wo der
+Erklärsatz von Türmchen spricht, und ein Strandbild unter „Altocumulus“.
+Beide sitzen jetzt richtig oder gar nicht.
 
 ## Ein Fehler, der nur beim Hinsehen auffällt
 
@@ -83,8 +103,8 @@ und der gehört nicht mir.
 
 ## Pakete
 
-* **N9 / N950:** `segelflug_2.8_armel.deb` (4,4 MB)
-* **Sailfish OS:** `harbour-segelflug-1.14.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
+* **N9 / N950:** `segelflug_2.9_armel.deb` (7,3 MB)
+* **Sailfish OS:** `harbour-segelflug-1.15.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
 
 Das Harmattan-Binär und die Lehrer-Oberfläche mussten neu gebaut werden:
 Der Modus steckt in `Erkennen.{h,cpp}` und in `Course`, nicht im Kurs.
