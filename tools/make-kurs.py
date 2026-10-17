@@ -18,6 +18,7 @@ sys.path.insert(0, ROOT)
 import formeln as formelsatz
 import kartenherleitungen
 import kurs
+import erkennen as erkennungsmodus
 import wolkenfotos
 
 
@@ -139,6 +140,43 @@ def fotos_zu(lektion):
     arten = [lektion.get("bild", "")]
     arten += wolkenfotos.ZUSATZ.get(lektion["id"], [])
     return fotos_fuer(arten)
+
+
+def erkennung():
+    """Der Erkennungsmodus, so wie die App ihn liest.
+
+    Die Klassen und ihre Texte stehen in erkennen.py, die Masse und die
+    Herkunft der Bilder in bilder/erkennen.json (tools/fotos.py). Fehlt
+    die Datei, bleibt der Modus leer -- und die App laesst die Taste dann
+    weg, statt eine leere Seite anzubieten.
+    """
+    pfad = os.path.join(ROOT, "bilder", "erkennen.json")
+    if not os.path.exists(pfad):
+        print("Ohne bilder/erkennen.json: kein Erkennungsmodus",
+              file=sys.stderr)
+        return {}
+    with open(pfad, encoding="utf-8") as fh:
+        fotos = json.load(fh)
+    klassen = [{"id": k["id"], "name": k["name"],
+                "bedeutung": k["bedeutung"], "erkennen": k["erkennen"],
+                "bedeutet": k["bedeutet"], "verwechselt": k["verwechselt"]}
+               for k in erkennungsmodus.KLASSEN]
+    bekannt = set(k["id"] for k in klassen)
+    for foto in fotos:
+        if foto["klasse"] not in bekannt:
+            print("Foto ohne Klasse: " + foto["datei"], file=sys.stderr)
+            return {}
+    return {
+        "titel": erkennungsmodus.TITEL,
+        "unterzeile": erkennungsmodus.UNTERZEILE,
+        "bedeutungen": [{"id": i, "text": text}
+                        for i, text in erkennungsmodus.BEDEUTUNGEN],
+        "klassen": klassen,
+        "fotos": [{"datei": f["datei"], "klasse": f["klasse"],
+                   "breite": f["breite"], "hoehe": f["hoehe"],
+                   "autor": f["autor"], "lizenz": f["lizenz"]}
+                  for f in fotos],
+    }
 
 
 def fotos_pruefen():
@@ -303,16 +341,20 @@ def main():
         "kapitel": chapters,
         "plan": plan,
         "einstufung": {"themen": kurs.THEMEN, "fragen": items},
+        "erkennen": erkennung(),
     }
     path = os.path.join(ROOT, "data", "kurs.json")
     with open(path, "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=1, sort_keys=True)
     bildzahl = sum(len(l["fotos"]) for c in chapters for l in c["lektionen"])
+    uebung = out["erkennen"].get("fotos", [])
     print("data/kurs.json: %d Kapitel, %d Lektionen, %d Aufgaben, "
-          "%d Einstufungsfragen, %d Fotos, %d B"
+          "%d Einstufungsfragen, %d Fotos, %d Uebungsbilder in %d Klassen, "
+          "%d B"
           % (len(chapters), sum(len(c["lektionen"]) for c in chapters),
              sum(len(l["aufgaben"]) for c in chapters for l in c["lektionen"]),
-             len(items), bildzahl, os.path.getsize(path)))
+             len(items), bildzahl, len(uebung),
+             len(out["erkennen"].get("klassen", [])), os.path.getsize(path)))
     return 0
 
 

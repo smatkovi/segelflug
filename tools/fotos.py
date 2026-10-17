@@ -45,9 +45,11 @@ WURZEL = os.path.dirname(HIER)
 sys.path.insert(0, WURZEL)
 
 from wolkenfotos import WOLKENFOTOS          # noqa: E402
+from erkennen import KLASSEN                 # noqa: E402
 
 BILDER = os.path.join(WURZEL, "bilder")
 INDEX = os.path.join(BILDER, "fotos.json")
+ERKINDEX = os.path.join(BILDER, "erkennen.json")
 CREDITS = os.path.join(WURZEL, "CREDITS")
 
 API = "https://commons.wikimedia.org/w/api.php"
@@ -158,7 +160,7 @@ def speichern(daten, ziel):
     return os.path.getsize(ziel)
 
 
-def credits_schreiben(index):
+def credits_schreiben(index, erkennung=None):
     zeilen = [
         "Fotos",
         "=====",
@@ -179,8 +181,43 @@ def credits_schreiben(index):
             zeilen.append("    %s -- %s" % (foto["autor"], foto["lizenz"]))
             zeilen.append("    %s" % foto["seite"])
         zeilen.append("")
+    if erkennung:
+        zeilen.append("Erkennungsmodus")
+        zeilen.append("---------------")
+        zeilen.append("")
+        zeilen.append("Dieselbe Bedingung, dieselbe Nennung; Bilder, die")
+        zeilen.append("schon oben stehen, sind hier nicht wiederholt.")
+        zeilen.append("")
+        oben = set()
+        for art in index:
+            for foto in index[art]:
+                oben.add(foto["datei"])
+        for foto in erkennung:
+            if foto["datei"] in oben:
+                continue
+            zeilen.append("  %s  (%s)" % (foto["datei"], foto["klasse"]))
+            zeilen.append("    %s" % foto["titel"])
+            zeilen.append("    %s -- %s" % (foto["autor"], foto["lizenz"]))
+            zeilen.append("    %s" % foto["seite"])
+        zeilen.append("")
     with open(CREDITS, "w", encoding="utf-8") as fh:
         fh.write("\n".join(zeilen))
+
+
+def erkennungsliste():
+    """Die Fotos des Erkennungsmodus, in der Reihenfolge der Klassen.
+
+    Ein Bild, das schon unter einer Zeichnung steht, wird nicht noch
+    einmal geholt: Der Uebungsmodus zeigt dieselbe Datei. Das spart nicht
+    nur Platz -- zwei Dateien desselben Bildes waeren zwei Stellen, an
+    denen die Urhebernennung auseinanderlaufen kann.
+    """
+    aus = []
+    for k in KLASSEN:
+        for nummer, titel in enumerate(k["fotos"]):
+            aus.append({"klasse": k["id"], "commons": titel,
+                        "datei": "erk-%s-%d.jpg" % (k["id"], nummer + 1)})
+    return aus
 
 
 def main():
@@ -189,7 +226,11 @@ def main():
                         help="nur nachsehen, nichts holen")
     args = teiler.parse_args()
 
+    erkennung = erkennungsliste()
     titel = [f["commons"] for liste in WOLKENFOTOS.values() for f in liste]
+    for eintrag in erkennung:
+        if eintrag["commons"] not in titel:
+            titel.append(eintrag["commons"])
     auskuenfte = {}
     for i in range(0, len(titel), 40):       # die API nimmt 50 auf einmal
         auskuenfte.update(auskunft(titel[i:i + 40]))
@@ -201,6 +242,11 @@ def main():
                              auskuenfte.get(foto["commons"]))
             if fehler:
                 maengel.append(fehler)
+    for eintrag in erkennung:
+        fehler = pruefen(eintrag["klasse"], eintrag["commons"],
+                         auskuenfte.get(eintrag["commons"]))
+        if fehler:
+            maengel.append(fehler)
     if maengel:
         for fehler in maengel:
             print("  FEHLER " + fehler, file=sys.stderr)
@@ -234,9 +280,42 @@ def main():
     with open(INDEX, "w", encoding="utf-8") as fh:
         fh.write(json.dumps(index, ensure_ascii=False, indent=1,
                             sort_keys=True))
-    credits_schreiben(index)
-    print("%d Fotos, %d kB -- bilder/fotos.json und CREDITS geschrieben"
-          % (len(titel), gesamt // 1024))
+
+    # -- und nun die Uebung -------------------------------------------------
+    schon = {}
+    for art in index:
+        for foto in index[art]:
+            schon["File:" + foto["titel"]] = foto
+    erk = []
+    geholt = 0
+    for eintrag in erkennung:
+        daten = auskuenfte[eintrag["commons"]]
+        alt = schon.get(eintrag["commons"])
+        if alt:
+            datei, breite, hoehe = alt["datei"], alt["breite"], alt["hoehe"]
+        else:
+            datei = eintrag["datei"]
+            groesse = speichern(daten, os.path.join(BILDER, datei))
+            gesamt += groesse
+            geholt += 1
+            breite, hoehe = daten["breite"], daten["hoehe"]
+            schon[eintrag["commons"]] = {"datei": datei, "breite": breite,
+                                         "hoehe": hoehe,
+                                         "titel": eintrag["commons"][5:]}
+        erk.append({
+            "datei": datei, "klasse": eintrag["klasse"],
+            "breite": breite, "hoehe": hoehe,
+            "titel": eintrag["commons"][5:],
+            "autor": daten["autor"], "lizenz": daten["lizenz"],
+            "lizenzurl": daten["lizenzurl"], "seite": daten["seite"],
+        })
+    with open(ERKINDEX, "w", encoding="utf-8") as fh:
+        fh.write(json.dumps(erk, ensure_ascii=False, indent=1))
+
+    credits_schreiben(index, erk)
+    print("%d Fotos unter den Zeichnungen, %d in der Uebung (%d davon neu), "
+          "%d kB" % (sum(len(v) for v in index.values()), len(erk), geholt,
+                     gesamt // 1024))
     return 0
 
 

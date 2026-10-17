@@ -152,12 +152,16 @@ WOLKENFOTOS = {
 
     # -- Wolkenstrassen -----------------------------------------------------
     "wolkenstrasse": [
-        foto("File:Cloud Street, Austral 025.jpg",
-             t("Die Wolken stehen in einer Reihe bis zum Horizont, längs des "
-               "Windes. Darunter lässt sich geradeaus fliegen, ohne zu "
-               "kreisen.",
-               "The clouds line up to the horizon, along the wind. Under that "
-               "line you can fly straight ahead without circling.")),
+        # Nicht nach dem Namen auswaehlen: "Cloud Street, Austral" ist auf
+        # Commons eine Wohnstrasse in New South Wales, keine Wolkenstrasse.
+        # Bis 2.7 stand genau die hier -- gesehen hatte sie niemand.
+        foto("File:Apodaca Cloud Streets.jpg",
+             t("Die Wolken stehen in Reihen, die zum Horizont zusammenlaufen, "
+               "längs des Windes. Darunter lässt sich geradeaus fliegen, ohne "
+               "zu kreisen.",
+               "The clouds stand in rows converging towards the horizon, "
+               "along the wind. Under them you can fly straight ahead "
+               "without circling.")),
         foto("File:HorizontalConvectiveRollsClouds1.jpg",
              t("Mehrere Reihen nebeneinander, dazwischen blaue Gassen. In den "
                "Gassen liegt der Abwind — querab der Straße wird es teuer.",

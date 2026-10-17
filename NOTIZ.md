@@ -1,61 +1,92 @@
-Segelflug 2.7 — unter jeder Zeichnung steht jetzt der wirkliche Himmel
+Segelflug 2.8 — ein Modus, der nur fragt: Was ist das für eine Wolke?
 
-Die Zeichnungen bleiben, wo sie sind, und bleiben das Hauptbild: Sie zeigen
-das Merkmal und sonst nichts. Genau das ist aber auch ihre Grenze. Am
-Himmel steht das Merkmal nie allein, sondern zwischen Dunst, Gegenlicht,
-drei Wolkenstockwerken übereinander und einem Baum im Weg — und wer nur die
-Zeichnung kennt, erkennt die Wolke im Bild wieder, nicht draußen.
+Bis 2.7 standen die Fotos unter den Zeichnungen, unter der Überschrift der
+Wolke, die sie zeigen. Das erklärt gut und übt nichts: Wer unter
+„Cumulus humilis“ drei Bilder von Cumulus humilis sieht, hat nichts zu
+entscheiden. Am Himmel steht aber keine Überschrift.
 
-**Unter jeder der neun Zeichnungen stehen deshalb zwei bis drei Fotos
-derselben Wolke**, und zu jedem Foto ein Satz, der sagt, wohin zu schauen
-ist. Ohne den Satz wäre es ein hübscher Himmel; mit ihm ist es eine Übung:
+**Der neue Modus dreht es um.** Ein Foto, sonst nichts auf der Seite, und
+zwei Fragen dazu:
 
-* **Cumulus humilis:** dass alle Basen auf derselben Höhe liegen — das ist
-  die Kondensationshöhe, kein Zeichenfehler.
-* **Lebenslauf:** harte Ränder gegen ausgefranste. Dasselbe Bildpaar, das
-  im Text „wachsend“ und „zerfallend“ heißt, einmal fotografiert.
-* **Congestus:** höher als breit, Ränder noch scharf — noch kein Eis.
-* **Cumulonimbus:** der Amboss von weitem, und der Regenschauer unter der
-  Basis von nahem.
-* **Stratocumulus:** wie aus Haufen Schicht wird und der Tag zumacht.
-* **Wolkenstraße:** von unten die Reihe, von oben (Satellit) das Muster.
-* **Castellanus:** die Türmchen, an denen die Warnung hängt.
-* **Cirrus:** die Haken, und der 22°-Ring, wenn daraus eine Schicht wird.
-* **Lenticularis:** ortsfest über dem Berg, und dieselbe Linse aus dem
-  Segelflugzeug.
+1. **Was für eine Wolke ist das?** Zur Auswahl stehen vier — und zwar
+   nicht irgendwelche, sondern die, mit denen diese wirklich verwechselt
+   wird (`verwechselt` in `erkennen.py`). Zwischen Cirrus und Stratus zu
+   unterscheiden übt niemand; zwischen mediocris und congestus hängt der
+   Tag davon ab.
+2. **Und was heißt sie fürs Segelfliegen?** Hier ist die Auswahl immer
+   dieselbe kurze Liste von neun Bedeutungen — von „schwache Thermik“ über
+   „Welle“ bis „schirmt ab“. Das hält die Autorenarbeit bei den zwölf
+   Klassen statt bei den einundachtzig Fotos.
 
-Cumulonimbus und Lenticularis sind in keiner Lektion das Bild, werden aber
-in einer besprochen; ihre Fotos hängen deshalb an „Wenn es zu gut läuft“
-und an „Wolkenstraßen und Wellen“.
+Nach jedem Tipp steht da, woran man es hätte sehen können, und erst dann
+geht es weiter. Bei der Einstufung wäre das falsch — dort wird gemessen —,
+hier ist es der ganze Zweck.
 
-## Woher die Fotos kommen
+Am Ende: wie viele Wolken erkannt, wie viele Bedeutungen gewusst, und
+welche Klassen danebengingen, jede mit dem Satz, woran sie zu erkennen
+gewesen wäre.
 
-Von Wikimedia Commons, 27 Stück, jedes frei lizenziert (CC BY, CC BY-SA,
-gemeinfrei). Urheber und Lizenz stehen **unter jedem Bild in der App** und
-noch einmal in `CREDITS` — beide Lizenzen verlangen das. `tools/fotos.py`
-prüft das vor dem Holen und bricht ab, statt ein Bild ohne Urheber oder
-unter GFDL stillschweigend mitzunehmen.
+## Die Bilder
 
-Geholt wird auf 640 Punkte Breite und höchstens 520 Punkte Höhe, als JPEG
-mit Qualität 82: 1,1 MB für siebenundzwanzig Fotos. Ohne die Höhengrenze
-stünde ein Hochformat 850 Punkte hoch auf einem 854 Punkte hohen
-Bildschirm, und die Zeichnung darüber liefe aus dem Bild.
+**81 Fotoplätze in zwölf Klassen**, 59 Dateien neu dazu (die
+siebenundzwanzig aus den Lektionen werden mitbenutzt, nicht ein zweites
+Mal geholt):
 
-## Auch bei den Aufgaben
+| Klasse | Fotos | heißt |
+|---|---|---|
+| Cumulus humilis | 10 | schwache Thermik |
+| Cumulus mediocris | 6 | der Tag trägt |
+| Cumulus congestus | 8 | Überentwicklung |
+| Cumulonimbus | 7 | Gewitter |
+| Wolkenstraße | 4 | Strecke geradeaus |
+| Stratocumulus | 7 | schirmt ab |
+| Altocumulus castellanus | 4 | Überentwicklung |
+| Lenticularis | 9 | Welle |
+| Altocumulus | 6 | schirmt ab |
+| Cirrus | 8 | Warmfront |
+| Cirrostratus | 6 | Warmfront |
+| Stratus | 6 | kein Flugwetter |
 
-Nicht nur in den Lektionen: Jede Aufgabe und jede Karteikarte, die eine
-Zeichnung führt, zeigt die Fotos **zweimal** — über der Frage neben der
-Zeichnung, wo sie beim Nachdenken helfen, und noch einmal in der Lösung,
-wo nach der Antwort Zeit ist, wirklich hinzusehen. Verraten wird damit
-nichts, was die Zeichnung über der Frage nicht schon zeigt. Vierzehn der
-neunundvierzig Aufgaben haben eine Zeichnung, macht zweiundvierzig
-Fotoplätze.
+Gesucht hat `tools/sammeln.py` (Commons-Kategorien, Unterkategorien,
+Volltextsuche), ausgewählt habe ich mit den Augen: Aus den Kandidaten
+wurden Kontaktbögen gezeichnet, und jedes Bild, bei dem man selbst zögert,
+ist für eine Erkennungsübung ein schlechtes Bild. Von rund fünfhundert
+Kandidaten sind einundachtzig geblieben. Draußen geblieben sind
+Satelliten- und Flugzeugbilder (so sieht niemand Wolken vom Platz aus),
+Sonnenuntergänge (die Farbe verrät mehr als die Form), Nachtbilder und
+alles mit Masten und Leitungen quer durchs Bild.
+
+## Ein Fehler, der nur beim Hinsehen auffällt
+
+Unter „Wolkenstraßen“ stand seit 2.6 ein Foto aus der Commons-Kategorie
+**„Cloud Street, Austral“** — und das ist eine Wohnstraße namens Cloud
+Street in New South Wales. Ausgewählt nach dem Dateinamen, nie angesehen.
+Jetzt steht dort eine wirkliche Wolkenstraße, und der Kontaktbogen über
+alle siebenundzwanzig Lektionsfotos ist der Grund, warum es aufgefallen
+ist.
+
+## Prüfungen
+
+* `c-lehrer/tools/build-erkennentest.sh` — der Ablauf ohne Gerät: dass die
+  richtige Antwort wandert statt vorne zu stehen, dass die verwechselbare
+  Wolke zur Wahl steht, dass nicht zwei Bilder derselben Klasse
+  hintereinander kommen.
+* `segelflug/bin/segelflug --qml-pruefen` — **am Gerät**, ohne Fenster:
+  jede QML-Datei einmal übersetzen. Der Prüfer auf dem Rechner kennt
+  `com.nokia.meego` nicht, und gerade dessen Fallen fallen sonst erst beim
+  Antippen auf. 19 Dateien, 0 Fehler.
+* `harbour-lehrer/tools/qml-laden.sh` — dasselbe für Silica: 18 Dateien,
+  0 Fehler.
+
+Nicht geprüft: wie es aussieht. Das N950 hängt hinter dem Sicherheitscode,
+und der gehört nicht mir.
 
 ## Pakete
 
-* **N9 / N950:** `segelflug_2.7_armel.deb`
-* **Sailfish OS:** `harbour-segelflug-1.13.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
+* **N9 / N950:** `segelflug_2.8_armel.deb` (4,4 MB)
+* **Sailfish OS:** `harbour-segelflug-1.14.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
 
-Die Oberfläche dafür liegt in C-Lehrer und harbour-lehrer (`Foto.qml`,
-`Fotos.qml`); das Harmattan-Binär musste neu gebaut werden, weil die
-Lektion ihre Felder einzeln durchreicht und `fotos` dazugekommen ist.
+Das Harmattan-Binär und die Lehrer-Oberfläche mussten neu gebaut werden:
+Der Modus steckt in `Erkennen.{h,cpp}` und in `Course`, nicht im Kurs.
+Die anderen drei Kurse tragen keinen Schlüssel `erkennen` — dort bleibt
+die Taste weg.
