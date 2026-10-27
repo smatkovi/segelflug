@@ -252,6 +252,39 @@ WOLKENFOTOS = {
                "From a glider: this is the lens seen from the lift in front "
                "of it. You fly to the leading edge, not into the cloud.")),
     ],
+    # -- Tagesverlaeufe: vier Morgen, vier verschiedene Tage ------------------
+    # Nur Bilder, die schon im Paket sind (unter einer anderen Zeichnung
+    # oder in der Uebung); tools/fotos.py legt sie unter neuem Namen ab.
+    "tagesverlaeufe": [
+        foto("File:Cumulus humilis clouds.jpg",
+             t("Kleine, flache Humilis mit viel Blau dazwischen, alle auf "
+               "einer Basis: so sieht der klassische Cumulus-Tag am "
+               "Vormittag aus. Die Basis steigt noch, der Tag wird lang.",
+               "Small flat humilis with plenty of blue between them, all on "
+               "one base: this is the classic cumulus day in late morning. "
+               "The base is still rising; the day will be long.")),
+        foto("File:2019-05-25 09-51-19 cumulus.jpg",
+             t("Aufgenommen um 9:51 Uhr — und schon ein Turm, höher als "
+               "breit. Das ist kein Humilis-Vormittag, das ist "
+               "Überentwicklung im Anmarsch: früh starten, mittags Abstand.",
+               "Taken at 09:51 — and already a tower, taller than wide. This "
+               "is no humilis morning, this is overdevelopment on its way: "
+               "start early, keep your distance at noon.")),
+        foto("File:2020-02-20 09 12 22 Sun dimly visible through cirrostratus along Old Ox Road in the Dulles section of Sterling, Loudoun County, Virginia.jpg",
+             t("9 Uhr, die Sonne nur noch als matte Scheibe hinter "
+               "Cirrostratus. Der Boden bekommt keine Kraft mehr: Abschirmung, "
+               "der Tag bringt keine Thermik, egal wie es am Horizont aussieht.",
+               "09:00, the sun only a dull disc behind cirrostratus. The "
+               "ground gets no strength any more: shaded out, the day will "
+               "bring no thermals whatever the horizon looks like.")),
+        foto("File:PXL 20211221 223638171.jpg",
+             t("Linsen über dem Kamm, glatt und ortsfest: Wellentag. Wenig "
+               "Thermik, dafür Steigen an derselben Stelle über Stunden — "
+               "und darunter der Rotor.",
+               "Lenses over the ridge, smooth and stationary: a wave day. "
+               "Little thermal lift, but lift in the same place for hours — "
+               "and the rotor underneath.")),
+    ],
 }
 
 

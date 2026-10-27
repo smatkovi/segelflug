@@ -18,7 +18,7 @@ import math
 import os
 import random
 
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(os.path.dirname(HERE), "bilder")
@@ -404,6 +404,254 @@ def zyklus():
     save(image, "cu-zyklus")
 
 
+# ---------------------------------------------------------------------------
+# w-tagesverlaeufe: vier Tage nebeneinander, vier Uhrzeiten untereinander
+# ---------------------------------------------------------------------------
+
+GRUND_TAFEL = (14, 14, 18)
+TEXT_TAFEL = (226, 230, 240)
+HAZE = (214, 222, 232)
+VEIL = (236, 240, 246)
+AS_GREY = (176, 184, 198)
+NS_GREY = (118, 126, 142)
+
+SPRACHE_TAFEL = "de"
+EN_TAFEL = {
+    "Cumulus-Tag": "cumulus day",
+    "Überentwicklung": "overdevelopment",
+    "Abschirmung": "shading out",
+    "Warmfront": "warm front",
+    "9 Uhr": "09:00", "12 Uhr": "12:00", "15 Uhr": "15:00", "18 Uhr": "18:00",
+}
+
+
+def schrift(groesse):
+    for pfad in ("/usr/share/fonts/dejavu/DejaVuSans.ttf",
+                 "/usr/share/fonts/TTF/DejaVuSans.ttf",
+                 "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"):
+        if os.path.exists(pfad):
+            return ImageFont.truetype(pfad, groesse)
+    return ImageFont.load_default()
+
+
+def zelle(w, h, horizon=0.84, top=SKY_TOP, bottom=SKY_BOTTOM):
+    """Ein kleiner Himmel fuer eine Tafelzelle -- canvas() in frei waehlbarer
+    Groesse und mit waehlbaren Himmelsfarben, denn ein Tag unter Altostratus
+    ist nicht blau."""
+    image = Image.new("RGB", (w, h))
+    draw = ImageDraw.Draw(image)
+    oben = int(h * horizon)
+    for y in range(oben):
+        t = y / float(max(1, oben - 1))
+        draw.line([(0, y), (w, y)],
+                  fill=tuple(int(top[i] + (bottom[i] - top[i]) * t)
+                             for i in range(3)))
+    draw.rectangle([0, oben, w, h], fill=GROUND)
+    return image, draw
+
+
+def schleier(image, rng, dichte, farbe=VEIL, y0=0.0, y1=0.55):
+    """Cirrostratus oder Altostratus: eine Schicht ohne Gestalt. Je dichter,
+    desto mehr verschwindet das Blau -- genau das ist das Merkmal."""
+    w, h = image.size
+    lage = Image.new("RGBA", image.size, (0, 0, 0, 0))
+    painter = ImageDraw.Draw(lage)
+    for _ in range(int(140 * dichte)):
+        x = rng.uniform(-w * 0.1, w * 1.1)
+        y = h * rng.uniform(y0, y1)
+        laenge = w * rng.uniform(0.15, 0.45)
+        painter.line([(x, y), (x + laenge, y - h * rng.uniform(0.0, 0.02))],
+                     fill=farbe + (int(60 + 120 * dichte),),
+                     width=int(rng.uniform(2, 5) * S))
+    lage = lage.filter(ImageFilter.GaussianBlur(2.5 * S))
+    return Image.alpha_composite(image.convert("RGBA"), lage).convert("RGB")
+
+
+def cirrusfaeden(image, rng, anzahl, x0=0.0, x1=0.6):
+    w, h = image.size
+    draw = ImageDraw.Draw(image)
+    for _ in range(anzahl):
+        y = h * rng.uniform(0.06, 0.32)
+        x = w * rng.uniform(x0, x1)
+        laenge = w * rng.uniform(0.18, 0.36)
+        for k in range(24):
+            t = k / 23.0
+            dicke = (1.0 - t) ** 1.4 * 2.2 * S + 0.5 * S
+            blob(draw, x + laenge * t, y - h * 0.05 * math.sin(t * 1.3),
+                 dicke, ICE)
+    return image
+
+
+def sonne(image, cx, cy, r, halo=False, matt=False):
+    draw = ImageDraw.Draw(image)
+    if halo:
+        draw.ellipse([cx - r * 3.2, cy - r * 3.2, cx + r * 3.2, cy + r * 3.2],
+                     outline=(252, 250, 240), width=int(1.2 * S))
+    farbe = (236, 236, 228) if matt else (255, 250, 214)
+    draw.ellipse([cx - r, cy - r, cx + r, cy + r], fill=farbe)
+    return image
+
+
+def fetzen(image, rng, anzahl, y_von, y_bis, hell=True):
+    """Zerfallende Reste ohne Basis -- wie der Abend des Cumulus-Tags."""
+    w, h = image.size
+    draw = ImageDraw.Draw(image)
+    for _ in range(anzahl):
+        x = w * rng.uniform(0.05, 0.95)
+        y = h * rng.uniform(y_von, y_bis)
+        puff(draw, x, y, h * rng.uniform(0.05, 0.09), rng,
+             CLOUD_MID if hell else CLOUD_DARK, CLOUD_LIT if hell else CLOUD_MID,
+             CLOUD_LIT, density=5, spread=1.5)
+    return image
+
+
+def regen(image, rng, x0, x1, y0, anzahl=40):
+    w, h = image.size
+    draw = ImageDraw.Draw(image)
+    for _ in range(anzahl):
+        x = w * rng.uniform(x0, x1)
+        y = y0 + rng.uniform(0, h * 0.10)
+        draw.line([(x, y), (x - 2 * S, y + 7 * S)], fill=(120, 130, 150),
+                  width=int(1 * S))
+    return image
+
+
+def tafel_text(draw, x, y, inhalt, groesse, mitte=False):
+    if SPRACHE_TAFEL != "de":
+        inhalt = EN_TAFEL.get(inhalt, inhalt)
+    f = schrift(groesse * S)
+    kasten = draw.textbbox((0, 0), inhalt, font=f)
+    breite = (kasten[2] - kasten[0]) / float(S)
+    if mitte:
+        x -= breite / 2.0
+    draw.text((x * S, y * S), inhalt, font=f, fill=TEXT_TAFEL)
+
+
+def tagesverlaeufe():
+    """Vier Tage, je um 9, 12, 15 und 18 Uhr.
+
+    Die Lektion sagt, dass ein Flugtag auf sehr verschiedene Arten laufen
+    kann und dass der Morgen schon verraet, welche. Dazu gehoert ein Bild,
+    in dem die Zeilen die Tage und die Spalten die Stunden sind: Man liest
+    eine Zeile von links nach rechts und sieht den Tag werden, und man liest
+    die erste Spalte von oben nach unten und sieht, wie wenig sich vier
+    Morgen unterscheiden, die vier verschiedene Tage werden.
+    """
+    global SPRACHE_TAFEL
+    for SPRACHE_TAFEL in ("de", "en"):
+        rng = random.Random(113)
+        image = Image.new("RGB", (W * S, H * S), GRUND_TAFEL)
+        draw = ImageDraw.Draw(image)
+        links, oben, luecke = 88, 18, 4
+        cw = (W - links - luecke * 5) // 4
+        ch = (H - oben - luecke * 5) // 4
+        stunden = ("9 Uhr", "12 Uhr", "15 Uhr", "18 Uhr")
+        zeilen = ("Cumulus-Tag", "Überentwicklung", "Abschirmung", "Warmfront")
+
+        for spalte, stunde in enumerate(stunden):
+            x = links + luecke + spalte * (cw + luecke)
+            tafel_text(draw, x + cw / 2.0, 3, stunde, 10, mitte=True)
+        for zeile, name in enumerate(zeilen):
+            y = oben + luecke + zeile * (ch + luecke)
+            tafel_text(draw, 4, y + ch / 2.0 - 7, name, 9)
+
+        w, h = cw * S, ch * S
+        szenen = {}
+
+        # -- Zeile 1: der klassische Cumulus-Tag ------------------------------
+        bild, _ = zelle(w, h)
+        bild = sonne(bild, w * 0.80, h * 0.20, h * 0.05)
+        szenen[(0, 0)] = bild                                  # blau, nichts
+        bild, _ = zelle(w, h)
+        basis = int(h * 0.58)
+        for cx, bw in ((0.22, 0.16), (0.52, 0.18), (0.80, 0.15)):
+            bild = cumulus(bild, w * cx, basis, w * bw, h * 0.09, rng)
+        szenen[(0, 1)] = bild                                  # erste Humilis
+        bild, _ = zelle(w, h)
+        basis = int(h * 0.40)
+        for cx, bw in ((0.20, 0.22), (0.58, 0.28), (0.88, 0.18)):
+            bild = cumulus(bild, w * cx, basis, w * bw, h * 0.20, rng,
+                           cauliflower=True)
+        szenen[(0, 2)] = bild                                  # Mediocris, hoch
+        bild, _ = zelle(w, h, top=(70, 120, 180), bottom=(220, 200, 180))
+        bild = fetzen(bild, rng, 7, 0.22, 0.42)
+        szenen[(0, 3)] = bild                                  # Zerfall
+
+        # -- Zeile 2: Ueberentwicklung ----------------------------------------
+        bild, _ = zelle(w, h)
+        basis = int(h * 0.56)
+        for cx, bw in ((0.18, 0.18), (0.50, 0.22), (0.82, 0.18)):
+            bild = cumulus(bild, w * cx, basis, w * bw, h * 0.26, rng,
+                           cauliflower=True)
+        szenen[(1, 0)] = bild                                  # schon um 9
+        bild, _ = zelle(w, h)
+        basis = int(h * 0.62)
+        bild = cumulus(bild, w * 0.50, basis, w * 0.34, h * 0.48, rng,
+                       cauliflower=True)
+        bild = cumulus(bild, w * 0.14, basis, w * 0.16, h * 0.14, rng)
+        szenen[(1, 1)] = bild                                  # Congestus
+        bild, _ = zelle(w, h)
+        basis = int(h * 0.70)
+        bild = cumulus(bild, w * 0.46, basis, w * 0.32, h * 0.44, rng,
+                       cauliflower=True)
+        bild = schleier(bild, rng, 0.6, farbe=ICE, y0=0.04, y1=0.22)
+        bild = regen(bild, rng, 0.36, 0.60, basis)
+        szenen[(1, 2)] = bild                                  # Cb mit Amboss
+        bild, _ = zelle(w, h, top=(90, 100, 120), bottom=(150, 156, 170))
+        bild = schleier(bild, rng, 1.0, farbe=AS_GREY, y0=0.0, y1=0.5)
+        bild = fetzen(bild, rng, 6, 0.30, 0.55, hell=False)
+        bild = regen(bild, rng, 0.55, 0.95, int(h * 0.55), 30)
+        szenen[(1, 3)] = bild                                  # ausgebreitet, Schauer
+
+        # -- Zeile 3: Abschirmung von Westen ----------------------------------
+        bild, _ = zelle(w, h)
+        bild = cirrusfaeden(bild, rng, 4, 0.0, 0.3)            # links = Westen
+        basis = int(h * 0.60)
+        bild = cumulus(bild, w * 0.70, basis, w * 0.14, h * 0.08, rng)
+        szenen[(2, 0)] = bild
+        bild, _ = zelle(w, h)
+        bild = schleier(bild, rng, 0.5, y0=0.0, y1=0.45)
+        bild = sonne(bild, w * 0.74, h * 0.18, h * 0.045, halo=True)
+        basis = int(h * 0.52)
+        for cx, bw in ((0.22, 0.18), (0.56, 0.16)):
+            bild = cumulus(bild, w * cx, basis, w * bw, h * 0.10, rng)
+        szenen[(2, 1)] = bild                                  # Halo, Cu darunter
+        bild, _ = zelle(w, h, top=(150, 168, 190), bottom=(200, 208, 220))
+        bild = schleier(bild, rng, 0.9, y0=0.0, y1=0.5)
+        bild = sonne(bild, w * 0.70, h * 0.20, h * 0.045, matt=True)
+        bild = fetzen(bild, rng, 4, 0.40, 0.55)
+        szenen[(2, 2)] = bild                                  # milchig, Cu sterben
+        bild, _ = zelle(w, h, top=(140, 150, 168), bottom=(190, 196, 206))
+        bild = schleier(bild, rng, 1.0, farbe=AS_GREY, y0=0.0, y1=0.55)
+        szenen[(2, 3)] = bild                                  # grau, nichts
+
+        # -- Zeile 4: Warmfront -----------------------------------------------
+        bild, _ = zelle(w, h)
+        bild = cirrusfaeden(bild, rng, 6, 0.0, 0.6)
+        szenen[(3, 0)] = bild                                  # Cirrus-Haken
+        bild, _ = zelle(w, h)
+        bild = schleier(bild, rng, 0.7, y0=0.0, y1=0.5)
+        bild = sonne(bild, w * 0.52, h * 0.24, h * 0.05, halo=True)
+        szenen[(3, 1)] = bild                                  # Cirrostratus, Halo
+        bild, _ = zelle(w, h, top=(128, 138, 156), bottom=(176, 182, 194))
+        bild = schleier(bild, rng, 1.0, farbe=AS_GREY, y0=0.0, y1=0.6)
+        bild = sonne(bild, w * 0.52, h * 0.24, h * 0.045, matt=True)
+        szenen[(3, 2)] = bild                                  # Altostratus
+        bild, _ = zelle(w, h, top=(92, 100, 116), bottom=(140, 146, 158))
+        bild = schleier(bild, rng, 1.2, farbe=NS_GREY, y0=0.0, y1=0.7)
+        bild = regen(bild, rng, 0.05, 0.95, int(h * 0.40), 90)
+        szenen[(3, 3)] = bild                                  # Nimbostratus
+
+        for (zeile, spalte), szene in szenen.items():
+            szene = szene.filter(ImageFilter.GaussianBlur(0.5 * S))
+            x = (links + luecke + spalte * (cw + luecke)) * S
+            y = (oben + luecke + zeile * (ch + luecke)) * S
+            image.paste(szene, (x, y))
+
+        name = "tagesverlaeufe" + ("" if SPRACHE_TAFEL == "de" else ".en")
+        save(image, name)
+
+
 def main():
     cumulus_humilis()
     cumulus_congestus()
@@ -414,6 +662,7 @@ def main():
     lenticularis()
     wolkenstrasse()
     zyklus()
+    tagesverlaeufe()
 
 
 if __name__ == "__main__":

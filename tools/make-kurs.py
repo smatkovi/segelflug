@@ -179,6 +179,74 @@ def erkennung():
     }
 
 
+def klassifizierer():
+    """Foto deuten, so wie die App es liest.
+
+    Die Klassentafel fuer das Netz in data/modell.bin (tools/MODELL.md):
+    dieselben Texte wie im Erkennungsmodus, plus die vier Klassen ohne
+    Uebungsfotos. Das Netz selbst nennt seine Klassen im Dateikopf; die
+    App ordnet ueber die Kennung zu, nicht ueber die Stelle.
+    """
+    klassen = [{"id": k["id"], "name": k["name"],
+                "bedeutung": k["bedeutung"], "erkennen": k["erkennen"],
+                "bedeutet": k["bedeutet"]}
+               for k in erkennungsmodus.klassifizierer_klassen()]
+    bekannt = set(i for i, _ in erkennungsmodus.BEDEUTUNGEN)
+    for k in klassen:
+        if k["bedeutung"] not in bekannt:
+            raise SystemExit("Klasse ohne Bedeutung: " + k["id"])
+    return {
+        "titel": erkennungsmodus.FOTO_TITEL,
+        "unterzeile": erkennungsmodus.FOTO_UNTERZEILE,
+        "tipps": erkennungsmodus.FOTO_TIPPS,
+        "bedeutungen": [{"id": i, "text": text}
+                        for i, text in erkennungsmodus.BEDEUTUNGEN],
+        "klassen": klassen,
+    }
+
+
+def glossar(chapters):
+    """Das Glossar: jedes Fachwort der App mit Definition und Zeichnung.
+
+    Die Eintraege stehen in begriffe.py (BEGRIFFE, je {id, wort, definition,
+    bild, siehe}). Die Kennungen sind dieselben wie in den `begriffe` der
+    Lektionen, damit die Lektion ihre Woerter verlinken kann; Woerter, die
+    nur im Text vorkommen, bekommen eigene Kennungen. Fehlt das Modul,
+    bleibt das Glossar leer und die App laesst die Taste weg.
+    """
+    try:
+        import begriffe as glossarmodul
+    except ImportError:
+        print("Ohne begriffe.py: kein Glossar", file=sys.stderr)
+        return []
+    eintraege = list(glossarmodul.BEGRIFFE)
+    ids = [b["id"] for b in eintraege]
+    if len(ids) != len(set(ids)):
+        raise SystemExit("Glossar: doppelte Kennung")
+    bekannt = set(ids)
+    for b in eintraege:
+        for s in b.get("siehe", []):
+            if s not in bekannt:
+                raise SystemExit("Glossar: siehe-Verweis ins Leere: %s -> %s"
+                                 % (b["id"], s))
+        if b.get("bild"):
+            pfad = os.path.join(ROOT, "bilder", b["bild"] + ".png")
+            if not os.path.exists(pfad):
+                raise SystemExit("Glossar: Bild fehlt: " + pfad)
+    fehlend = set()
+    for chapter in chapters:
+        for lesson in chapter["lektionen"]:
+            for kennung in lesson["begriffe"]:
+                if kennung not in bekannt:
+                    fehlend.add(kennung)
+    if fehlend:
+        print("Lektionsbegriffe ohne Glossareintrag: " + ", ".join(sorted(fehlend)),
+              file=sys.stderr)
+    return [{"id": b["id"], "wort": b["wort"], "definition": b["definition"],
+             "bild": b.get("bild", ""), "siehe": list(b.get("siehe", []))}
+            for b in eintraege]
+
+
 def fotos_pruefen():
     """Jede Zeichnung, die als Lektionsbild vorkommt, soll Fotos haben.
 
@@ -342,6 +410,8 @@ def main():
         "plan": plan,
         "einstufung": {"themen": kurs.THEMEN, "fragen": items},
         "erkennen": erkennung(),
+        "klassifizierer": klassifizierer(),
+        "begriffe": glossar(chapters),
     }
     path = os.path.join(ROOT, "data", "kurs.json")
     with open(path, "w", encoding="utf-8") as fh:

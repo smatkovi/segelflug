@@ -25,6 +25,9 @@ mkdir -p "$STAGE/opt/segelflug/bin" "$STAGE/opt/segelflug/qml" \
 cp "$BIN" "$STAGE/opt/segelflug/bin/segelflug"
 cp "$HOME/ps/c-lehrer/qml/"*.qml "$HOME/ps/c-lehrer/qml/"*.js "$STAGE/opt/segelflug/qml/"
 cp data/kurs.json "$STAGE/opt/segelflug/data/"
+# Das Wolkennetz fuer "Foto deuten" (tools/MODELL.md); ohne Datei bleibt
+# die Taste in der App weg, das Paket wird aber nicht verweigert.
+[ -f data/modell.bin ] && cp data/modell.bin "$STAGE/opt/segelflug/data/"
 # Zeichnungen und Formeln als PNG, die Wolkenfotos als JPEG.
 cp bilder/*.png "$STAGE/opt/segelflug/bilder/"
 cp bilder/*.jpg "$STAGE/opt/segelflug/bilder/"

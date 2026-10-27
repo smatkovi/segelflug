@@ -730,6 +730,289 @@ K_WOLKEN["lektionen"].extend([
                  "opposite."),
                bild="ac-castellanus"),
         ]),
+
+    lektion("w-tagesverlaeufe",
+        t("Tagesverläufe — wie ein Flugtag laufen kann",
+          "How a flying day can go"),
+        ["tagesverlauf", "planung", "abschirmung"],
+        t("„Der Tagesgang“ beschreibt den Normaltag. Der kommt aber vielleicht "
+          "an jedem dritten Flugtag; die anderen laufen anders, und **um 9 Uhr "
+          "steht meist schon am Himmel, welcher es wird.** Hier die acht "
+          "Verläufe, die am häufigsten sind, jeder mit seinem Morgenbild.\n\n"
+          "**1. Der klassische Cumulus-Tag.** Morgens blau, Sicht gut, kein "
+          "Schleier. Gegen 10–11 Uhr die ersten Humilis, alle auf einer "
+          "Basis in 800–1200 m. Mittags Mediocris, die Basis steigt auf "
+          "1500–2000 m, Steigen 2–3 m/s. Ab 17–18 Uhr zerfallen die Wolken "
+          "zu Fetzen, die Basis bleibt hoch, das Steigen nicht. *Folge:* "
+          "Start, sobald die zweite Generation Wolken steht (die erste ist "
+          "oft ein Fehlstart), Rückkehr bis 18 Uhr geplant.\n\n"
+          "**2. Blauthermik.** Dieselbe Labilität, aber trockene Luft: "
+          "Spreizung 15 °C und mehr, die Thermik erreicht die Kondensation "
+          "nicht. Keine Wolke zeigt, wo es steigt. Marken sind die "
+          "**Dunstglocke** (Thermik hebt den Dunst zu einer flachen Kuppe), "
+          "**Staubteufel**, kreisende **Greifvögel** und das Gefühl im "
+          "Hosenboden. Steigen oft gut, die Höhe muss aus Temperatur und "
+          "Taupunkt **gerechnet** werden. *Folge:* flieg von einem "
+          "Auslöser zum nächsten (Hänge, Ortsränder, Kiesgruben), nie "
+          "blind ins Blaue, und halte die Höhe, denn unten gibt es keine "
+          "zweite Chance.\n\n"
+          "**3. Überentwicklung.** Schon um **9–10 Uhr** Cumuli, die höher "
+          "als breit sind, mittags Congestus-Türme, um 14 Uhr der erste "
+          "Amboss, dann Schauer und Ausbreitung. Der Tag ist zuerst der "
+          "beste des Jahres und drei Stunden später nicht mehr fliegbar. "
+          "Oft kündigt ihn Castellanus am Morgen an. *Folge:* früh "
+          "starten, bis mittags fliegen, ab 13 Uhr mindestens 10 km Abstand "
+          "zu jedem Turm, der faserig wird, und zurück sein, bevor die "
+          "Böenfront den Platz erreicht.\n\n"
+          "**4. Zumachen und Abschirmung.** Zwei Arten, ein Ende: Entweder "
+          "breiten sich die Cumuli unter einer Inversion zu Stratocumulus "
+          "aus (alle Wolken hören auf derselben Höhe auf, werden breit "
+          "statt hoch, das Blau dazwischen schließt sich), oder von Westen "
+          "schiebt sich ein **Cirrostratus-Schleier** über den Platz. Den "
+          "sieht man schon um 9 Uhr: **ein weißer Saum über dem "
+          "Westhorizont, der sich nicht auflöst, während der Rest blau "
+          "ist.** Um 12 Uhr steht ein Halo, um 14 Uhr ist die Sonne eine "
+          "matte Scheibe, und die Thermik stirbt innerhalb einer Stunde. "
+          "*Folge:* der Tag endet nicht am Abend, sondern wenn der Schleier "
+          "da ist — rechne mit einer Stunde Vorsprung je 100 km Abstand des "
+          "Saums.\n\n"
+          "**5. Fronttag.** *Warmfront:* Cirrus-Haken → Cirrostratus mit "
+          "Halo → Altostratus (Sonne wie hinter Milchglas) → Nimbostratus "
+          "und Landregen. Diese Abfolge dauert 12–24 Stunden; wer sie "
+          "morgens beim Cirrus sieht, hat höchstens den Vormittag. "
+          "*Kaltfront:* eine Linie aus Congestus und Cb, Böen, Windsprung "
+          "nach West oder Nordwest, dann binnen einer Stunde Aufklaren. "
+          "*Folge:* vor einer Warmfront nur Platzrunden; vor einer "
+          "Kaltfront nicht starten, wenn die Linie unter 50 km ist.\n\n"
+          "**6. Rückseitenwetter.** Der Tag nach der Kaltfront: kalte, "
+          "klare, labile Luft, Sicht 50 km und mehr, Cumuli scharf "
+          "gezeichnet, Basis 2000 m und höher, Steigen 3–4 m/s. Dazu "
+          "Schauer aus einzelnen Congestus und Böen am Boden. Es ist der "
+          "beste **und** der ruppigste Tag. *Folge:* auf der Strecke immer "
+          "eine Landewiese im Blick, denn ein Schauer frisst 20 km Himmel; "
+          "bei der Landung mit Windsprüngen rechnen.\n\n"
+          "**7. Welle und Föhn.** Starker Wind quer zum Gebirge. Am Morgen "
+          "**Lenticularis** — glatt, linsenförmig, ortsfest —, darunter "
+          "zerrissene **Rotorwolken**, im Lee oft ein wolkenfreies "
+          "**Föhnfenster**. Thermik gibt es wenig und durchgerührt; dafür "
+          "steht das Steigen stundenlang an derselben Stelle, in der Welle "
+          "ruhig wie am Faden. *Folge:* Einstieg über den Rotor hinweg oder "
+          "über den Hang, oben Sauerstoff und Luftraum beachten, den Rotor "
+          "nie unterschätzen.\n\n"
+          "**8. Nebel oder Hochnebel am Morgen.** Eine Stratusdecke von "
+          "der Nacht. Ob sie geht, liest man um 9 Uhr an drei Dingen: "
+          "**Dicke** (schimmert die Sonne als Scheibe durch, ist sie dünn), "
+          "**Löcher** (reißt es irgendwo auf, breitet sich das aus) und "
+          "**Wind** (schwacher Wind löst, kräftiger Wind aus Ost hält sie). "
+          "Dünn und löchrig: weg bis 11–13 Uhr, dann ein verkürzter "
+          "Cumulus-Tag mit tiefer Basis. Dick und grau ohne Sonnenscheibe: "
+          "bleibt, Tag gestrichen. *Folge:* erst aufrüsten, wenn das erste "
+          "Loch da ist; die Thermik setzt nach dem Nebel schnell ein, weil "
+          "der Boden feucht und die Luft labil ist.\n\n"
+          "**Was ich um 9 Uhr sehe → was der Tag wird → wann starten, wann "
+          "heim**\n\n"
+          "**Blau, Sicht gut, Westhorizont sauber** → Cumulus-Tag → Start "
+          "mit der zweiten Wolkengeneration, heim bis 18 Uhr.\n\n"
+          "**Blau, aber diesig, Spreizung über 15 °C** → Blauthermik → "
+          "Start gegen 11 Uhr, heim, wenn die Dunstglocke flach wird.\n\n"
+          "**Cumuli, höher als breit; Castellanus** → Überentwicklung → "
+          "Start sofort, heim um 14 Uhr.\n\n"
+          "**Weißer Saum im Westen, der bleibt** → Abschirmung → Start "
+          "sofort, heim, sobald der Halo steht.\n\n"
+          "**Cirrus-Haken, die dichter werden** → Warmfront → nur "
+          "Platzrunden, Schulung, nichts auf Strecke.\n\n"
+          "**Scharfe Cumuli, kalte Luft, Sicht 50 km** → Rückseite → Start "
+          "früh, heim nach Schauerlage, nicht nach Uhr.\n\n"
+          "**Linsen über dem Gebirge** → Welle → Start, wenn der Rotor "
+          "ausgeprägt ist, heim vor dem Abendwind.\n\n"
+          "**Grau, Sonne als Scheibe, erste Löcher** → Hochnebel löst sich "
+          "→ aufrüsten beim ersten Loch, kurzer Nachmittag.",
+          "\"The course of the day\" describes the normal day. It turns up "
+          "on perhaps one flying day in three; the others run differently, "
+          "and **by 09:00 the sky usually already shows which one it will "
+          "be.** Here are the eight commonest ways a day goes, each with "
+          "its morning picture.\n\n"
+          "**1. The classic cumulus day.** Blue in the morning, good "
+          "visibility, no veil. Around 10–11 the first humilis, all on one "
+          "base at 800–1200 m. Mediocris by noon, the base climbing to "
+          "1500–2000 m, climbs of 2–3 m/s. From 17–18 the clouds decay into "
+          "shreds; the base stays high, the lift does not. *Consequence:* "
+          "launch once the second generation of clouds is up (the first is "
+          "often a false start), plan to be home by 18:00.\n\n"
+          "**2. Blue thermals.** The same instability but dry air: a spread "
+          "of 15 °C or more, so the thermals never reach condensation. No "
+          "cloud shows where the lift is. The markers are the **haze dome** "
+          "(a thermal lifts the haze into a flat hump), **dust devils**, "
+          "circling **birds of prey** and the feel through the seat. Climbs "
+          "are often good; the height has to be **calculated** from "
+          "temperature and dew point. *Consequence:* fly from one trigger to "
+          "the next (slopes, village edges, gravel pits), never blindly into "
+          "the blue, and keep your height – low down there is no second "
+          "chance.\n\n"
+          "**3. Overdevelopment.** Already at **09:00–10:00** cumulus taller "
+          "than wide, congestus towers by noon, the first anvil at 14:00, "
+          "then showers and spreading out. The day starts as the best of the "
+          "year and three hours later is unflyable. Castellanus in the "
+          "morning often announces it. *Consequence:* launch early, fly "
+          "until noon, from 13:00 keep at least 10 km from any tower that "
+          "turns fibrous, and be back before the gust front reaches the "
+          "field.\n\n"
+          "**4. Closing in and shading out.** Two ways, one ending: either "
+          "the cumulus spread out under an inversion into stratocumulus "
+          "(every cloud stops at the same height, grows wide instead of "
+          "tall, the blue between them closes), or a **cirrostratus veil** "
+          "slides in over the field from the west. You can see it at 09:00: "
+          "**a white fringe above the western horizon that does not "
+          "dissolve while the rest is blue.** By noon there is a halo, by "
+          "14:00 the sun is a dull disc, and the thermals die within the "
+          "hour. *Consequence:* the day ends not in the evening but when "
+          "the veil arrives – reckon one hour of grace per 100 km of "
+          "distance to the fringe.\n\n"
+          "**5. Front day.** *Warm front:* cirrus hooks → cirrostratus with "
+          "halo → altostratus (sun as if behind frosted glass) → "
+          "nimbostratus and steady rain. The sequence takes 12–24 hours; "
+          "whoever sees the cirrus in the morning has the morning at most. "
+          "*Cold front:* a line of congestus and cumulonimbus, gusts, a wind "
+          "shift to west or north-west, then clearing within an hour. "
+          "*Consequence:* ahead of a warm front, circuits only; ahead of a "
+          "cold front, do not launch once the line is inside 50 km.\n\n"
+          "**6. Post-frontal air.** The day after the cold front: cold, "
+          "clear, unstable air, visibility 50 km and more, cumulus sharply "
+          "drawn, base 2000 m and above, climbs of 3–4 m/s. Also showers "
+          "out of single congestus and gusts on the ground. It is the best "
+          "**and** the roughest day. *Consequence:* on task always keep a "
+          "landable field in view, because one shower eats 20 km of sky; "
+          "expect wind shifts on landing.\n\n"
+          "**7. Wave and foehn.** Strong wind across the mountains. In the "
+          "morning **lenticularis** – smooth, lens-shaped, stationary – "
+          "with torn **rotor clouds** below and often a cloud-free **foehn "
+          "gap** in the lee. Thermals are few and stirred up; in return the "
+          "lift stands in the same place for hours, smooth as on a string "
+          "in the wave. *Consequence:* enter above the rotor or via the "
+          "ridge, mind oxygen and airspace up high, never underestimate the "
+          "rotor.\n\n"
+          "**8. Fog or low stratus in the morning.** A stratus sheet left "
+          "from the night. Whether it goes you read at 09:00 from three "
+          "things: **thickness** (if the sun shows through as a disc it is "
+          "thin), **holes** (if it tears open anywhere, that spreads) and "
+          "**wind** (light wind dissolves it, a brisk easterly holds it). "
+          "Thin and holed: gone by 11:00–13:00, then a shortened cumulus "
+          "day with a low base. Thick and grey without a sun disc: it stays, "
+          "day cancelled. *Consequence:* rig only when the first hole "
+          "appears; thermals start quickly after fog, because the ground is "
+          "moist and the air unstable.\n\n"
+          "**What I see at 09:00 → what the day becomes → when to launch, "
+          "when to go home**\n\n"
+          "**Blue, good visibility, clean western horizon** → cumulus day → "
+          "launch with the second generation of clouds, home by 18:00.\n\n"
+          "**Blue but hazy, spread above 15 °C** → blue thermals → launch "
+          "around 11:00, home when the haze dome flattens.\n\n"
+          "**Cumulus taller than wide; castellanus** → overdevelopment → "
+          "launch at once, home at 14:00.\n\n"
+          "**A white fringe in the west that stays** → shading out → launch "
+          "at once, home as soon as the halo appears.\n\n"
+          "**Cirrus hooks thickening** → warm front → circuits and training "
+          "only, nothing cross-country.\n\n"
+          "**Sharp cumulus, cold air, visibility 50 km** → post-frontal → "
+          "launch early, home by the showers, not by the clock.\n\n"
+          "**Lenses over the mountains** → wave → launch once the rotor is "
+          "well formed, home before the evening wind.\n\n"
+          "**Grey, sun as a disc, first holes** → low stratus dissolving → "
+          "rig at the first hole, a short afternoon."),
+        "tagesverlaeufe",
+        [
+            mc(t("9 Uhr: Über dem Platz ist es blau, die Sicht ist gut. Über "
+                 "dem Westhorizont liegt ein weißer, gleichmäßiger Saum, der "
+                 "seit dem Frühstück nicht kleiner geworden ist. Welcher Tag "
+                 "wird das?",
+                 "09:00: blue over the field, good visibility. Above the "
+                 "western horizon lies a white, even fringe that has not "
+                 "shrunk since breakfast. What kind of day will it be?"),
+               [t("Abschirmung – ein Cirrostratus-Schleier zieht auf; "
+                  "starten, solange es trägt, heim beim Halo.",
+                  "Shading out – a cirrostratus veil is coming; launch while "
+                  "it carries, home when the halo appears."),
+                t("Ein klassischer Cumulus-Tag – der Saum ist Morgendunst.",
+                  "A classic cumulus day – the fringe is morning haze."),
+                t("Überentwicklung – im Westen baut sich schon ein Gewitter.",
+                  "Overdevelopment – a thunderstorm is already building in "
+                  "the west."),
+                t("Blauthermik – kein Schleier, nur trockene Luft.",
+                  "Blue thermals – no veil, just dry air.")], 0,
+               t("Dunst löst sich mit der Sonne auf; ein Saum, der bleibt und "
+                 "gleichmäßig weiß ist, ist Eiswolke in großer Höhe – der "
+                 "Rand eines Cirrostratus-Schilds. Er kommt mit dem "
+                 "Höhenwind von Westen näher und nimmt dem Boden die Sonne, "
+                 "lange bevor es regnet. Der Tag ist bis dahin fliegbar, "
+                 "danach nicht mehr.",
+                 "Haze dissolves with the sun; a fringe that stays and is "
+                 "evenly white is ice cloud at great height – the edge of a "
+                 "cirrostratus shield. It comes closer with the upper wind "
+                 "from the west and takes the sun off the ground long before "
+                 "it rains. The day is flyable until then and not after."),
+               bild="tagesverlaeufe"),
+            mc(t("9:30 Uhr: Die ersten Cumuli stehen schon, und sie sind "
+                 "höher als breit. Dazwischen in mittlerer Höhe kleine "
+                 "Türmchen auf einer gemeinsamen Basis. Was planst du?",
+                 "09:30: the first cumulus are already up, and they are "
+                 "taller than wide. Between them, at mid-level, little "
+                 "turrets on a common base. What is your plan?"),
+               [t("Ein normaler Cumulus-Tag – gegen 11 Uhr starten, heim um "
+                  "18 Uhr.",
+                  "A normal cumulus day – launch around 11:00, home at "
+                  "18:00."),
+                t("Überentwicklung – sofort starten, ab 13 Uhr Abstand zu "
+                  "den Türmen, um 14 Uhr zurück.",
+                  "Overdevelopment – launch at once, keep clear of the towers "
+                  "from 13:00, back at 14:00."),
+                t("Rückseitenwetter – der beste Tag des Monats, bis zum Abend "
+                  "fliegen.",
+                  "Post-frontal – the best day of the month, fly until "
+                  "evening."),
+                t("Welle – die Türmchen sind Rotorwolken.",
+                  "Wave – the turrets are rotor clouds.")], 1,
+               t("Türme um halb zehn und Castellanus dazu heißen: labil vom "
+                 "Boden bis in die mittlere Höhe, und nichts deckelt. So ein "
+                 "Tag gibt mittags das beste Steigen des Jahres und am "
+                 "frühen Nachmittag Gewitter. Wer wie an einem Normaltag "
+                 "plant, ist um 16 Uhr 80 km vom Platz, wenn die Böenfront "
+                 "kommt.",
+                 "Towers at half past nine and castellanus on top mean "
+                 "unstable from the ground to mid-levels with nothing "
+                 "capping it. Such a day gives the best climbs of the year "
+                 "at noon and thunderstorms in the early afternoon. Plan it "
+                 "like a normal day and at 16:00 you are 80 km from the "
+                 "field when the gust front arrives."),
+               bild="tagesverlaeufe"),
+            mc(t("9 Uhr: Graue Decke über dem Platz, die Sonne ist als "
+                 "matte Scheibe zu erkennen, im Osten ist ein erstes Loch "
+                 "aufgerissen, kaum Wind. Was heißt das?",
+                 "09:00: a grey sheet over the field, the sun recognisable "
+                 "as a dull disc, a first hole torn open in the east, hardly "
+                 "any wind. What does it mean?"),
+               [t("Eine Warmfront – Altostratus, es wird regnen.",
+                  "A warm front – altostratus, it will rain."),
+                t("Abschirmung – der Tag ist gestrichen.",
+                  "Shading out – the day is off."),
+                t("Hochnebel, der sich auflöst – bis mittags frei, dann ein "
+                  "kurzer Cumulus-Tag mit tiefer Basis.",
+                  "Low stratus dissolving – clear by noon, then a short "
+                  "cumulus day with a low base."),
+                t("Stratocumulus vom Vortag – bleibt den ganzen Tag.",
+                  "Yesterday's stratocumulus – stays all day.")], 2,
+               t("Dünn (Sonnenscheibe sichtbar), löchrig (es reißt auf) und "
+                 "windschwach: Das sind die drei Zeichen, dass eine "
+                 "nächtliche Stratusdecke geht. Altostratus hätte kein Loch "
+                 "und würde dichter, nicht dünner. Nach dem Nebel setzt die "
+                 "Thermik schnell ein, aber die Basis bleibt den Tag über "
+                 "niedrig, weil die Luft feucht ist.",
+                 "Thin (sun disc visible), holed (tearing open) and nearly "
+                 "calm: those are the three signs that a night-time stratus "
+                 "sheet is going. Altostratus would have no hole and would "
+                 "thicken, not thin. After fog the thermals start quickly, "
+                 "but the base stays low all day because the air is moist."),
+               bild="tagesverlaeufe"),
+        ]),
 ])
 
 # ===========================================================================
@@ -2235,6 +2518,27 @@ EINSTUFUNG = [
             "und in Knoten angegeben. 270 Grad ist West.",
             "Wind is always named by the direction it comes **from**, and "
             "given in knots. 270 degrees is west.")),
+
+    # -- Stufe 2 -----------------------------------------------------------
+    frage("e-tagesverlauf", 2, "wolken",
+          t("Um 9 Uhr stehen schon Cumuli, die höher als breit sind. Was "
+            "wird aus dem Tag?",
+            "At 09:00 there are already cumulus taller than wide. What will "
+            "the day become?"),
+          [t("Überentwicklung – früh starten, früh zurück.",
+             "Overdevelopment – launch early, be back early."),
+           t("Ein langer, ruhiger Cumulus-Tag.",
+             "A long, calm cumulus day."),
+           t("Blauthermik.", "Blue thermals."),
+           t("Hochnebel, der sich auflöst.",
+             "Low stratus dissolving.")], 0,
+          t("Türme um 9 Uhr heißen Labilität ohne Deckel: Das beste Steigen "
+            "kommt mittags, das Gewitter am frühen Nachmittag. Der Normaltag "
+            "hat um diese Zeit höchstens flache Humilis.",
+            "Towers at 09:00 mean instability with no lid: the best climbs "
+            "come at noon, the thunderstorm in the early afternoon. The "
+            "normal day has at most flat humilis at that hour."),
+          bild="tagesverlaeufe"),
 
     # -- Stufe 3 -----------------------------------------------------------
     frage("e-zyklus", 3, "wolken",

@@ -1,121 +1,106 @@
-Segelflug 2.10 — ein Modus, der nur fragt: Was ist das für eine Wolke?
+Segelflug 2.11 — ein eigenes Foto vom Himmel, und die App sagt, was es ist
 
-Bis 2.7 standen die Fotos unter den Zeichnungen, unter der Überschrift der
-Wolke, die sie zeigen. Das erklärt gut und übt nichts: Wer unter
-„Cumulus humilis“ drei Bilder von Cumulus humilis sieht, hat nichts zu
-entscheiden. Am Himmel steht aber keine Überschrift.
+Bis 2.10 kamen alle Wolken aus dem Paket: gezeichnet in den Lektionen,
+fotografiert im Erkennungsmodus. Jetzt geht es andersherum: Ein Foto, das
+man gerade selbst gemacht hat (oder eines aus der Galerie), wird im Gerät
+eingeordnet — ohne Netz — und bekommt dazu, was es fürs Segelfliegen
+heißt. Wer mag, holt sich als zweites Urteil Claude dazu; beide bleiben
+nebeneinander stehen.
 
-**Der neue Modus dreht es um.** Ein Foto, sonst nichts auf der Seite, und
-zwei Fragen dazu:
+**Erst der eigene Tipp.** Das Netz ist meist schon fertig, bevor man die
+Ratetafel gelesen hat; stünde sein Ergebnis da, tippte niemand mehr selbst.
+Also bleibt es verborgen, bis ein Tipp steht (oder „Weiß nicht“), und erst
+dann erscheinen die drei wahrscheinlichsten Klassen mit Prozentbalken, die
+Bedeutung für den Tag beim ersten, und aufklappbar, woran man es erkennt.
 
-1. **Was für eine Wolke ist das?** Zur Auswahl stehen vier — und zwar
-   nicht irgendwelche, sondern die, mit denen diese wirklich verwechselt
-   wird (`verwechselt` in `erkennen.py`). Zwischen Cirrus und Stratus zu
-   unterscheiden übt niemand; zwischen mediocris und congestus hängt der
-   Tag davon ab.
-2. **Und was heißt sie fürs Segelfliegen?** Hier ist die Auswahl immer
-   dieselbe kurze Liste von neun Bedeutungen — von „schwache Thermik“ über
-   „Welle“ bis „schirmt ab“. Das hält die Autorenarbeit bei den zwölf
-   Klassen statt bei den einundachtzig Fotos.
+## Das Netz
 
-Nach jedem Tipp steht da, woran man es hätte sehen können, und erst dann
-geht es weiter. Bei der Einstufung wäre das falsch — dort wird gemessen —,
-hier ist es der ganze Zweck.
+MobileNetV2 (ImageNet-vortrainiert), Eingabe 160 × 160, 14 Klassen: die
+zwölf Übungsklassen ohne Wolkenstraße und Castellanus, dazu Altostratus,
+Nimbostratus, Cirrocumulus und Kondensstreifen — die vier haben jetzt auch
+Bedeutungstexte im Kurs. Die Gewichte liegen als int8 je Ausgabekanal in
+`data/modell.bin` (2,35 MB; Format in `tools/MODELL.md`), gerechnet wird in
+`Klassifizierer.cpp` ohne jede Fremdbibliothek, aus demselben Text für Qt 4.7
+und Qt 5. Auf dem Jolla dauert ein Bild 97 ms; die N950 ist noch nicht
+gemessen.
 
-Am Ende: wie viele Wolken erkannt, wie viele Bedeutungen gewusst, und
-welche Klassen danebengingen, jede mit dem Satz, woran sie zu erkennen
-gewesen wäre.
+**Woher die Bilder kommen.** CCSN v2 (Harvard Dataverse, CC0; 2543 Bilder
+in elf Klassen, „Cu“ als weiches Ziel auf humilis/mediocris/congestus),
+die unkuratierten Wikimedia-Commons-Kandidaten aus der Sammlung für den
+Erkennungsmodus (etwa 1500), und die 136 kuratierten Kursfotos.
 
-## Die Bilder
+**Wie gut es ist — ehrlich gemessen.** Fünffache Kreuzprobe über die 136
+kuratierten Fotos (jedes genau einmal geprüft, nie im eigenen Training):
 
-**134 Fotos in zwölf Klassen**, 113 Dateien eigens dafür; die
-siebenundzwanzig aus den Lektionen werden mitbenutzt, nicht ein zweites
-Mal geholt:
-
-| Klasse | Fotos | heißt |
+| | Top-1 | Top-3 |
 |---|---|---|
-| Cumulus humilis | 15 | schwache Thermik |
-| Cumulus mediocris | 11 | der Tag trägt |
-| Cumulus congestus | 13 | Überentwicklung |
-| Cumulonimbus | 14 | Gewitter |
-| Wolkenstraße | 3 | Strecke geradeaus |
-| Stratocumulus | 9 | schirmt ab |
-| Altocumulus castellanus | 2 | Überentwicklung |
-| Lenticularis | 22 | Welle |
-| Altocumulus | 9 | schirmt ab |
-| Cirrus | 20 | Warmfront |
-| Cirrostratus | 7 | Warmfront |
-| Stratus | 9 | kein Flugwetter |
+| gesamt (136) | 60 % | 90 % |
+| Cirrus (20) | 95 % | 100 % |
+| Lenticularis (22) | 82 % | 100 % |
+| Altocumulus (12) | 75 % | 100 % |
+| Cumulonimbus (14) | 71 % | 100 % |
+| Cu mediocris (11) | 55 % | 91 % |
+| Cu congestus (13) | 46 % | 100 % |
+| Stratus (9) | 44 % | 89 % |
+| Cu humilis (15) | 40 % | 87 % |
+| Cirrostratus (7) | 29 % | 43 % |
+| Stratocumulus (10) | 10 % | 40 % |
 
-2.9 hatte 153. Der Nutzer war sich nicht sicher, ob die Bezeichnungen
-stimmen, und er hatte recht, nachzufragen: Beim zweiten Durchgang —
-klassenweise, in größerer Ansicht, mit der Frage „würde ein Meteorologe
-das unterschreiben?“ — flogen **neunzehn** wieder raus und **drei**
-wechselten die Klasse. Die Muster dahinter:
+Die Cumulus-Stufen verwechselt es untereinander (das ist auch für Menschen
+die schwere Frage), Stratocumulus hält es für Altocumulus. Darum zeigt die
+Seite drei Klassen, nicht eine, und darum gibt es den zweiten Blick.
 
-* **Zu groß für seine Klasse.** Drei „humilis“ waren schon mediocris,
-  zwei „mediocris“ und ein Cumulonimbus ohne Amboss waren congestus. Die
-  Grenze zwischen den Cumulus-Stufen ist genau das, was der Modus lehren
-  soll — ein Bild auf der falschen Seite der Grenze lehrt das Gegenteil.
-* **Blau zwischen den Haufen.** Zwei „Stratocumulus“ zeigten verstreute
-  Cumulus mit viel Himmel dazwischen; zwei weitere eine Frontwolkenbank am
-  Horizont. Stratocumulus heißt: eine Schicht, kaum Lücken.
-* **Die falsche Höhe.** Die beiden „Wolkenstraßen“ aus Monterrey sind
-  fächerförmige Cirrus-Bänder, die zum Horizont zusammenlaufen — ja, in
-  Reihen, aber ohne einen einzigen Cumulus darunter, und damit ohne das
-  Steigen, um das es geht. Eines davon war seit 2.8 das **Lektionsfoto**;
-  jetzt steht dort ein Bild mit niedrigen Rollen in Reihen.
-* **Zu wenig zu sehen.** Dämmerung, Zinnen ohne Zinnen, ein Cirrus unter
-  „Cirrostratus“, ein Zwilling derselben Minute.
+**Was beim Training schiefging.** Das erste Rezept — alle Gewichte, Lernrate
+2·10⁻⁴, dreißig Epochen — war nach der ersten Epoche am besten (54 %) und
+wurde dann schlechter, während es auf zurückgehaltenen CCSN-Bildern besser
+wurde: Es lernte die CCSN-Bilder (256 px, beschnittene Webfotos) auswendig
+und verlor die Verteilung der Handyfotos. Geholfen hat: frühe Blöcke
+eingefroren, Rückgrat mit kleiner Lernrate, Mixup, stärkere Augmentierung,
+die Commons- und Kursfotos häufiger gezogen, und die Kursfotos per
+Kreuzprobe mit ins Training (`training/train.py`).
 
-Zwei Klassen sind danach sehr dünn: Wolkenstraße drei, Castellanus zwei.
-Von beiden gibt es auf Commons kaum brauchbare Bodenaufnahmen; die
-Kandidaten, die noch da wären, hätten den Fehler wiederholt. Lieber zwei
-richtige als zehn, bei denen die Übung das Falsche beibringt.
+## Der zweite Blick
 
-**Eine Runde sind zwanzig Bilder**, reihum über die Klassen gemischt.
-Wer mehr will, tippt noch einmal; im Menü (Sailfish) bzw. unter der Taste
-(N9) steht der ganze Stapel.
+„Claude fragen“ schickt das Foto (auf 1024 px verkleinert) mit der
+Klassenliste an die Anthropic-API (claude-sonnet-5) und bekommt Kennung,
+Sicherheit und zwei Sätze Begründung zurück — in der Sprache der App. Der
+Schlüssel wird auf der Seite eingetragen und neben dem Fortschritt
+gespeichert (0600); auf den Nokias wird er aus `~/.profile` übernommen. Auf
+Sailfish geht die Anfrage über QNetworkAccessManager, auf Harmattan (Qt
+4.7, TLS zu alt) über den wget-Helfer aus wunderw — der Schlüssel steht nie
+in argv, sondern in einer wgetrc, die nur `WGETRC` benennt. Geprüft gegen
+einen Scheinserver (`tests/scheinserver.py`): Kopfzeilen, Rumpf, Fehlerfall
+401, Abbruch. Live noch nicht: Hier auf dem Jolla gibt es keinen Schlüssel,
+und die N950 war nicht erreichbar.
 
-Gesucht hat `tools/sammeln.py` — Commons-Kategorien, deren
-Unterkategorien, Volltextsuche und, wo nötig, eine Liste von Titeln.
-Ausgewählt wurde mit den Augen über Kontaktbögen. Draußen geblieben sind
-Satelliten- und Flugzeugbilder (darunter ein ganzer Schwung
-Apollo-Aufnahmen, die in der Congestus-Kategorie liegen), Sonnenuntergänge
-(die Farbe verrät mehr als die Form), Nachtbilder und alles mit Masten und
-Leitungen quer durchs Bild.
+## So gelingt das Foto
 
-## Ein Fehler, der nur beim Hinsehen auffällt
+Sechs Hinweise stehen auf der Seite, solange kein Foto gewählt ist: Sonne
+im Rücken, Wolke ganz ins Bild mit Basis und Oberseite, schräg nach oben
+statt in den Zenit, auf die Wolke belichten, nicht durch Scheiben, bei
+Tageslicht.
 
-Unter „Wolkenstraßen“ stand seit 2.6 ein Foto aus der Commons-Kategorie
-**„Cloud Street, Austral“** — und das ist eine Wohnstraße namens Cloud
-Street in New South Wales. Ausgewählt nach dem Dateinamen, nie angesehen.
-Jetzt steht dort eine wirkliche Wolkenstraße, und der Kontaktbogen über
-alle siebenundzwanzig Lektionsfotos ist der Grund, warum es aufgefallen
-ist.
+## Neue Lektion: Tagesverläufe
+
+Acht Verläufe, wie ein Flugtag laufen kann — der klassische Cumulus-Tag,
+Blauthermik, Überentwicklung, Zumachen, Fronttag, Rückseitenwetter, Welle,
+Hochnebel — jeweils Morgen, Vormittag, Nachmittag, Abend und die
+Entscheidung für den Piloten; am Ende eine Tafel „Was ich um 9 Uhr sehe“.
+Mit einer Zeichnung (vier Verläufe × vier Uhrzeiten) und vier Fotos.
 
 ## Prüfungen
 
-* `c-lehrer/tools/build-erkennentest.sh` — der Ablauf ohne Gerät: dass die
-  richtige Antwort wandert statt vorne zu stehen, dass die verwechselbare
-  Wolke zur Wahl steht, dass nicht zwei Bilder derselben Klasse
-  hintereinander kommen.
-* `segelflug/bin/segelflug --qml-pruefen` — **am Gerät**, ohne Fenster:
-  jede QML-Datei einmal übersetzen. Der Prüfer auf dem Rechner kennt
-  `com.nokia.meego` nicht, und gerade dessen Fallen fallen sonst erst beim
-  Antippen auf. 19 Dateien, 0 Fehler.
-* `harbour-lehrer/tools/qml-laden.sh` — dasselbe für Silica: 18 Dateien,
-  0 Fehler.
-
-Nicht geprüft: wie es aussieht. Das N950 hängt hinter dem Sicherheitscode,
-und der gehört nicht mir.
+- `c-lehrer/tools/build-klassifizierertest.sh`: Winzigmodell aus reinem
+  Python nachgerechnet (Δ 5·10⁻⁸), kaputte Dateien scheitern sauber,
+  EXIF-Drehung.
+- `training/vergleichen.py` gegen 33 Referenzpuffer des echten Modells:
+  max |Δ Logit| 2·10⁻⁵.
+- `c-lehrer/tools/build-onlinedeutertest.sh`: „alles gut“.
+- `harbour-lehrer/tools/qml-laden.sh`: 20 QML-Dateien, 0 Fehler.
+- Harmattan: Cross-Build mit GCC 14 gegen Qt 4.7 fehlerfrei; auf dem Gerät
+  noch nicht gestartet (N950 nicht erreichbar).
 
 ## Pakete
 
-* **N9 / N950:** `segelflug_2.10_armel.deb` (6,7 MB)
-* **Sailfish OS:** `harbour-segelflug-1.16.0-1.aarch64.rpm` bzw. `…armv7hl.rpm`
-
-Das Harmattan-Binär und die Lehrer-Oberfläche mussten neu gebaut werden:
-Der Modus steckt in `Erkennen.{h,cpp}` und in `Course`, nicht im Kurs.
-Die anderen drei Kurse tragen keinen Schlüssel `erkennen` — dort bleibt
-die Taste weg.
+- MeeGo Harmattan (N9/N950): `segelflug_2.11_armel.deb`, 9,2 MB
+- Sailfish OS: `harbour-segelflug-1.17.0-1.{aarch64,armv7hl}.rpm`

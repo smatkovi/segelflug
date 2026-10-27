@@ -406,3 +406,149 @@ KLASSEN = [
             "File:Hochnebel Wismat 005.jpg",
         ]),
 ]
+
+
+# -- Foto deuten: was das Netz kennt -----------------------------------------
+#
+# Der dritte Modus nimmt ein eigenes Foto (Kamera oder Galerie) und laesst
+# das Netz in data/modell.bin raten -- Format und Training in
+# tools/MODELL.md und training/. Das Netz kennt die Uebungsklassen bis auf
+# zwei (Wolkenstrasse sieht man auf einem Handyfoto nicht, Castellanus hat
+# drei Bilder) und dazu vier, die das CCSN-Datenset mitbringt und die am
+# Himmel genauso vorkommen: Altostratus, Nimbostratus, Cirrocumulus,
+# Kondensstreifen. Sie haben keine Uebungsfotos (fotos leer) und erscheinen
+# darum nicht im Erkennungsmodus, aber das Ergebnis muss auch fuer sie
+# sagen koennen, was es fuer den Tag heisst.
+
+FOTO_TITEL = t("Foto deuten", "Read a photo")
+FOTO_UNTERZEILE = t("Ein eigenes Himmelsfoto: Erst selbst raten, dann sagt "
+                    "das Netz im Gerät, was es sieht — und auf Wunsch "
+                    "Claude dazu.",
+                    "A sky photo of your own: guess first, then the network "
+                    "on the device says what it sees — and Claude too, if "
+                    "you ask.")
+
+KLASSIFIZIERER_OHNE = ["wolkenstrasse", "ac-castellanus"]
+
+# Wie das Foto aufgenommen werden soll. Das Netz hat Tageslichtfotos vom
+# Boden gesehen, mit der Sonne hinter dem Fotografen -- ein Gegenlichtbild
+# macht jede Wolke zum grauen Fleck, und auch Claude raet dann. Die Liste
+# steht auf der Seite, bevor ein Foto gewaehlt ist.
+FOTO_TIPPS = [
+    t("Die Sonne im Rücken oder seitlich, nie im Bild: Im Gegenlicht wird "
+      "jede Wolke zur grauen Silhouette, und Oberseite und Basis sind nicht "
+      "mehr zu unterscheiden.",
+      "Sun behind you or to the side, never in the frame: against the light "
+      "every cloud becomes a grey silhouette, and top and base can no longer "
+      "be told apart."),
+    t("Die Wolke ganz ins Bild, mit etwas Himmel rundherum — am besten "
+      "Basis und Oberseite zugleich. Die Basis sagt, ob es trägt, die "
+      "Oberseite, wie weit es geht.",
+      "The whole cloud in the frame, with some sky around it — ideally base "
+      "and top together. The base tells whether it carries, the top how far "
+      "it goes."),
+    t("Schräg nach oben fotografieren, etwa 30 bis 45 Grad über dem "
+      "Horizont, wie der Blick vom Flugplatz; ein Streifen Landschaft unten "
+      "gibt den Maßstab. Nicht senkrecht in den Zenit.",
+      "Shoot at an angle, roughly 30 to 45 degrees above the horizon, like "
+      "the view from the airfield; a strip of landscape at the bottom gives "
+      "the scale. Not straight up into the zenith."),
+    t("Auf die Wolke tippen, damit die Kamera auf sie belichtet — sonst "
+      "brennt sie aus und wird eine weiße Fläche. Kein Zoom, kein Filter, "
+      "HDR aus.",
+      "Tap the cloud so the camera exposes for it — otherwise it burns out "
+      "into a white blank. No zoom, no filter, HDR off."),
+    t("Nicht durch Scheiben oder die Haube fotografieren, und die Linse "
+      "vorher abwischen: Reflexe und Schlieren sehen für das Netz wie "
+      "Cirren aus.",
+      "Do not shoot through windows or the canopy, and wipe the lens first: "
+      "reflections and smears look like cirrus to the network."),
+    t("Querformat, bei Tageslicht. In der Dämmerung oder nachts rät das "
+      "Netz nur noch.",
+      "Landscape format, in daylight. At dusk or at night the network is "
+      "only guessing."),
+]
+
+WEITERE = [
+    klasse(
+        "altostratus",
+        t("Altostratus", "Altostratus"),
+        "front",
+        t("Eine graue bis bläuliche Schicht in mittlerer Höhe, die den "
+          "Himmel ganz oder weitgehend bedeckt; die Sonne scheint wie durch "
+          "Milchglas, ohne Halo, und wirft keinen Schatten mehr.",
+          "A grey to bluish sheet at mid level covering most or all of the "
+          "sky; the sun shows through as if behind frosted glass, with no "
+          "halo, and no longer casts a shadow."),
+        t("Die Warmfront ist da: Die Decke dickt von Westen her ein, die "
+          "Sonne ist weg und mit ihr die Thermik. Als Nächstes kommt Regen "
+          "— für heute ist es vorbei.",
+          "The warm front has arrived: the sheet thickens from the west, "
+          "the sun is gone and with it the lift. Rain comes next — today "
+          "is over."),
+        ["cirrostratus", "nimbostratus", "stratus"],
+        []),
+
+    klasse(
+        "nimbostratus",
+        t("Nimbostratus", "Nimbostratus"),
+        "kein-flug",
+        t("Eine dunkle, formlose, dicke Schicht mit tiefer, zerfaserter "
+          "Basis, aus der anhaltend Regen oder Schnee fällt; keine Sonne, "
+          "keine Konturen, oft Fetzen darunter.",
+          "A dark, shapeless, thick layer with a low ragged base and steady "
+          "rain or snow falling from it; no sun, no outlines, often shreds "
+          "beneath it."),
+        t("Dauerregen, niedrige Basis, schlechte Sicht: Nichts geht, und "
+          "das für Stunden. Das Flugzeug bleibt in der Halle.",
+          "Steady rain, low base, poor visibility: nothing works, and for "
+          "hours. The glider stays in the hangar."),
+        ["altostratus", "stratus", "cumulonimbus"],
+        []),
+
+    klasse(
+        "cirrocumulus",
+        t("Cirrocumulus", "Cirrocumulus"),
+        "front",
+        t("Sehr kleine weiße Körnchen oder Rippel hoch oben, ohne "
+          "Eigenschatten, oft in Feldern — wie Sand am Strand; viel feiner "
+          "als Altocumulus.",
+          "Very small white grains or ripples high up, without shading, "
+          "often in patches — like sand on a beach; much finer than "
+          "altocumulus."),
+        t("Feuchte, labile Höhenluft — meist ein Vorbote: Innerhalb eines "
+          "Tages kommt die Front. Heute meist noch fliegbar, morgen eher "
+          "nicht.",
+          "Moist, unstable air aloft — usually a harbinger: the front "
+          "arrives within a day. Today is usually still flyable, tomorrow "
+          "probably not."),
+        ["altocumulus", "cirrus", "cirrostratus"],
+        []),
+
+    klasse(
+        "kondensstreifen",
+        t("Kondensstreifen", "Contrails"),
+        "abschirmung",
+        t("Gerade weiße Linien hoch am Himmel, von Flugzeugen gezogen; "
+          "manche lösen sich sofort auf, andere bleiben, werden breiter und "
+          "fasern zu Cirrus aus.",
+          "Straight white lines high in the sky, drawn by aircraft; some "
+          "dissolve at once, others persist, widen and fray into cirrus."),
+        t("Lösen sie sich gleich auf, ist die Höhe trocken — gut. Bleiben "
+          "sie und breiten sich aus, ist die Höhe feucht: Die Streifen "
+          "wachsen zu einem Schleier, der die Thermik später dämpft, und "
+          "oft kündigt das eine Front an.",
+          "If they dissolve at once the upper air is dry — good. If they "
+          "persist and spread, the upper air is moist: the trails grow into "
+          "a veil that damps the lift later on, and often that announces a "
+          "front."),
+        ["cirrus", "cirrostratus"],
+        []),
+]
+
+
+def klassifizierer_klassen():
+    """Die Klassen des Netzes, in der Reihenfolge der Ratetafel: erst die
+    Uebungsklassen (tief nach hoch), dann die vier weiteren."""
+    return ([k for k in KLASSEN if k["id"] not in KLASSIFIZIERER_OHNE]
+            + WEITERE)
