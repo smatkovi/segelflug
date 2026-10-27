@@ -155,12 +155,15 @@ WOLKENFOTOS = {
         # Nicht nach dem Namen auswaehlen: "Cloud Street, Austral" ist auf
         # Commons eine Wohnstrasse in New South Wales, keine Wolkenstrasse.
         # Bis 2.7 stand genau die hier -- gesehen hatte sie niemand.
-        foto("File:Apodaca Cloud Streets.jpg",
-             t("Die Wolken stehen in Reihen, die zum Horizont zusammenlaufen, "
-               "längs des Windes. Darunter lässt sich geradeaus fliegen, ohne "
-               "zu kreisen.",
-               "The clouds stand in rows converging towards the horizon, "
-               "along the wind. Under them you can fly straight ahead "
+        # Zweiter Tausch (27.10.2026): die "Cloud Streets" aus Monterrey sind
+        # faecherfoermige Cirrus-Baender, keine Cumulus-Reihen -- unter denen
+        # traegt nichts. Grand Junction zeigt niedrige Rollen in Reihen.
+        foto("File:Roll clouds, grand junction, co 20250710.jpg",
+             t("Die Wolken stehen nicht verstreut, sondern in parallelen "
+               "Reihen, längs des Windes. Unter einer Reihe lässt sich "
+               "geradeaus fliegen, ohne zu kreisen.",
+               "The clouds are not scattered but lined up in parallel rows, "
+               "along the wind. Under a row you can fly straight ahead "
                "without circling.")),
         foto("File:HorizontalConvectiveRollsClouds1.jpg",
              t("Mehrere Reihen nebeneinander, dazwischen blaue Gassen. In den "
