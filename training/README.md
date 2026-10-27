@@ -27,6 +27,11 @@ Abbruch); Verlauf in `training/lauf.log`.
   gegen das Float-Modell, `referenz/*.rgb` + `referenz.json`.
 - `vergleichen.py referenz/ --pruefstand ./klassifizierertest modell.bin` —
   C++-Logits gegen die Referenz, bestanden bei max |Δ| < 0,01.
+- `stauchung_pruefen.py` — die erste Hälfte des Weges (Datei öffnen, EXIF,
+  Stauchen), die die Referenzpuffer auslassen: `--pruefstand BIN modell.bin
+  aus.json` auf dem Telefon, `--python modell.bin aus.json` hier, dann
+  `--vergleich a.json b.json`; bestanden ab 95 % gleicher Top-1-Klasse über
+  die kuratierten Fotos (27.10.2026: 95,5 %, beide Wege gleich treffsicher).
 
 Ergebnis zurück: `modell.bin` → `segelflug/data/modell.bin`, `referenz/` und
 `*.log` hierher (beide gitignored).

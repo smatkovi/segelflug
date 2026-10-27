@@ -30,7 +30,7 @@ einem durch 4 teilbaren Offset.
               "stratocumulus", "stratus", "nimbostratus", "altocumulus",
               "ac-lenticularis", "altostratus", "cirrus", "cirrostratus",
               "cirrocumulus", "kondensstreifen"],
-  "bytes": 3500000,
+  "bytes": 2344240,
   "schichten": [ ... ]
 }
 ```
@@ -41,8 +41,12 @@ einem durch 4 teilbaren Offset.
 
 ## Vorverarbeitung (gilt für Training, Export und App gleich)
 
-1. Das ganze Bild auf `eingabe`×`eingabe` **stauchen** (bilinear), nicht
-   beschneiden — der Rand eines Himmelsfotos gehört dazu.
+1. Das ganze Bild auf `eingabe`×`eingabe` **stauchen**, nicht beschneiden —
+   der Rand eines Himmelsfotos gehört dazu. Gestaucht wird durch
+   **Flächenmittelung** (`QImage::scaled` mit `Qt::SmoothTransformation`,
+   in Python `Image.BOX`), nicht bilinear: PILs BILINEAR glättet stärker,
+   und auf 2 von 33 Referenzbildern kamen die beiden Wege zu verschiedenen
+   Klassen.
 2. RGB, Werte 0..255 → `x/255`, dann je Kanal `(x - mittel[c]) / streuung[c]`.
 3. Tensor 0 = Eingabe, Layout **CHW** float32, Index `c*E*E + y*E + x`.
 
@@ -108,9 +112,11 @@ Das Dropout aus dem Training kommt nicht in die Datei.
 ## Speicher auf dem Gerät
 
 Die N950 hat oft nur 50 MB frei. Die App hält die dequantisierten Gewichte
-als float32 (≈ 14 MB) und gibt Zwischentensoren frei, sobald keine spätere
-Schicht sie mehr nennt (Letztverwendung aus dem Graphen berechnen). Der
-größte Zwischentensor ist 96×80×80 float = 2,4 MB.
+als float32 — bei diesem Modell 8,8 MB plus 0,1 MB Bias und Skalen — und
+gibt Zwischentensoren frei, sobald keine spätere Schicht sie mehr nennt
+(Letztverwendung aus dem Graphen berechnen). Der größte Zwischentensor ist
+96×80×80 float = 2,4 MB; gemessen braucht die Rechnung rund 17 MB über dem
+Grundbedarf der App.
 
 ## Prüfung gegen die Referenz
 
@@ -126,6 +132,14 @@ Der Exporter legt neben `modell.bin` den Ordner `referenz/` an:
 liest `modell.bin` und ein `.rgb`, gibt die Logits aus, und
 `training/vergleichen.py` vergleicht: `max |Δ| < 0.01` über alle Referenzen
 ist bestanden.
+
+Die Referenzpuffer beginnen beim fertigen 160-px-Bild. Den Weg davor — Datei
+öffnen, EXIF-Drehung, Stauchen — prüft `training/stauchung_pruefen.py`
+getrennt: derselbe Prüfstand mit `--bild` über die kuratierten Fotos auf dem
+Gerät, der Python-Weg (`daten.eingabe`) auf dem Rechner, bestanden ab 95 %
+gleicher Top-1-Klasse. Ganz gleich werden die beiden nie (andere
+JPEG-Dekoder, in der App eine Zwischenstufe auf 640 Pixel); gemessen sind
+95,5 % bei gleicher Trefferzahl.
 
 ## Klassen und ihre Quellen
 

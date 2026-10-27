@@ -9,6 +9,7 @@ about the subject. What differs here is that every readable string is a
 """
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -247,6 +248,75 @@ def glossar(chapters):
             for b in eintraege]
 
 
+def verlinken(text, begriffe):
+    """Die Fachwoerter eines Lektionstextes zu Glossarverweisen machen.
+
+    Aus jeder Wortform (begriffe.py, `formen`) wird beim ERSTEN Vorkommen
+    je Begriff der Marker [[begriff:<id>|<Wortform>]]. style.js und
+    stil.js machen daraus in rich()/reich() einen Link, und die
+    Lektionsseite oeffnet damit den Glossareintrag.
+
+    Nur das erste Vorkommen, weil ein Text, in dem jedes zweite Wort
+    unterstrichen ist, nicht mehr zu lesen ist: der Verweis wird einmal
+    angeboten, nicht in jedem Satz.
+
+    Nicht angetastet wird, was schon ausgezeichnet ist -- **Fettungen**
+    (dort fuehrt die Lektion ihre eigenen Begriffe ein und erklaert sie
+    gleich, ein Verweis waere dort ein Umweg), `Programmtext` und
+    vorhandene [[...]]-Marker. Sonst stuende ein Marker im Marker und
+    rich() zeigte ihn woertlich.
+
+    Gesucht wird mit Lookarounds und nicht mit \\b: Formen wie "Alto-"
+    enden auf einem Zeichen, das selbst keine Wortgrenze bildet, und \\b
+    griffe dort ins Leere. Gross- und Kleinschreibung zaehlt, damit das
+    englische "As" am Satzanfang nicht zum Altostratus wird -- Latein
+    steht in beiden Sprachen gleich, deshalb kommen alle Formen in jeden
+    Text.
+    """
+    if not text:
+        return text
+
+    def regel(formen):
+        """Eine Alternative aus allen Formen, die laengste zuerst.
+
+        Die Reihenfolge in der Alternative entscheidet bei gleichem
+        Anfang: ohne sie faende "Cumulus" schon in "Cumulus humilis" sein
+        Ende, und der Verweis haengte am halben Namen.
+        """
+        teile = sorted([f for f in formen if f.strip()], key=len, reverse=True)
+        if not teile:
+            return None
+        return re.compile(r"(?<!\w)(?:"
+                          + "|".join(re.escape(f) for f in teile)
+                          + r")(?!\w)")
+
+    def sperren(quelle):
+        return [(m.start(), m.end()) for m in
+                re.finditer(r"\*\*[^*]+\*\*|`[^`]+`|\[\[[^\]]+\]\]", quelle)]
+
+    # Die Begriffe der Reihe nach, der mit der laengsten Form zuerst: so
+    # belegt "Cumulus humilis" die Stelle, bevor der Begriff "Cumulus"
+    # ueberhaupt sucht.
+    sortiert = sorted(
+        begriffe,
+        key=lambda b: max([len(f) for f in b.get("formen", [])] or [0]),
+        reverse=True)
+    for b in sortiert:
+        muster = regel(b.get("formen", []))
+        if muster is None:
+            continue
+        verboten = sperren(text)
+        for treffer in muster.finditer(text):
+            if any(treffer.start() < ende and treffer.end() > anfang
+                   for anfang, ende in verboten):
+                continue
+            text = (text[:treffer.start()]
+                    + "[[begriff:" + b["id"] + "|" + treffer.group(0) + "]]"
+                    + text[treffer.end():])
+            break
+    return text
+
+
 def fotos_pruefen():
     """Jede Zeichnung, die als Lektionsbild vorkommt, soll Fotos haben.
 
@@ -345,6 +415,43 @@ def main():
             "stufe": chapter["stufe"], "sprache": "-",
             "text": chapter["text"], "lektionen": lessons,
         })
+
+    # ---- Glossarverweise in die Lektionstexte ---------------------------
+    # Die Wortformen stehen in begriffe.py und nicht in kurs.json: die App
+    # braucht sie nicht, verlinkt wird hier beim Bauen. Fehlt das Modul,
+    # bleibt der Kurs ohne Verweise -- genau wie er ohne Glossar bleibt.
+    try:
+        import begriffe as glossarmodul
+        glossarbegriffe = list(glossarmodul.BEGRIFFE)
+    except ImportError:
+        glossarbegriffe = []
+    titelmuster = {}
+    for b in glossarbegriffe:
+        formen = sorted([f for f in b.get("formen", []) if f.strip()],
+                        key=len, reverse=True)
+        if formen:
+            titelmuster[b["id"]] = re.compile(
+                r"(?<!\w)(?:" + "|".join(re.escape(f) for f in formen)
+                + r")(?!\w)", re.I)
+    verweise = {"de": 0, "en": 0}
+    for kap in chapters:
+        for lek in kap["lektionen"]:
+            texte = {}
+            for code in ("de", "en"):
+                titel = lek["titel"].get(code, "")
+                # Die Lektion, die den Begriff selbst erklaert, verlinkt ihn
+                # nicht: ein Verweis von der Ueberschrift "Cumulus humilis"
+                # auf den Eintrag "Cumulus humilis" fuehrt im Kreis.
+                dran = [b for b in glossarbegriffe
+                        if b["id"] in titelmuster
+                        and not titelmuster[b["id"]].search(titel)]
+                texte[code] = verlinken(lek["text"].get(code, ""), dran)
+                verweise[code] += texte[code].count("[[begriff:")
+            # Ein neues Wortverzeichnis, nicht das aus kurs.py: die
+            # Lektionen teilen ihre Textwoerterbuecher mit dem Modul, und
+            # ein zweiter Lauf im selben Prozess verlinkte sonst doppelt.
+            lek["text"] = texte
+    print("Glossarverweise: de %d, en %d" % (verweise["de"], verweise["en"]))
 
     # Zu jeder Formel das Bild dazulegen, das tools/formeln.py gesetzt hat.
     # Fehlt eines, bleibt die Textzeile stehen und nur das Gesetzte fehlt --

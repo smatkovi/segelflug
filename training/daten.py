@@ -180,9 +180,15 @@ def bild_oeffnen(pfad):
 
 
 def gestaucht(bild):
-    """Der Puffer, den das Netz sieht: HWC uint8, EINGABE x EINGABE, bilinear
-    gestaucht -- genau so schreibt export.py die .rgb-Referenzen."""
-    bild = bild.resize((EINGABE, EINGABE), Image.BILINEAR)
+    """Der Puffer, den das Netz sieht: HWC uint8, EINGABE x EINGABE.
+
+    **Flaechenmittelung (BOX), nicht BILINEAR.** Die App staucht mit
+    QImage::scaled(Qt::SmoothTransformation), und das ist beim Verkleinern
+    eine Flaechenmittelung -- PILs BILINEAR glaettet staerker. Der
+    Unterschied ist klein, aber gross genug: Auf 2 von 33 Referenzbildern
+    kamen die beiden Wege zu verschiedenen Klassen (gemessen 27.10.2026).
+    Beide Seiten rechnen jetzt dasselbe; MODELL.md sagt es auch so."""
+    bild = bild.resize((EINGABE, EINGABE), Image.BOX)
     return np.asarray(bild, dtype=np.uint8)
 
 
