@@ -161,7 +161,7 @@ beim ersten Vorkommen verlinkt.
   Zwischenstufe auf 640 Pixel). Die 64 % gelten also für die App, nicht nur
   für das Training.
 - `c-lehrer/tools/build-onlinedeutertest.sh`: „alles gut“.
-- `harbour-lehrer/tools/qml-laden.sh`: 20 QML-Dateien, 0 Fehler.
+- `harbour-lehrer/tools/qml-laden.sh`: 23 QML-Dateien, 0 Fehler (Methodenaufrufe prüft es nicht — siehe Kamera unten).
 - `c-lehrer/tools/build-nachlernentest.sh`: Datei schreiben und lesen,
   Korrektur, Modellwechsel, unbekannte Klassen, zwei Geräte zusammenführen,
   kaputte Dateien — „alles gut".
