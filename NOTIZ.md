@@ -218,19 +218,26 @@ Nach 1.19.0 noch vier, darum 1.19.1:
   Abdrücke, während die Oberfläche „Vergessen" oder ein neues Foto
   zulassen konnte. Jetzt zieht er im Oberflächenfaden eine Abschrift
   (`Nachlernen::Lernstoff`) und rechnet nur darauf.
-- **Die Kamera stellte auf Tippen nicht scharf, belichtete aber.** Der
-  Nutzer hat es auf dem Jolla bestätigt: die Belichtungsstelle kam an, der
-  Fokus nicht. Die Seite folgt jetzt Schritt für Schritt der Jolla-Kamera
-  (`CaptureView.qml`, die auf demselben Gerät scharfstellt): Fokus- und
-  Punktmodus als Bindungen, die erst im aktiven Kamerazustand auf Auto und
-  Custom gehen (im ungeladenen Zustand lehnt QtMultimedia die Modi stumm
-  ab); erst `unlock()`, dann umschalten, dann der Punkt, dann
-  `searchAndLock()`; die Belichtungsstelle erst, wenn der Fokus sein
-  Ergebnis hat, damit kein zweiter Parametersatz im selben Zug an gst-droid
-  geht; nach fünf Sekunden wieder laufender Fokus. Vor der Aufnahme wird
-  wie dort einmal scharfgestellt und auf das Ende der Suche gewartet. Statt
-  Buchstaben steht jetzt in Worten da, was die Kamera tut (Fokus: Auto,
-  Punkt, sucht). Am Gerät noch nicht bestätigt — das kann nur der Nutzer.
+- **Die Kamera stellte auf Tippen nicht scharf.** Der Nutzer hat es auf dem
+  Jolla bestätigt. Drei Prüfer am Quelltext des Sailfish-Forks von
+  QtMultimedia und von gst-droid haben die Ursache gefunden: Die Seite rief
+  `exposure.isMeteringModeSupported()` auf, und die Methode gibt es im
+  QML-Typ nicht — der TypeError brach die Funktion ab, bevor
+  `searchAndLock()` kam. Der Hinweis „die Belichtung ist gesetzt" war nur
+  Text; eine eigene Belichtungsstelle kennt der Fork gar nicht, die
+  Messfläche kommt über die Fokusregion mit (gst-droid setzt daraus
+  focus-areas und metering-areas). Dazu zwei Dinge, die auch nach dem Abbruch
+  falsch gewesen wären: der Tipp-Punkt muss wie in der Jolla-Kamera um
+  `camera.orientation` in die Sensorlage gedreht werden (dafür QtMultimedia
+  5.4), und ein Rückfall auf `FocusPointAuto` setzt die Messfläche mit
+  zurück. Die neue Seite: kann die Kamera `FocusInfinity`, bleibt die Schärfe
+  im Unendlichen (Wolken liegen dort, und ein Kontrast-Autofokus auf weichen
+  Rändern scheitert oft) und der Tipp setzt nur die Messfläche; sonst der
+  Weg der Jolla-Kamera mit Auto-Fokus und eigenem Punkt. Unter dem Hinweis
+  steht in Worten, was die Kamera tut, samt Sucherquelle und Sensorlage. Am
+  Gerät noch nicht bestätigt — das kann nur der Nutzer; die Prüfung mit
+  `qml-laden.sh` sieht fehlende Methoden nicht, weil sie erst zur Laufzeit
+  aufgelöst werden.
 
 ## Pakete
 
