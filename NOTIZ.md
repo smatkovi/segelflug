@@ -309,7 +309,24 @@ gültiges JSON. Das geht auf Fable und Opus gleich. Verweigert Fable ein Foto
 Karte das mit der Kategorie. Scheinserver und Prüfstand prüfen die neue
 Form (`/verweigert` dazu).
 
+## Nachtrag 2.17 / 1.19.6: Weiterklicken kostet nichts mehr
+
+Der Nutzer ließ mehrere Fotos deuten und ging jedes Mal gleich zum nächsten
+— gelernt wurde nur eines. Ursache: `classifyPhoto()` brach die laufende
+Claude-Anfrage ab, das Urteil kam nie an. Jetzt bleibt die Anfrage am Leben;
+beim Absenden merkt sich Course eine Abschrift des Fotos (Netzbild,
+Abdruck, Länge, eigener Tipp), und die Antwort wird daraus gelernt, auch
+wenn die Seite längst das nächste Foto zeigt (angezeigt wird sie dann nicht
+mehr). Nur wer für das nächste Foto erneut „Claude fragen" drückt, während
+die alte Anfrage noch läuft, verwirft die alte.
+
+Und die eigentliche Ursache, warum von mehreren gedeuteten Fotos nur eines
+gelernt wurde: Der Schalter war aus (Datei fehlte), also galt nur die
+Zwei-Stimmen-Regel. Jetzt ist Lernen von Fable der Normalfall — an, bei
+„hoch" und „mittel"; nur das Ausschalten wird als Datei
+`von-claude-lernen-aus` festgehalten.
+
 ## Pakete
 
-- MeeGo Harmattan (N9/N950): `segelflug_2.16_armel.deb`
-- Sailfish OS: `harbour-segelflug-1.19.5-1.{aarch64,armv7hl}.rpm`
+- MeeGo Harmattan (N9/N950): `segelflug_2.17_armel.deb`
+- Sailfish OS: `harbour-segelflug-1.19.6-1.{aarch64,armv7hl}.rpm`

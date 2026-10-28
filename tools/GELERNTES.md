@@ -44,14 +44,14 @@ Urteil gespeichert wird.
 Dazu kommt, was der Leser selbst richtigstellt („das war doch ein
 Stratocumulus") — das ist die stärkste Stimme und wird immer gemerkt.
 
-Auf Wunsch zählt Claude allein: Mit dem Schalter „Von Claude lernen,
-unabhängig von meinem Tipp" (Gelerntes-Seite) merkt die App Claudes Klasse
-von selbst, sobald er seine Sicherheit mit „hoch" angibt — auch gegen den
-eigenen Tipp (Quelle 1; stimmen beide überein, bleibt es Quelle 0). Die
-Schwelle „hoch" ist bewusst gesetzt: Ein Lehrer mit 80 % Trefferquote hat
-dem Netz im Versuch kaum geholfen (Tabelle unten), bei „hoch" liegt Claude
-deutlich über seinem Mittel. Bei „mittel" und „niedrig" bleibt es beim
-ausdrücklichen Knopf. Der Lehrer ist seit 2.15 Fable (claude-fable-5-1),
+Seit 2.17 ist Fable der Lehrer, und zwar von selbst: Der Schalter „Von
+Claude lernen, unabhängig von meinem Tipp" (Gelerntes-Seite) ist im
+Normalfall an, und die App merkt Fables Klasse bei Sicherheit „hoch" und
+„mittel" — auch gegen den eigenen Tipp (Quelle 1; stimmen beide überein,
+bleibt es Quelle 0). „Niedrig" bleibt draußen: Ein unsicherer Lehrer hat dem
+Netz im Versuch kaum geholfen (Tabelle unten). Wer den Schalter ausschaltet,
+ist wieder bei der Zwei-Stimmen-Regel; ausdrücklich merken geht immer über
+den Knopf. Der Lehrer ist seit 2.15 Fable (claude-fable-5-1),
 mit Rückfall auf Opus (claude-opus-5), wenn Fable nicht verfügbar ist;
 welches Modell geantwortet hat, steht in jeder Karte (`modell`); das Urteil
 kommt als structured output nach Schema (seit 2.16, Fable lehnt erzwungene
