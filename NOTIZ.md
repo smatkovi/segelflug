@@ -294,7 +294,22 @@ haben den Rückfall (`/fable-aus`). Das
 bis dahin von Sonnet Gelernte (vier Einträge) hat der Nutzer löschen lassen;
 die Datei liegt gesichert im Sitzungsordner.
 
+## Nachtrag 2.16 / 1.19.5: Fable wollte es anders
+
+Der erste Versuch mit Fable kam mit „use thinking.type adaptive" zurück: Fable
+5.1 lehnt `thinking: disabled` ab — und, was die Dokumentation dazu sagt,
+ebenso die erzwungene Werkzeugwahl (`tool_choice: tool`), die seit 2.13 das
+JSON sicherte. Der Rückfall auf Opus hat das abgefangen, aber Fable wäre so
+nie zum Zug gekommen. Jetzt stellt die Anfrage kein `thinking`-Feld mehr
+(beide Modelle denken von sich aus, mit `effort: low` kurz gehalten, darum
+4000 statt 800 Token Platz) und kein Werkzeug, sondern `output_config.format`
+mit demselben Schema: Die API hält die Antwort daran, der erste Textblock ist
+gültiges JSON. Das geht auf Fable und Opus gleich. Verweigert Fable ein Foto
+(`stop_reason: refusal`), geht es an Opus; verweigert auch Opus, sagt die
+Karte das mit der Kategorie. Scheinserver und Prüfstand prüfen die neue
+Form (`/verweigert` dazu).
+
 ## Pakete
 
-- MeeGo Harmattan (N9/N950): `segelflug_2.15_armel.deb`
-- Sailfish OS: `harbour-segelflug-1.19.4-1.{aarch64,armv7hl}.rpm`
+- MeeGo Harmattan (N9/N950): `segelflug_2.16_armel.deb`
+- Sailfish OS: `harbour-segelflug-1.19.5-1.{aarch64,armv7hl}.rpm`
