@@ -239,7 +239,23 @@ Nach 1.19.0 noch vier, darum 1.19.1:
   `qml-laden.sh` sieht fehlende Methoden nicht, weil sie erst zur Laufzeit
   aufgelöst werden.
 
+## Nachtrag 2.13 / 1.19.2: „Antwort nicht lesbar"
+
+Der Nutzer bekam bei „Claude fragen" manchmal „Antwort nicht lesbar" — nicht
+immer, am selben Morgen hatte es zweimal funktioniert. Die App bat um „JSON
+only" und suchte dann im Text nach der ersten `{` und der letzten `}`; kam
+Prosa, ein halbes Objekt (400 Token Platz waren knapp) oder ein erfundenes
+Wort für die Sicherheit, blieb nichts übrig. Jetzt stellt die Anfrage ein
+Werkzeug `urteil` mit Schema (Klasse aus der Liste, Sicherheit hoch, mittel
+oder niedrig, Begründung) und erzwingt den Aufruf mit `tool_choice`; die API
+liefert die Eingabe als geprüftes JSON-Objekt. Der alte Textweg bleibt als
+Rückfall. Platz 800 Token. Lässt sich eine Antwort trotzdem nicht deuten,
+nennt die Meldung ihren Anfang („abgeschnitten", „leer" oder die ersten
+Wörter) und der Rumpf liegt unter `letzte-antwort.json` im Datenordner der
+App zum Nachlesen. Scheinserver und Prüfstand kennen die vier Fälle
+(Werkzeug, Text, Prosa, abgeschnitten) — „alles gut".
+
 ## Pakete
 
-- MeeGo Harmattan (N9/N950): `segelflug_2.12_armel.deb`
-- Sailfish OS: `harbour-segelflug-1.19.1-1.{aarch64,armv7hl}.rpm`
+- MeeGo Harmattan (N9/N950): `segelflug_2.13_armel.deb` (2.12 ohne den Nachtrag)
+- Sailfish OS: `harbour-segelflug-1.19.2-1.{aarch64,armv7hl}.rpm` (1.19.1 ohne den Nachtrag)
