@@ -3,10 +3,10 @@
 Theorie für den **Segelflug- und PPL-Schein**, deutsch oder englisch, auf dem
 Nokia N9 und N950 (MeeGo 1.2 Harmattan) und auf Sailfish OS.
 
-Zehn Kapitel, 23 Lektionen: Aerodynamik und Flugmechanik, Flugleistung und
+Zehn Kapitel, 25 Lektionen: Aerodynamik und Flugmechanik, Flugleistung und
 Flugplanung, Luftrecht nach EASA, Navigation, menschliches
 Leistungsvermögen, Technik und Instrumente, Verfahren und Notfälle,
-Sprechfunk — und als Schwerpunkt sieben Lektionen **Wolken lesen**: was
+Sprechfunk — und als Schwerpunkt neun Lektionen **Wolken lesen**: was
 Cumulus, Stratocumulus, Lenticularis, Cumulonimbus und die Bewölkung einer
 Kaltfront über Thermik, Streckenflug und Sicherheit verraten.
 

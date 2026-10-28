@@ -73,6 +73,19 @@ EN = {
     "Druck oben": "pressure above",
     "Druck unten": "pressure below",
     "je 100 m": "per 100 m",
+    "Blase: Konvektion": "bubble: convection",
+    "Haufen, mittags": "heap, midday",
+    "Rampe: Front": "ramp: front",
+    "Schicht, Stunden vorher": "layer, hours ahead",
+    "Welle: Gebirge": "wave: mountains",
+    "Linse, steht still": "lens, stands still",
+    "Auskühlen: Nacht": "cooling: night",
+    "Nebel, Stratus": "fog, stratus",
+    "Kondensationsniveau": "condensation level",
+    "warm": "warm",
+    "kalt": "cold",
+    "Wer hebt die Luft, wie schnell, wie hoch — das steht im Namen.":
+        "Who lifts the air, how fast, how high — that is what the name says.",
 }
 
 
@@ -407,6 +420,92 @@ def luftsaeule():
     sichern(bild, "skizze-luftsaeule")
 
 
+# ---------------------------------------------------------------------------
+# w-entstehung: vier Wege nach oben, vier Wolkenformen
+# ---------------------------------------------------------------------------
+def wolke(draw, x, y, b, h, farbe=KOERPER):
+    """Ein Haufen aus Ellipsen auf flacher Basis bei y, Breite b, Hoehe h."""
+    draw.rectangle([(x - b / 2) * S, (y - h * 0.45) * S, (x + b / 2) * S, y * S], fill=farbe)
+    for dx, r in ((-0.3, 0.55), (0.0, 0.8), (0.3, 0.6)):
+        cx, rr = x + dx * b, h * r
+        draw.ellipse([(cx - rr * 0.8) * S, (y - h * 0.45 - rr) * S,
+                      (cx + rr * 0.8) * S, (y - h * 0.45 + rr * 0.3) * S], fill=farbe)
+
+
+def schicht(draw, x1, x2, y, dicke, farbe=(170, 176, 190)):
+    draw.rectangle([x1 * S, (y - dicke) * S, x2 * S, y * S], fill=farbe)
+
+
+def wolkenentstehung():
+    bild, draw = leinwand()
+    # Vier Felder: links oben Blase, rechts oben Rampe, links unten Welle,
+    # rechts unten Nacht. Jedes Feld 210 x 125, Boden unten.
+    felder = ((16, 14), (226, 14), (16, 150), (226, 150))
+    fb, fh = 200, 118
+    for (fx, fy) in felder:
+        strich(draw, fx, fy + fh, fx + fb, fy + fh, LINIE, 2)      # Boden
+
+    # 1 Blase
+    fx, fy = felder[0]
+    boden = fy + fh
+    # Sonne
+    draw.ellipse([(fx + 12) * S, (fy + 6) * S, (fx + 30) * S, (fy + 24) * S], fill=WARN)
+    for i in range(3):
+        pfeil(draw, fx + 40 + i * 22, boden - 2, fx + 40 + i * 22, boden - 28, WARN, 1, 5)
+    gestrichelt(draw, fx + 20, fy + 52, fx + fb - 6, fy + 52, GUT)
+    text(draw, fx + 20, fy + 40, "Kondensationsniveau", 8, GUT)
+    pfeil(draw, fx + 140, boden - 6, fx + 140, fy + 56, BETONT, 2, 6)
+    wolke(draw, fx + 140, fy + 52, 56, 30)
+    text(draw, fx + 4, fy + 2, "Blase: Konvektion", 10, TEXT)
+    text(draw, fx + 4, fy + fh + 4, "Haufen, mittags", 9, DUENN)
+
+    # 2 Rampe: Kaltluftkeil rechts, Warmluft gleitet auf
+    fx, fy = felder[1]
+    boden = fy + fh
+    draw.polygon([(fx + 60) * S, boden * S, (fx + fb) * S, boden * S,
+                  (fx + fb) * S, (fy + 46) * S], fill=(40, 60, 96))
+    text(draw, fx + fb - 6, boden - 14, "kalt", 9, BETONT, rechts=True)
+    text(draw, fx + 8, boden - 14, "warm", 9, WARN)
+    pfeil(draw, fx + 10, boden - 24, fx + 150, fy + 54, WARN, 2, 6)
+    schicht(draw, fx + 70, fx + fb - 4, fy + 78, 7)
+    schicht(draw, fx + 100, fx + fb - 4, fy + 60, 6, (200, 206, 220))
+    schicht(draw, fx + 130, fx + fb - 4, fy + 44, 4, (230, 234, 244))
+    text(draw, fx + 4, fy + 2, "Rampe: Front", 10, TEXT)
+    text(draw, fx + 4, fy + fh + 4, "Schicht, Stunden vorher", 9, DUENN)
+
+    # 3 Welle: Berg, Wind, Welle, Linse am Wellenberg
+    fx, fy = felder[2]
+    boden = fy + fh
+    draw.polygon([(fx + 30) * S, boden * S, (fx + 80) * S, (fy + 60) * S,
+                  (fx + 130) * S, boden * S], fill=(60, 70, 86))
+    pfeil(draw, fx + 6, fy + 44, fx + 40, fy + 44, BETONT, 2, 6)
+    # Wellenlinie
+    pts = []
+    for i in range(0, 171, 5):
+        x = fx + 30 + i
+        y = fy + 46 + 14 * math.cos((i - 50) / 24.0)
+        pts.append((x * S, y * S))
+    draw.line(pts, fill=BETONT, width=2)
+    draw.ellipse([(fx + 112) * S, (fy + 24) * S, (fx + 168) * S, (fy + 38) * S], fill=KOERPER)
+    text(draw, fx + 4, fy + 2, "Welle: Gebirge", 10, TEXT)
+    text(draw, fx + 4, fy + fh + 4, "Linse, steht still", 9, DUENN)
+
+    # 4 Nacht: Abstrahlung, Nebel in der Senke
+    fx, fy = felder[3]
+    boden = fy + fh
+    draw.ellipse([(fx + 150) * S, (fy + 10) * S, (fx + 170) * S, (fy + 30) * S], fill=(200, 206, 220))
+    draw.ellipse([(fx + 156) * S, (fy + 8) * S, (fx + 176) * S, (fy + 28) * S], fill=GRUND)
+    for i in range(4):
+        pfeil(draw, fx + 30 + i * 30, boden - 30, fx + 30 + i * 30, boden - 54, DUENN, 1, 5)
+    schicht(draw, fx + 10, fx + fb - 10, boden - 2, 18, (120, 126, 140))
+    text(draw, fx + 4, fy + 2, "Auskühlen: Nacht", 10, TEXT)
+    text(draw, fx + 4, fy + fh + 4, "Nebel, Stratus", 9, DUENN)
+
+    text(draw, W / 2, 284, "Wer hebt die Luft, wie schnell, wie hoch — das steht im Namen.",
+         10, GUT, mitte=True)
+    sichern(bild, "skizze-wolkenentstehung")
+
+
 def main():
     global SPRACHE
     for SPRACHE in ("de", "en"):
@@ -417,6 +516,7 @@ def main():
         wolkenbasis()
         vorhalt()
         luftsaeule()
+        wolkenentstehung()
     return 0
 
 

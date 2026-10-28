@@ -275,7 +275,36 @@ MISSWEISUNG = t(
  "the two north arrows — it takes five seconds and is never wrong.")
 
 
+ENTSTEHUNG = t(
+ "## Vier Wege nach oben\n\n"
+ "Aufsteigende Luft dehnt sich aus, weil der Druck mit der Höhe abnimmt; "
+ "das Ausdehnen kostet Arbeit, und die zahlt die Luft mit ihrer Wärme: "
+ "etwa 1 °C je 100 m, solange nichts kondensiert (Trockenadiabate). Der "
+ "Taupunkt sinkt dabei nur um 0,2 °C je 100 m. Die Spreizung schließt sich "
+ "also mit 0,8 °C je 100 m — bei 8 °C Spreizung in 1000 m. Dort ist die "
+ "Basis, für jede Blase des Tages gleich.\n\n"
+ "Was danach kommt, hängt am Heber: Die **Blase** (Konvektion) steigt mit "
+ "Metern je Sekunde, eng und schnell — ein Haufen. Die **Rampe** (Front) "
+ "hebt mit Zentimetern je Sekunde über hunderte Kilometer — eine Schicht. "
+ "Die **Welle** hinter dem Gebirge hebt und senkt dieselbe Luft im "
+ "Wechsel — die Wolke steht, der Wind zieht durch. In der **Nacht** hebt "
+ "niemand; der Boden kühlt die Luft unter den Taupunkt — Nebel.",
+ "## Four ways up\n\n"
+ "Rising air expands because pressure drops with height; expanding costs "
+ "work, and the air pays with its heat: about 1 °C per 100 m as long as "
+ "nothing condenses (dry adiabat). The dew point meanwhile falls only "
+ "0.2 °C per 100 m. The spread therefore closes at 0.8 °C per 100 m — with "
+ "an 8 °C spread at 1000 m. That is the base, the same for every bubble "
+ "of the day.\n\n"
+ "What follows depends on the lifter: the **bubble** (convection) rises "
+ "at metres per second, narrow and fast — a heap. The **ramp** (front) "
+ "lifts at centimetres per second over hundreds of kilometres — a layer. "
+ "The **wave** behind the mountains lifts and lowers the same air in "
+ "turn — the cloud stands, the wind passes through. At **night** nobody "
+ "lifts; the ground cools the air below its dew point — fog.")
+
 HERLEITUNGEN = {
+ "Warum ist ein Cumulus ein Haufen mit flacher Basis und keine Decke?": ENTSTEHUNG,
  "Am Morgen meldet der Platz 24 °C und 9 °C Taupunkt. In welcher "
  "Höhe über Grund ist die Basis zu erwarten?": BASIS,
  "Gleitzahl 38, Ankunftshöhe 300 m soll übrig bleiben. Du bist 1200 m "
@@ -294,6 +323,8 @@ HERLEITUNGEN = {
 
 
 SKIZZEN = {
+ "Warum ist ein Cumulus ein Haufen mit flacher Basis und keine Decke?":
+   "skizze-wolkenentstehung",
  "Am Morgen meldet der Platz 24 °C und 9 °C Taupunkt. In welcher "
  "Höhe über Grund ist die Basis zu erwarten?": "skizze-luftsaeule",
  "Gleitzahl 38, Ankunftshöhe 300 m soll übrig bleiben. Du bist 1200 m "

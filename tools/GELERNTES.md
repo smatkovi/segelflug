@@ -44,6 +44,14 @@ Urteil gespeichert wird.
 Dazu kommt, was der Leser selbst richtigstellt („das war doch ein
 Stratocumulus") — das ist die stärkste Stimme und wird immer gemerkt.
 
+Auf Wunsch auch ohne zweite Stimme: Mit dem Schalter „Auch ohne meinen Tipp
+von Claude lernen" (Gelerntes-Seite) merkt die App ein Foto von selbst,
+wenn der Leser nichts geraten hat und Claude seine Sicherheit mit „hoch"
+angibt (Quelle 1). Die Schwelle ist bewusst hoch: Ein Lehrer mit 80 %
+Trefferquote hat dem Netz im Versuch kaum geholfen (Tabelle unten), bei
+„hoch" liegt Claude deutlich über seinem Mittel. Gehen Tipp und Claude
+auseinander, bleibt es beim ausdrücklichen Knopf.
+
 ## Datei
 
     "WOLKENG1"            8 Byte Kennung

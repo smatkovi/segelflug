@@ -261,7 +261,24 @@ Sailjail-Recht `MediaIndexing`; `Pictures` allein gibt nur den Ordner frei.
 Jetzt `MediaIndexing` und `RemovableMedia` (Speicherkarte) in der
 Desktop-Datei, wie bei Fernschreiber und Sag's Wien.
 
+## Nachtrag 2.14 / 1.19.3: Entstehung und Lernen ohne Tipp
+
+Neue Lektion **„Wie und wann Wolken entstehen"** direkt hinter den Namen:
+Jede Wolke entsteht durch Heben und Abkühlen; was sie unterscheidet, ist,
+wer hebt, wie schnell und wie hoch — Blase (Konvektion, Haufen, mittags),
+Rampe (Front, Schicht, Stunden vorher), Welle (Gebirge, Linse, steht
+still), Auskühlen (Nacht, Nebel und Stratus), dazu Mischformen und
+Kondensstreifen. Daraus liest sich jeder Name ab. Drei Aufgaben; die Lösung
+der ersten trägt die Herleitung der 0,8 °C je 100 m und die Skizze
+`skizze-wolkenentstehung` (vier Felder, de/en).
+
+Dazu der Schalter **„Auch ohne meinen Tipp von Claude lernen"** auf der
+Gelerntes-Seite: Dann merkt die App ein Foto von selbst, wenn Claude seine
+Sicherheit mit „hoch" angibt und der Leser nichts geraten hat; gehen Tipp
+und Claude auseinander, entscheidet weiter der Leser. Die Einstellung ist
+eine Datei `von-claude-lernen` im Datenordner, keine QSettings (Sailjail).
+
 ## Pakete
 
-- MeeGo Harmattan (N9/N950): `segelflug_2.13_armel.deb` (2.12 ohne den Nachtrag)
-- Sailfish OS: `harbour-segelflug-1.19.2-1.{aarch64,armv7hl}.rpm` (1.19.1 ohne den Nachtrag)
+- MeeGo Harmattan (N9/N950): `segelflug_2.14_armel.deb`
+- Sailfish OS: `harbour-segelflug-1.19.3-1.{aarch64,armv7hl}.rpm`

@@ -191,6 +191,218 @@ K_WOLKEN = kapitel(
                bild="cu-zyklus"),
         ]),
 
+    # -- 0b ------------------------------------------------------------
+    lektion("w-entstehung",
+        t("Wie und wann Wolken entstehen",
+          "How and when clouds form"),
+        ["kondensationsniveau", "thermik", "inversion", "warmfront", "welle", "nebel"],
+        t("Jede Wolke entsteht auf dieselbe Weise: Luft wird gehoben, dehnt "
+          "sich aus und kühlt dabei um etwa 1 °C je 100 m ab. Sobald sie "
+          "ihren Taupunkt erreicht, kondensiert der Wasserdampf an "
+          "Staubteilchen zu Tröpfchen, weiter oben zu Eiskristallen. Die "
+          "Höhe, in der das passiert, ist das "
+          "[[begriff:kondensationsniveau|Kondensationsniveau]], die Basis. "
+          "Was die Wolken unterscheidet, ist nur, **wer die Luft hebt, wie "
+          "schnell und wie hoch**. Daraus folgt die Form, und die Form steht "
+          "im Namen.\n\n"
+          "**1. Die Blase: Konvektion — die Haufenwolken (cumulus).** Die "
+          "Sonne heizt den Boden, der Boden die Luft darüber; eine Blase "
+          "löst sich und steigt, solange sie wärmer ist als ihre Umgebung "
+          "([[begriff:thermik|Thermik]]). Sie steigt schnell und eng, darum "
+          "ist die Wolke ein Haufen mit flacher Basis und blumenkohlartigem "
+          "Dach, und alle Haufen eines Tages haben dieselbe Basis. **Wann:** "
+          "ab dem späten Vormittag, am frühen Nachmittag am stärksten, gegen "
+          "Abend zerfallend. Die Beinamen sind der Lebenslauf derselben "
+          "Blase: *humilis* (bescheiden, breiter als hoch — am Vormittag, "
+          "oder wenn eine [[begriff:inversion|Inversion]] deckelt), "
+          "*mediocris* (so hoch wie breit), *congestus* (aufgetürmt, mit "
+          "Sprudelköpfen — labile Luft bis weit hinauf), und wenn der Turm "
+          "die Vereisungszone erreicht und oben ein Amboss ausfließt: "
+          "*cumulonimbus*, der Haufen, aus dem es regnet (*nimbus*). Wer die "
+          "Stufe liest, liest die Stunde und die Labilität des Tages.\n\n"
+          "**2. Die Rampe: großflächige Hebung — die Schichtwolken "
+          "(stratus).** Schiebt sich warme Luft über kalte (an einer "
+          "[[begriff:warmfront|Warmfront]]) oder wird eine ganze Luftmasse "
+          "an einem Tief langsam angehoben, steigt die Luft nur mit "
+          "Zentimetern je Sekunde, aber über hunderte Kilometer. Es gibt "
+          "keine Blasen, nur eine Decke — deshalb *stratus*, ausgebreitet. "
+          "Die Abfolge kommt von oben: zuerst die Eisfasern *cirrus*, dann "
+          "der Schleier *cirrostratus* mit [[begriff:halo|Halo]], dann die "
+          "graue Scheibe *altostratus* (Sonne wie durch Milchglas), zuletzt "
+          "*nimbostratus*, die Regen-Schicht, dick und formlos. **Wann:** "
+          "Stunden bis einen Tag vor der Front — darum kündigt Cirrus am "
+          "Westhimmel den Wetterwechsel an. Für den Segelflieger sagen die "
+          "Schichtwolken, wie viel Zeit noch bleibt.\n\n"
+          "**3. Das Mischen: die Zwischenformen.** *Stratocumulus* ist eine "
+          "Schicht aus Haufen: breitgelaufene Cumuli unter einer Inversion, "
+          "oft am Morgen oder am Abend, auch über kühlem Wasser. "
+          "*Altocumulus* ist dasselbe Muster im mittleren Stockwerk, die "
+          "Schäfchen; *cirrocumulus* als winzige Körnchen ganz oben. Die "
+          "Vorsilbe nennt das Stockwerk, das Grundwort die Form.\n\n"
+          "**4. Die Welle: Hebung am Hindernis — lenticularis.** Weht Wind "
+          "über ein Gebirge, schwingt die Luft dahinter in "
+          "[[begriff:welle|Wellen]]; am Wellenberg kondensiert sie, im Tal "
+          "löst sie sich wieder auf. Die Wolke steht still, obwohl der Wind "
+          "durch sie hindurchbläst — eine Linse (*lenticularis*), scharf "
+          "gerandet. **Wann:** bei kräftigem Wind quer zum Gebirge und "
+          "stabiler Schichtung, oft im Herbst und Winter. Darunter der "
+          "[[begriff:rotor|Rotor]] mit zerfetzten Fractus-Wolken.\n\n"
+          "**5. Das Auskühlen: Nebel und Stratus in der Nacht.** Hier hebt "
+          "niemand: Die Luft kühlt in klarer, windstiller Nacht am Boden "
+          "unter ihren Taupunkt. Das gibt [[begriff:nebel|Nebel]] in den "
+          "Senken, bei leichtem Wind eine tiefe graue *stratus*-Decke, die "
+          "der Morgenwind hebt und die Sonne auflöst. **Wann:** vor "
+          "Sonnenaufgang bis in den Vormittag, im Herbst besonders. Der "
+          "Stratus vom Morgen sagt über den Flugtag wenig — nur, dass er "
+          "spät anfängt.\n\n"
+          "**6. Vom Menschen: Kondensstreifen.** Der Wasserdampf aus dem "
+          "Triebwerk kondensiert in der kalten Höhe, eine Wolke in einer "
+          "Linie. Bleibt sie lange stehen und wird breit, ist die Höhe "
+          "feucht — oft das erste Zeichen eines nahenden Wetterwechsels.\n\n"
+          "Daraus wird eine Regel: **Haufen heißt Blase heißt Thermik. "
+          "Schicht heißt Rampe heißt Front. Linse heißt Welle. Nebel heißt "
+          "Nacht.** Wer das sieht, muss die Namen nicht lernen — er liest "
+          "sie ab.",
+          "Every cloud forms the same way: air is lifted, expands and cools "
+          "by about 1 °C per 100 m. As soon as it reaches its dew point, the "
+          "water vapour condenses on dust particles into droplets, higher "
+          "up into ice crystals. The height where that happens is the "
+          "[[begriff:kondensationsniveau|condensation level]], the base. "
+          "What sets clouds apart is only **who lifts the air, how fast and "
+          "how high**. From that follows the shape, and the shape is in the "
+          "name.\n\n"
+          "**1. The bubble: convection — the heap clouds (cumulus).** The "
+          "sun heats the ground, the ground heats the air above it; a "
+          "bubble breaks loose and rises as long as it is warmer than its "
+          "surroundings ([[begriff:thermik|thermal]]). It rises fast and "
+          "narrow, so the cloud is a heap with a flat base and a "
+          "cauliflower top, and every heap of the day shares the same base. "
+          "**When:** from late morning, strongest in the early afternoon, "
+          "decaying towards evening. The epithets are the life story of the "
+          "same bubble: *humilis* (humble, wider than tall — in the morning, "
+          "or when an [[begriff:inversion|inversion]] puts a lid on), "
+          "*mediocris* (as tall as wide), *congestus* (piled up, with "
+          "bubbling heads — unstable air far up), and when the tower reaches "
+          "the freezing zone and an anvil spreads out on top: "
+          "*cumulonimbus*, the heap that rains (*nimbus*). Read the stage "
+          "and you read the hour and the instability of the day.\n\n"
+          "**2. The ramp: broad lifting — the layer clouds (stratus).** When "
+          "warm air slides over cold air (at a [[begriff:warmfront|warm "
+          "front]]) or a whole air mass is slowly lifted around a low, the "
+          "air rises at centimetres per second, but over hundreds of "
+          "kilometres. There are no bubbles, only a blanket — hence "
+          "*stratus*, spread out. The sequence comes from the top: first "
+          "the ice fibres *cirrus*, then the veil *cirrostratus* with a "
+          "[[begriff:halo|halo]], then the grey disc *altostratus* (sun as "
+          "through frosted glass), finally *nimbostratus*, the rain layer, "
+          "thick and shapeless. **When:** hours to a day ahead of the front "
+          "— which is why cirrus in the western sky announces the change. "
+          "For the glider pilot the layer clouds say how much time is "
+          "left.\n\n"
+          "**3. The mix: the in-between forms.** *Stratocumulus* is a layer "
+          "made of heaps: cumuli that spread out under an inversion, often "
+          "in the morning or evening, also over cool water. *Altocumulus* "
+          "is the same pattern in the middle level, the fleecy clouds; "
+          "*cirrocumulus* as tiny grains at the top. The prefix names the "
+          "level, the root word the shape.\n\n"
+          "**4. The wave: lifting over an obstacle — lenticularis.** When "
+          "wind blows across a mountain range, the air behind it swings in "
+          "[[begriff:welle|waves]]; at the crest it condenses, in the "
+          "trough it evaporates again. The cloud stands still although the "
+          "wind blows through it — a lens (*lenticularis*), sharply edged. "
+          "**When:** in strong wind across the ridge and stable "
+          "stratification, often in autumn and winter. Below it the "
+          "[[begriff:rotor|rotor]] with ragged fractus clouds.\n\n"
+          "**5. Cooling: fog and stratus at night.** Nobody lifts here: in "
+          "a clear, calm night the air at the ground cools below its dew "
+          "point. That gives [[begriff:nebel|fog]] in the hollows, in a "
+          "light wind a low grey *stratus* blanket that the morning wind "
+          "lifts and the sun dissolves. **When:** before sunrise into the "
+          "morning, especially in autumn. Morning stratus says little about "
+          "the flying day — only that it starts late.\n\n"
+          "**6. Man-made: contrails.** The water vapour from the engine "
+          "condenses in the cold heights, a cloud in a line. If it lingers "
+          "and spreads, the upper air is moist — often the first sign of a "
+          "coming change in the weather.\n\n"
+          "That makes a rule: **heap means bubble means thermal. Layer "
+          "means ramp means front. Lens means wave. Fog means night.** Whoever "
+          "sees that need not learn the names — they read them off."),
+        "cu-zyklus",
+        [
+            mc(t("Warum ist ein Cumulus ein Haufen mit flacher Basis und "
+                 "keine Decke?",
+                 "Why is a cumulus a heap with a flat base and not a "
+                 "blanket?"),
+               [t("Die Luft steigt in einer eng begrenzten Blase schnell auf, "
+                  "und alle Blasen eines Tages kondensieren in derselben "
+                  "Höhe.",
+                  "The air rises fast in a narrowly bounded bubble, and all "
+                  "bubbles of the day condense at the same height."),
+                t("Der Wind schiebt die Wolke zu einem Haufen zusammen.",
+                  "The wind pushes the cloud together into a heap."),
+                t("Sie besteht aus Eiskristallen, die sich stapeln.",
+                  "It consists of ice crystals that stack up."),
+                t("Die Sonne formt sie von oben rund.",
+                  "The sun rounds it off from above.")], 0,
+               t("Konvektion hebt die Luft in Blasen, nicht flächig: schnell, "
+                 "eng, blumenkohlartig. Die Basis ist das "
+                 "Kondensationsniveau, und das hängt von Temperatur und "
+                 "Taupunkt am Boden ab — für alle Blasen gleich.",
+                 "Convection lifts the air in bubbles, not over an area: "
+                 "fast, narrow, cauliflower-like. The base is the "
+                 "condensation level, and that depends on temperature and "
+                 "dew point at the ground — the same for every bubble."),
+               bild="cu-humilis"),
+            mc(t("Am Westhimmel ziehen Cirrusfasern auf, später ein Schleier "
+                 "mit Halo. Wer hebt hier die Luft?",
+                 "Cirrus fibres come in from the west, later a veil with a "
+                 "halo. Who is lifting the air here?"),
+               [t("Eine Warmfront: Warme Luft gleitet großflächig auf die "
+                  "kalte auf, von oben her immer dichter werdend.",
+                  "A warm front: warm air slides broadly up over the cold "
+                  "air, thickening from the top down."),
+                t("Die Thermik des Nachmittags.",
+                  "The afternoon's thermals."),
+                t("Eine Welle hinter dem Gebirge.",
+                  "A wave behind the mountains."),
+                t("Die Abkühlung der Nacht.",
+                  "The cooling of the night.")], 0,
+               t("Die Schichtwolken-Abfolge von oben nach unten — Cirrus, "
+                 "Cirrostratus, Altostratus, Nimbostratus — ist das Bild der "
+                 "Rampe, auf der die warme Luft aufgleitet. Was tagsüber "
+                 "noch an Thermik geht, hat eine Frist.",
+                 "The layer-cloud sequence from top to bottom — cirrus, "
+                 "cirrostratus, altostratus, nimbostratus — is the picture "
+                 "of the ramp the warm air glides up. Whatever thermals the "
+                 "day still offers have a deadline."),
+               bild="cirrostratus"),
+            mc(t("Über dem Gebirge steht eine scharf gerandete Wolke "
+                 "unbeweglich, obwohl kräftiger Wind weht. Wie entsteht "
+                 "sie?",
+                 "A sharply edged cloud stands motionless over the "
+                 "mountains although a strong wind is blowing. How does it "
+                 "form?"),
+               [t("Die Luft schwingt hinter dem Berg in Wellen und "
+                  "kondensiert am Wellenberg: Altocumulus lenticularis.",
+                  "The air swings in waves behind the ridge and condenses "
+                  "at the crest: altocumulus lenticularis."),
+                t("Eine Thermikblase hängt am Gipfel fest.",
+                  "A thermal bubble is stuck on the summit."),
+                t("Eine Front staut sich am Gebirge.",
+                  "A front is piling up against the mountains."),
+                t("Der Berg kühlt die Luft in der Nacht aus.",
+                  "The mountain cools the air overnight.")], 0,
+               t("Die Linse steht, weil die Luft an derselben Stelle "
+                 "aufsteigt und wieder absinkt — der Wind bläst hindurch. "
+                 "Für den Segelflieger das Zeichen für Wellenaufwind, und "
+                 "darunter die Warnung vor dem Rotor.",
+                 "The lens stands still because the air rises and sinks "
+                 "at the same place — the wind blows through it. For the "
+                 "glider pilot the sign of wave lift, and below it the "
+                 "warning of the rotor."),
+               bild="lenticularis"),
+        ]),
+
     # -- 1 -------------------------------------------------------------
     lektion("w-basis",
         t("Die flache Basis", "The flat base"),
