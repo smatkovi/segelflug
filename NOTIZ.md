@@ -272,13 +272,27 @@ Kondensstreifen. Daraus liest sich jeder Name ab. Drei Aufgaben; die Lösung
 der ersten trägt die Herleitung der 0,8 °C je 100 m und die Skizze
 `skizze-wolkenentstehung` (vier Felder, de/en).
 
-Dazu der Schalter **„Auch ohne meinen Tipp von Claude lernen"** auf der
-Gelerntes-Seite: Dann merkt die App ein Foto von selbst, wenn Claude seine
-Sicherheit mit „hoch" angibt und der Leser nichts geraten hat; gehen Tipp
-und Claude auseinander, entscheidet weiter der Leser. Die Einstellung ist
-eine Datei `von-claude-lernen` im Datenordner, keine QSettings (Sailjail).
+Dazu der Schalter **„Von Claude lernen, unabhängig von meinem Tipp"** auf
+der Gelerntes-Seite (2.15 / 1.19.4; in 2.14 noch nur ohne eigenen Tipp):
+Dann merkt die App Claudes Klasse von selbst, sobald er seine Sicherheit
+mit „hoch" angibt, auch gegen den eigenen Tipp — der Nutzer wollte
+ausdrücklich Claudes Urteil als Lehrer, nicht das eigene. Die Einstellung
+ist eine Datei `von-claude-lernen` im Datenordner, keine QSettings
+(Sailjail). Das Modell hinter „Claude fragen" ist `claude-sonnet-5`.
+
+## Nachtrag 2.15 / 1.19.4: Fable, und Opus als Rückfall
+
+„Claude fragen" ging bis 2.14 an `claude-sonnet-5`. Auf Wunsch des Nutzers
+jetzt zuerst **Fable** (`claude-fable-5-1`); lehnt die API ab (Modell dem
+Konto nicht freigegeben, Kontingent aufgebraucht, überlastet — alles außer
+einem falschen Schlüssel), geht dieselbe Anfrage noch einmal an **Opus**
+(`claude-opus-5`). Die Antwortkarte trägt `modell` („Fable" oder „Opus
+(Fable nicht verfügbar: …)"), und die Fotoseite zeigt es hinter der
+Sicherheit. Scheinserver und Prüfstand haben den Fall (`/fable-aus`). Das
+bis dahin von Sonnet Gelernte (vier Einträge) hat der Nutzer löschen lassen;
+die Datei liegt gesichert im Sitzungsordner.
 
 ## Pakete
 
-- MeeGo Harmattan (N9/N950): `segelflug_2.14_armel.deb`
-- Sailfish OS: `harbour-segelflug-1.19.3-1.{aarch64,armv7hl}.rpm`
+- MeeGo Harmattan (N9/N950): `segelflug_2.15_armel.deb`
+- Sailfish OS: `harbour-segelflug-1.19.4-1.{aarch64,armv7hl}.rpm`

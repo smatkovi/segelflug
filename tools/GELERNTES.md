@@ -44,13 +44,16 @@ Urteil gespeichert wird.
 Dazu kommt, was der Leser selbst richtigstellt („das war doch ein
 Stratocumulus") — das ist die stärkste Stimme und wird immer gemerkt.
 
-Auf Wunsch auch ohne zweite Stimme: Mit dem Schalter „Auch ohne meinen Tipp
-von Claude lernen" (Gelerntes-Seite) merkt die App ein Foto von selbst,
-wenn der Leser nichts geraten hat und Claude seine Sicherheit mit „hoch"
-angibt (Quelle 1). Die Schwelle ist bewusst hoch: Ein Lehrer mit 80 %
-Trefferquote hat dem Netz im Versuch kaum geholfen (Tabelle unten), bei
-„hoch" liegt Claude deutlich über seinem Mittel. Gehen Tipp und Claude
-auseinander, bleibt es beim ausdrücklichen Knopf.
+Auf Wunsch zählt Claude allein: Mit dem Schalter „Von Claude lernen,
+unabhängig von meinem Tipp" (Gelerntes-Seite) merkt die App Claudes Klasse
+von selbst, sobald er seine Sicherheit mit „hoch" angibt — auch gegen den
+eigenen Tipp (Quelle 1; stimmen beide überein, bleibt es Quelle 0). Die
+Schwelle „hoch" ist bewusst gesetzt: Ein Lehrer mit 80 % Trefferquote hat
+dem Netz im Versuch kaum geholfen (Tabelle unten), bei „hoch" liegt Claude
+deutlich über seinem Mittel. Bei „mittel" und „niedrig" bleibt es beim
+ausdrücklichen Knopf. Der Lehrer ist seit 2.15 Fable (claude-fable-5-1),
+mit Rückfall auf Opus (claude-opus-5), wenn Fable nicht verfügbar ist;
+welches Modell geantwortet hat, steht in jeder Karte (`modell`).
 
 ## Datei
 
