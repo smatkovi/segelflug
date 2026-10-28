@@ -53,7 +53,9 @@ dem Netz im Versuch kaum geholfen (Tabelle unten), bei „hoch" liegt Claude
 deutlich über seinem Mittel. Bei „mittel" und „niedrig" bleibt es beim
 ausdrücklichen Knopf. Der Lehrer ist seit 2.15 Fable (claude-fable-5-1),
 mit Rückfall auf Opus (claude-opus-5), wenn Fable nicht verfügbar ist;
-welches Modell geantwortet hat, steht in jeder Karte (`modell`).
+welches Modell geantwortet hat, steht in jeder Karte (`modell`). Von selbst
+gemerkt wird nur, was Fable gesagt hat — auch die Übereinstimmung mit dem
+eigenen Tipp; antwortet Opus, bleibt es beim Knopf „Claude glauben".
 
 ## Datei
 

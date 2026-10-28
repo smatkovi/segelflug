@@ -288,7 +288,9 @@ Konto nicht freigegeben, Kontingent aufgebraucht, überlastet — alles außer
 einem falschen Schlüssel), geht dieselbe Anfrage noch einmal an **Opus**
 (`claude-opus-5`). Die Antwortkarte trägt `modell` („Fable" oder „Opus
 (Fable nicht verfügbar: …)"), und die Fotoseite zeigt es hinter der
-Sicherheit. Scheinserver und Prüfstand haben den Fall (`/fable-aus`). Das
+Sicherheit. Von selbst gemerkt wird nur, was Fable gesagt hat; bei Opus
+bleibt es beim Knopf — so wollte es der Nutzer. Scheinserver und Prüfstand
+haben den Rückfall (`/fable-aus`). Das
 bis dahin von Sonnet Gelernte (vier Einträge) hat der Nutzer löschen lassen;
 die Datei liegt gesichert im Sitzungsordner.
 
