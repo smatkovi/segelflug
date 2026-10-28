@@ -255,6 +255,12 @@ Wörter) und der Rumpf liegt unter `letzte-antwort.json` im Datenordner der
 App zum Nachlesen. Scheinserver und Prüfstand kennen die vier Fälle
 (Werkzeug, Text, Prosa, abgeschnitten) — „alles gut".
 
+Dazu auf Sailfish: „Foto wählen" zeigte keine Bilder. Der Bildwähler
+(`Sailfish.Pickers`) liest den Tracker-Index, und dafür braucht die App das
+Sailjail-Recht `MediaIndexing`; `Pictures` allein gibt nur den Ordner frei.
+Jetzt `MediaIndexing` und `RemovableMedia` (Speicherkarte) in der
+Desktop-Datei, wie bei Fernschreiber und Sag's Wien.
+
 ## Pakete
 
 - MeeGo Harmattan (N9/N950): `segelflug_2.13_armel.deb` (2.12 ohne den Nachtrag)
