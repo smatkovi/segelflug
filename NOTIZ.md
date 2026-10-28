@@ -326,7 +326,17 @@ Zwei-Stimmen-Regel. Jetzt ist Lernen von Fable der Normalfall — an, bei
 „hoch" und „mittel"; nur das Ausschalten wird als Datei
 `von-claude-lernen-aus` festgehalten.
 
+## Nachtrag 2.18 / 1.19.7: „gemerkt als" vom falschen Foto
+
+Der Nutzer sah „Claude meint Altostratus" und darunter „gemerkt als
+Altocumulus". Das Altocumulus gehörte zum vorigen Foto: `classifyPhoto()`
+setzte beim Fotowechsel vieles zurück, aber nicht `m_fotoGemerkt` (das tat
+nur `clearPhoto()`, das „Foto wählen" nicht durchläuft). Gelernt war also
+richtig, nur die Anzeige log. Jetzt werden beim Fotowechsel auch das
+Gemerkte, das Korrigiert-Kennzeichen, Netzbild und Abdruck geleert — Letztere
+auch, damit ein frühes „Claude glauben" nicht das alte Netzbild nimmt.
+
 ## Pakete
 
-- MeeGo Harmattan (N9/N950): `segelflug_2.17_armel.deb`
-- Sailfish OS: `harbour-segelflug-1.19.6-1.{aarch64,armv7hl}.rpm`
+- MeeGo Harmattan (N9/N950): `segelflug_2.18_armel.deb`
+- Sailfish OS: `harbour-segelflug-1.19.7-1.{aarch64,armv7hl}.rpm`
